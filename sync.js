@@ -9,6 +9,16 @@ module.exports=new function(){
             return this;
         };
 
+        this.list=function(syncList){
+
+            var o_ = new _this();
+            for(var n=0;n<syncList.length;n++){
+                o_.then(syncList[n]);
+            }
+            o_.run();
+
+        };
+
         this.for=function(limit,callbacks){
             
             for(var n=0;n<limit;n++){
@@ -16,7 +26,7 @@ module.exports=new function(){
             }
 
             this.run();
-        },
+        };
 
         this.foreach=function(data,callbacks){
 
@@ -53,7 +63,7 @@ module.exports=new function(){
 
             this.run();
 
-        },
+        };
 
         this.run=function(){
 
@@ -82,4 +92,6 @@ module.exports=new function(){
     };
 
     return new _this();
+    
+
 };

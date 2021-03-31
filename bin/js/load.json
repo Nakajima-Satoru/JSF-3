@@ -1,0 +1,10 @@
+[
+    "jsf3.js",
+    "jsf3.sync.js",
+    "jsf3.convert.js",
+    "jsf3.load.js",
+    "jsf3.callback.js",
+    "jsf3.page.js",
+    "jsf3.redirect.js",
+    "jsf3.dialog.js"
+]

@@ -13,9 +13,15 @@ if(cmd[0]=="create"){
     create(name);
 
 }
-else if(cmd[1]=="build"){
-        
+else if(cmd[0]=="build"){
+
+    var name=cmd[1];
+
+    var build=require("./build.js");
+
+    build(name);
+
 }
-else if(cmd[1]=="delete"){
+else if(cmd[0]=="delete"){
 
 }

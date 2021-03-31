@@ -1,0 +1,43 @@
+/* fade_open ----- */
+
+pagearea.feed page.open{
+    animation-name:page_fade_open;
+    animation-duration:500ms;
+    animation-fill-mode: forwards;
+}
+pagearea.feed page.open wk{
+    animation-name:page_fade_open;
+    animation-duration:500ms;
+    animation-fill-mode: forwards;
+}
+pagearea.feed page.closed{
+    animation-name:page_fade_close;
+    animation-duration:500ms;
+    animation-fill-mode: forwards;
+}
+pagearea.feed page.closed wk{
+    animation-name:page_fade_close;
+    animation-duration:500ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes page_fade_open{
+    0%{
+        opacity:0;
+        -webkit-opacity:0;
+    }
+    100%{
+        opacity:1;
+        -webkit-opacity:1;
+    }
+}
+@keyframes page_fade_close{
+    0%{
+        opacity:1;
+        -webkit-opacity:1;
+    }
+    100%{
+        opacity:0;
+        -webkit-opacity:0;
+    }
+}
