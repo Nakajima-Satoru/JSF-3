@@ -7,6 +7,14 @@ jsf3.option={
 jsf3.cache={
     callbacks:{},
     pages:{},
+    data:{
+        page:{},
+        group:{},
+        dialog:{},
+        form:{},
+        request:{},
+        validator:{},
+    },
 };
 
 jsf3.buffer={

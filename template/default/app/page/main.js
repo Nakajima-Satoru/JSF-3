@@ -1,5 +1,7 @@
 jsf3.page("main",{
 
+    group:"app",
+
     before:function(obj){
 
         console.log("main page beforer...");

@@ -67,7 +67,7 @@ jsf3.dialog=function(dialogName,settings){
                         function(next){
 
                             if(!jsf3.callback.get("DIALOG_CLOSE_"+dialogName)){
-                                next;
+                                next();
                                 return;
                             }
 

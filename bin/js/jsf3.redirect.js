@@ -56,6 +56,11 @@ jsf3.redirect={
             pageArea.find("page#"+now.id).removeClass("open").addClass("closed");
         }
 
+        var _pageData={};
+        if(jsf3.cache.data.page[jsf3.base64.encode(pageName)]){
+            _pageData=jsf3.cache.data.page[jsf3.base64.encode(pageName)];
+        }
+
         jsf3.sync([
 
             function(next){
@@ -65,6 +70,36 @@ jsf3.redirect={
                     next();
                 };
                 next();
+            },
+
+            function(next){
+
+                if(!_pageData.group){
+                    next();
+                    return;
+                }
+
+                var groupCallbackList=[];
+
+                for(var n=0;n<_pageData.group.length;n++){
+
+                    var groupName=_pageData.group[n];
+
+                    if(jsf3.callback.get("GROUP_BEFORE_"+groupName)){
+
+                        var _callback=jsf3.callback.get("GROUP_BEFORE_"+groupName);
+
+                        groupCallbackList.push(function(next2){   
+                            _callback(callObj);
+                            if(!callObj._waited){
+                                next2();
+                            }
+                        });
+                    }
+                }
+
+                jsf3.sync(groupCallbackList);
+
             },
 
             function(next){
@@ -119,6 +154,36 @@ jsf3.redirect={
                     },560);
 
                 },500);
+
+            },
+
+            function(next){
+
+                if(!_pageData.group){
+                    next();
+                    return;
+                }
+
+                var groupCallbackList=[];
+
+                for(var n=0;n<_pageData.group.length;n++){
+
+                    var groupName=_pageData.group[n];
+
+                    if(jsf3.callback.get("GROUP_AFTER_"+groupName)){
+
+                        var _callback=jsf3.callback.get("GROUP_AFTER_"+groupName);
+
+                        groupCallbackList.push(function(next2){   
+                            _callback(callObj);
+                            if(!callObj._waited){
+                                next2();
+                            }
+                        });
+                    }
+                }
+
+                jsf3.sync(groupCallbackList);
 
             },
 
