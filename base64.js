@@ -1,11 +1,11 @@
 module.exports={
 
     encode:function(str){
-        return Buffer.from(str).toString('base64');
+        return (Buffer.from(encodeURIComponent(str)).toString('base64'));
     },
 
     decode:function(str){
-        return Buffer.from(str, 'base64').toString();
+        return decodeURIComponent(Buffer.from(str, 'base64').toString());
     },
 
 };

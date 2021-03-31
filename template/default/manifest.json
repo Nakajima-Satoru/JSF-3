@@ -6,6 +6,7 @@
     "hp": "https://www.jsf-3.com/",
     "option": {
         "libCompressionMode":false,
-        "jquery": "3.6.0"
+        "jquery": "3.6.0",
+        "animation": " fade"
     }
 }

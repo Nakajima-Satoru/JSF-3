@@ -51,25 +51,24 @@ jsf3.load=function(){
 
         ]);
 
-        $("html").on("click","a[batkto]",function(){
+        $("html").on("click","a",function(){
 
-            jsf3.redirect.back();
+            var href=$(this).attr("href");
+            var backto=$(this).attr("backto");
 
-            return false;
-        });
+            if(backto !== undefined){
+                jsf3.redirect.back();
+            }
 
-        $("html").on("click","a[href]",function(){
-
-            var pageName=$(this).attr("href");
-
-            jsf3.redirect.next(pageName);
+            if(href!="#"){
+                jsf3.redirect.next(href);
+            }
 
             return false;
         });
 
         window.onpopstate=function(event){
             jsf3.redirect.back();
-
             return false;
         };
 

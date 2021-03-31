@@ -131,20 +131,19 @@ module.exports=function(name){
         function(obj){
             
             // convert cache html
-            var htmlCacheStr="jsf3.cache={ \n";
+            var htmlCacheStr="";
 
             // page cache...
             var htmlPageLIst = fsa.deepSearch(name+"/render/page");    
 
-            htmlCacheStr+=" pages: { \n";
+            htmlCacheStr+="jsf3.cache.pages = { \n";
             for(var n=0;n<htmlPageLIst.file.length;n++){
                 var filepath=htmlPageLIst.file[n];
 
-                var fileName=filepath.replace(name+"/render/page","");
+                var fileName=filepath.replace(name+"/render/page/","");
                 fileName=fileName.replace(".html","");
-
+                
                 var content=fsa.readFileSync(filepath).toString();
-
                 var contentB64=base64.encode(content);
                 var fileNameB64=base64.encode(fileName);
 
@@ -152,7 +151,7 @@ module.exports=function(name){
 
                 console.log("# read "+filepath);
             }
-            htmlCacheStr+=" }, \n";
+            htmlCacheStr+=" };\n";
 
             // dialog cache
 
@@ -160,11 +159,11 @@ module.exports=function(name){
 
                 var HtmlDialogList = fsa.deepSearch(name+"/render/dialog");    
 
-                HtmlCacheStr+=" dialogs: {\n";
+                htmlCacheStr+="jsf3.cache.dialogs = { \n";
                 for(var n=0;n<HtmlDialogList.file.length;n++){
                     var filepath=HtmlDialogList.file[n];
     
-                    var fileName=filepath.replace(name+"/render/dialog","");
+                    var fileName=filepath.replace(name+"/render/dialog/","");
                     fileName=fileName.replace(".html","");
     
                     var content=fsa.readFileSync(filepath).toString();
@@ -176,7 +175,7 @@ module.exports=function(name){
     
                     console.log("# read "+filepath);
                 }
-                htmlCacheStr+=" }, \n";
+                htmlCacheStr+="};\n";
     
             }
 
@@ -184,11 +183,11 @@ module.exports=function(name){
             if(fsa.existsSync(name+"/render/element")){
                 var HtmlElementList = fsa.deepSearch(name+"/render/element");    
 
-                htmlCacheStr+=" elements: {\n";
+                htmlCacheStr+="jsf3.cache.elements = {\n";
                 for(var n=0;n<HtmlElementList.file.length;n++){
                     var filepath=HtmlElementList.file[n];
 
-                    var fileName=filepath.replace(name+"/render/element","");
+                    var fileName=filepath.replace(name+"/render/element/","");
                     fileName=fileName.replace(".html","");
 
                     var content=fsa.readFileSync(filepath).toString();
@@ -201,11 +200,9 @@ module.exports=function(name){
                     console.log("# read "+filepath);
 
                 }
-                htmlCacheStr+=" }, \n";
+                htmlCacheStr+="};\n";
 
             }
-
-            htmlCacheStr+="};"
 
             fsa.writeFileSync(buildPath+"/bin/cache.js",htmlCacheStr);
             console.log("# fileset "+buildPath+"/bin/cache.js");

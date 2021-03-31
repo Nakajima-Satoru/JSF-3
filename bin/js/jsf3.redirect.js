@@ -9,10 +9,14 @@ jsf3.redirect={
      */
     next:function(pageName,option){
 
+        if(!option){
+            option={};
+        }
+
         history.pushState(pageName, null, null);
 
         var now=jsf3.buffer.nowPage;
-
+        
         if(!jsf3.cache.pages[jsf3.base64.encode(pageName)]){
             return;
         }
@@ -55,26 +59,48 @@ jsf3.redirect={
         jsf3.sync([
 
             function(next){
+
                 callObj.next=function(){
+                    callObj._waited=false;
                     next();
                 };
                 next();
             },
 
-            function(){
+            function(next){
 
                 var callName="PAGE_BEFORE_"+jsf3.base64.encode(pageName);
+
                 if(jsf3.callback.get(callName)){
                     var callback=jsf3.callback.get(callName);
                     callback(callObj);
                     if(!callObj._waited){
-                        callObj.next();
+                        next();
                     }
                 }
                 else{
-                    callObj.next();
+                    next();
                 }
 
+            },
+
+            function(next){
+
+                if(!option.callback){
+                    next();
+                    return;
+                }
+
+                if(!option.callback.before){
+                    next();
+                    return;
+                }
+
+                option.callback.before(callObj);
+
+                if(!callObj._waited){
+                    next();
+                }
             },
 
             function(next){
@@ -88,23 +114,47 @@ jsf3.redirect={
                     var nowPageArea=pageArea.find("page#"+_next.id);
                     nowPageArea.addClass("open");
 
-                    next();
+                    setTimeout(function(){
+                        next();
+                    },560);
 
                 },500);
 
             },
 
-            function(){
+            function(next){
 
-                setTimeout(function(){
+                var callName="PAGE_AFTER_"+jsf3.base64.encode(pageName);
+                if(jsf3.callback.get(callName)){
+                    var callback=jsf3.callback.get(callName);
+                    callback(callObj);
 
-                    var callName="PAGE_AFTER_"+jsf3.base64.encode(pageName);
-                    if(jsf3.callback.get(callName)){
-                        var callback=jsf3.callback.get(callName);
-                        callback(callObj);
+                    if(!callObj._waited){
+                        next();
                     }
-    
-                },500);
+                }
+                else{
+                    next();
+                }
+            },
+
+            function(next){
+
+                if(!option.callback){
+                    next();
+                    return;
+                }
+
+                if(!option.callback.after){
+                    next();
+                    return;
+                }
+
+                option.callback.after(callObj);
+
+                if(!callObj._waited){
+                    next();
+                }
 
             },
 

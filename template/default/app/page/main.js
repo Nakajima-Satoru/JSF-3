@@ -4,6 +4,10 @@ jsf3.page("main",{
 
         console.log("main page beforer...");
 
+        $(".open_dialog").off("click").on("click",function(){
+            jsf3.dialog("dialog01").open();
+        });
+
     },
 
     after:function(obj){
@@ -12,10 +16,4 @@ jsf3.page("main",{
 
     },
     
-    leave:function(obj){
-
-        console.log("main page leave...");
-
-    },
-
 });
