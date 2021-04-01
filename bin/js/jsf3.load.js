@@ -53,24 +53,68 @@ jsf3.load=function(){
 
         $("html").on("click","a",function(){
 
-            var href=$(this).attr("href");
-            var backto=$(this).attr("backto");
+            try{
 
-            if(backto !== undefined){
-                jsf3.redirect.back();
-            }
+                var href=$(this).attr("href");
+                var backto=$(this).attr("backto");
+    
+                if(backto !== undefined){
+                    jsf3.redirect.back();
+                }
+    
+                if(href!="#"){
+                    jsf3.redirect.next(href);
+                }
 
-            if(href!="#"){
-                jsf3.redirect.next(href);
+                
+            }catch(err){
+                console.log(err);
             }
 
             return false;
         });
 
         window.onpopstate=function(event){
-            jsf3.redirect.back();
+
+            try{
+                jsf3.redirect.back();
+            }catch(err){
+                console.log(err);
+            }
+
             return false;
         };
+
+        $("html").on("submit","form",function(){
+
+            try{
+
+                var formId=$(this).attr("id");
+
+                var getData=jsf3.form(formId).getFormData();
+
+                var callobj={
+                    post:getData,
+                };
+
+                if(jsf3.callback.get("FORM_SUBMIT_"+formId)){
+                    var _callback=jsf3.callback.get("FORM_SUBMIT_"+formId);
+                    _callback(callobj);
+                }
+    
+            }catch(err){
+                console.log(err);
+            }
+
+            return false;
+        });
+
+        $("html").on("change","input[type=file]",function(e){
+
+            var files = $(this).prop('files');
+            console.log(files);
+
+        });
 
     });
 

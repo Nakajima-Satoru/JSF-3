@@ -8,6 +8,7 @@
     "jsf3.group.js",
     "jsf3.redirect.js",
     "jsf3.dialog.js",
+    "jsf3.formbuild.js",
     "jsf3.form.js",
     "jsf3.request.js",
     "jsf3.validator.js"
