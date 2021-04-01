@@ -1,3 +1,5 @@
+jsf3.formFileBuffer={};
+
 jsf3.form=function(formName,settings){
 
     if(settings){
@@ -22,6 +24,8 @@ jsf3.form=function(formName,settings){
     var _this=function(formName){
 
         this.tagOpen=function(){
+
+            jsf3.formFileBuffer={};
 
             if(!jsf3.cache.data.form[formName]){
                 return;
@@ -65,7 +69,11 @@ jsf3.form=function(formName,settings){
 
         };
 
-        this.getFormData=function(field){
+        /**
+         * getData
+         * @returns 
+         */
+        this.getData=function(){
 
             var formObj=$("form#"+formName);
             var length=formObj.find("[name]").length;
@@ -121,7 +129,9 @@ jsf3.form=function(formName,settings){
                         field=field.replace("[]","",field);
                     }
                     else if(type=="file"){
-                        value=_obj.val();
+                        if(jsf3.formFileBuffer[field]){
+                            value=jsf3.formFileBuffer[field];
+                        }
                     }
                     else{
                         value=_obj.val();
@@ -133,6 +143,19 @@ jsf3.form=function(formName,settings){
             }
 
             return data;
+
+        };
+
+        /**
+         * setData
+         * @param {} data 
+         */
+        this.setData=function(data){
+
+            var colum=Object.keys(data);
+
+            
+
 
         };
 

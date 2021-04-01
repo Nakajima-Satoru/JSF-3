@@ -91,10 +91,12 @@ jsf3.load=function(){
 
                 var formId=$(this).attr("id");
 
-                var getData=jsf3.form(formId).getFormData();
+                var getData=jsf3.form(formId).getData();
 
                 var callobj={
-                    post:getData,
+                    id:formId,
+                    form:$(this),
+                    data:getData,
                 };
 
                 if(jsf3.callback.get("FORM_SUBMIT_"+formId)){
@@ -109,11 +111,50 @@ jsf3.load=function(){
             return false;
         });
 
+        $("html").on("reset","form",function(){
+
+            try{
+
+                var formId=$(this).attr("id");
+
+                var getData=jsf3.form(formId).getData();
+
+
+
+
+            }catch(err){
+                console.log(err);
+            }
+
+            return false;
+
+
+        });
+
         $("html").on("change","input[type=file]",function(e){
 
-            var files = $(this).prop('files');
-            console.log(files);
+            var fileBuffers=[];
+            var field=$(this).attr("name");
 
+            var files=$(this).prop("files");
+
+            for(var n=0;n<files.length;n++){
+                var file=files[n];
+
+                var fr=new FileReader();
+                fr.onload=function(evt) {
+                    fileBuffers.push({
+                        name:file.name,
+                        size:file.size,
+                        type:file.type,
+                        lastModifiedDate:file.lastModifiedDate,
+                        result:evt.target.result,
+                    });
+                }
+                fr.readAsDataURL(file);    
+            }
+
+            jsf3.formFileBuffer[field]=fileBuffers;
         });
 
     });
