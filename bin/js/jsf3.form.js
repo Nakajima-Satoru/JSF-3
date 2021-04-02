@@ -23,7 +23,7 @@ jsf3.form=function(formName,settings){
 
     var _this=function(formName){
 
-        this.tagOpen=function(){
+        this.tagOpen=function(option){
 
             jsf3.formFileBuffer={};
 
@@ -65,6 +65,27 @@ jsf3.form=function(formName,settings){
                 }
                 
                 formObj.find("[field="+field+"]").html(tagStr);
+            }
+
+            if(option){
+                if(option.setData){
+                    this.setData(option.setData);
+                }
+                if(option.ignore){
+                    this.tagIgnore(option.ignore);
+                }
+            }
+
+            return this;
+        };
+
+        this.tagIgnore=function(ignores){
+
+            var formObj=$("form#"+formName);
+
+            for(var n=0;n<ignores.length;n++){
+                var field=ignores[n];
+                formObj.find("[field=\""+field+"\"]").html("");
             }
 
         };
@@ -152,9 +173,54 @@ jsf3.form=function(formName,settings){
          */
         this.setData=function(data){
 
+            var formObj=$("form#"+formName);
             var colum=Object.keys(data);
 
-            
+            for(var n=0;n<colum.length;n++){
+                var field=colum[n];
+                var value=data[field];
+
+                var _obj=formObj.find("[name=\""+field+"\"]");
+                var _objCheck=formObj.find("[name=\""+field+"[]\"]");
+                var tagName=_obj.prop("tagName");
+
+                if(tagName=="SELECT"){
+                    _obj.val(value);
+                }
+                else if(tagName=="TEXTAREA"){
+                    _obj.val(value);
+                }
+                else{
+
+                    var type=_obj.attr("type");
+
+                    if(type=="radio"){
+                        var __o=formObj.find("[name=\""+field+"\"][value=\""+value+"\"]");
+                        __o.prop("checked",true);
+                    }
+                    else if(_objCheck.length){
+
+                        var _f=field+"[]";
+
+                        if(typeof value=="string"){
+                            value=[value];
+                        }
+
+                        var __o=formObj.find("[name=\""+_f+"\"]");
+                        __o.prop("checked",false);
+
+                        for(var n2=0;n2<value.length;n2++){
+                             var __o=formObj.find("[name=\""+_f+"\"][value=\""+value[n2]+"\"]");
+                            __o.prop("checked",true);
+                        }
+
+                    }
+                    else{
+                        _obj.val(value);
+                    }
+
+                }
+            }
 
 
         };
