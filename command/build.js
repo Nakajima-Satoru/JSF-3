@@ -145,9 +145,8 @@ module.exports=function(name){
                 
                 var content=fsa.readFileSync(filepath).toString();
                 var contentB64=base64.encode(content);
-                var fileNameB64=base64.encode(fileName);
 
-                htmlCacheStr+="  \""+fileNameB64+"\":\""+contentB64+"\",\n";
+                htmlCacheStr+="  \""+fileName+"\":\""+contentB64+"\",\n";
 
                 console.log("# read "+filepath);
             }
@@ -169,9 +168,8 @@ module.exports=function(name){
                     var content=fsa.readFileSync(filepath).toString();
     
                     var contentB64=base64.encode(content);
-                    var fileNameB64=base64.encode(fileName);
     
-                    htmlCacheStr+="  \""+fileNameB64+"\":\""+contentB64+"\",\n";
+                    htmlCacheStr+="  \""+fileName+"\":\""+contentB64+"\",\n";
     
                     console.log("# read "+filepath);
                 }
@@ -193,9 +191,8 @@ module.exports=function(name){
                     var content=fsa.readFileSync(filepath).toString();
 
                     var contentB64=base64.encode(content);
-                    var fileNameB64=base64.encode(fileName);
 
-                    htmlCacheStr+="  \""+fileNameB64+"\":\""+contentB64+"\",\n";
+                    htmlCacheStr+="  \""+fileName+"\":\""+contentB64+"\",\n";
 
                     console.log("# read "+filepath);
 
@@ -236,6 +233,32 @@ module.exports=function(name){
             console.log("# fileset "+buildPath+"/bin/app.js");
             
             obj.next();  
+        },
+        function(obj){
+
+            // asset file copy
+            var assetList = fsa.deepSearch(name+"/render/assets");
+
+            if(!fsa.existsSync(buildPath+"/assets")){
+                fsa.mkdirSync(buildPath+"/assets");
+                console.log("# mkdir "+buildPath+"/assets");    
+            }
+
+            for(var n=0;n<assetList.dir.length;n++){
+                var path=assetList.dir[n];
+                var copyPath=path.replace(name+"/render/assets/","");
+                fsa.mkdirSync(buildPath+"/assets/"+copyPath);
+            }
+
+            for(var n=0;n<assetList.file.length;n++){
+                var path=assetList.file[n];
+                var copyPath=path.replace(name+"/render/assets/","");
+                fsa.copyFileSync(path,buildPath+"/assets/"+copyPath);
+                console.log("# copy "+path+" "+buildPath+"/assets/"+copyPath);
+            }
+
+            obj.next();
+
         },
         function(obj){
 

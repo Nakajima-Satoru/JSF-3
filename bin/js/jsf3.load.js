@@ -19,9 +19,9 @@ jsf3.load=function(){
 
             function(next){
 
-                if(jsf3.callback.get("START")){
+                if(jsf3.cache.common.start){
 
-                    var callback=jsf3.callback.get("START");
+                    var callback=jsf3.cache.common.start;
 
                     var callObj={
                         _waited:false,
@@ -57,13 +57,19 @@ jsf3.load=function(){
 
                 var href=$(this).attr("href");
                 var backto=$(this).attr("backto");
-    
+
+                var leavePage=$(this).attr("data-leave-page");
+
+                var opt={
+                    leavePage:leavePage,
+                };
+
                 if(backto !== undefined){
                     jsf3.redirect.back();
                 }
     
                 if(href!="#"){
-                    jsf3.redirect.next(href);
+                    jsf3.redirect.next(href,opt);
                 }
 
                 
@@ -99,10 +105,18 @@ jsf3.load=function(){
                     data:getData,
                 };
 
-                if(jsf3.callback.get("FORM_SUBMIT_"+formId)){
-                    var _callback=jsf3.callback.get("FORM_SUBMIT_"+formId);
-                    _callback(callobj);
+                var _form=jsf3.cache.form[formId];
+
+                if(!_form){
+                    return false;
                 }
+
+                if(!_form.submit){
+                    return false;
+                }
+
+                var _callback=_form.submit;
+                _callback(callobj);
     
             }catch(err){
                 console.log(err);
@@ -150,7 +164,7 @@ jsf3.load=function(){
                         lastModifiedDate:file.lastModifiedDate,
                         result:evt.target.result,
                     });
-                }
+                };
                 fr.readAsDataURL(file);    
             }
 

@@ -4,18 +4,17 @@ jsf3.form=function(formName,settings){
 
     if(settings){
 
-        if(settings.submit){
-            jsf3.callback.set("FORM_SUBMIT_"+formName,settings.submit);
+        var colum=Object.keys(settings);
+        
+        if(!jsf3.cache.form[formName]){
+            jsf3.cache.form[formName]={};
         }
-        if(settings.reset){
-            jsf3.callback.set("FORM_RESET_"+formName,settings.reset);
-        }
-        if(settings.tags){
-            if(!jsf3.cache.data.form[formName]){
-                jsf3.cache.data.form[formName]={};
-            }
 
-            jsf3.cache.data.form[formName].tags=settings.tags;           
+        for(var n=0;n<colum.length;n++){
+            var field=colum[n];
+            var values=settings[field];
+
+            jsf3.cache.form[formName][field]=values;
         }
 
         return;
@@ -27,26 +26,26 @@ jsf3.form=function(formName,settings){
 
             jsf3.formFileBuffer={};
 
-            if(!jsf3.cache.data.form[formName]){
+            if(!jsf3.cache.form[formName]){
                 return;
             }
 
-            var data=jsf3.cache.data.form[formName];
+            var _form=jsf3.cache.form[formName];
 
-            if(!data.tags){
+            if(!_form.tags){
                 return;
             }
 
-            if(data.tags=={}){
+            if(_form.tags=={}){
                 return;
             }
 
             var formObj=$("form#"+formName);
 
-            var colums=Object.keys(data.tags);
+            var colums=Object.keys(_form.tags);
             for(var n=0;n<colums.length;n++){
                 var field=colums[n];
-                var values=data.tags[field];
+                var values=_form.tags[field];
 
                 if(values.type=="select"){
                     var tagStr=jsf3.formbuild.select(field,values);

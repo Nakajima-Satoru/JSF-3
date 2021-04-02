@@ -100,7 +100,15 @@ jsf3.formbuild={
 
     checkbox:function(name,option){
 
-        var _name=name+"[]";
+        var _name=name;
+        if(typeof option.selected=="string"){
+            option.selected={
+                1:option.selected,
+            };
+        }
+        else{
+            _name+="[]";
+        }
 
         var _value=null;
         if(option.value!=undefined){
@@ -136,10 +144,12 @@ jsf3.formbuild={
                 "selected",
             ]);
     
-            for(var n2=0;n2<_value.length;n2++){
-                var v_=_value[n2];
-                if(field.toString() === v_.toString()){
-                    optStr+=" checked";
+            if(_value){
+                for(var n2=0;n2<_value.length;n2++){
+                    var v_=_value[n2];
+                    if(field.toString() === v_.toString()){
+                        optStr+=" checked";
+                    }    
                 }    
             }
 

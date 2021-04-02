@@ -2,11 +2,17 @@ jsf3.dialog=function(dialogName,settings){
 
     if(settings){
 
-        if(settings.open){
-            jsf3.callback.set("DIALOG_OPEN_"+dialogName,settings.open);           
+        var colum=Object.keys(settings);
+
+        if(!jsf3.cache.dialog[dialogName]){
+            jsf3.cache.dialog[dialogName]={};
         }
-        if(settings.close){
-            jsf3.callback.set("DIALOG_CLOSE_"+dialogName,settings.close);
+
+        for(var n=0;n<colum.length;n++){
+            var field=colum[n];
+            var values=settings[field];
+
+            jsf3.cache.dialog[dialogName][field]=values;
         }
 
         return;
@@ -22,9 +28,18 @@ jsf3.dialog=function(dialogName,settings){
                 };
             }
 
-            var dialogNameB64=jsf3.base64.encode(dialogName);
-            var content=jsf3.cache.dialogs[dialogNameB64];
+            if(!jsf3.cache.dialog[dialogName]){
+                return;
+            }
+
+            var _dialogData=jsf3.cache.dialog[dialogName];
+
+            var content=jsf3.cache.dialogs[dialogName];
             content=jsf3.base64.decode(content);
+
+            if(content==undefined){
+                return;
+            }
 
             var id=jsf3.uniqId();
 
@@ -34,10 +49,10 @@ jsf3.dialog=function(dialogName,settings){
             }
 
             if(option.noWindow){
-                var dialogHtml='<div class="dialog '+_class+'" data-id="'+id+'"><div class="bg">'+content+'</div></div>';
+                var dialogHtml='<div class="dialog '+_class+'" data-dialog_type="'+dialogName+'" data-id="'+id+'"><div class="bg">'+content+'</div></div>';
             }
             else{
-                var dialogHtml='<div class="dialog '+_class+'" data-id="'+id+'"><div class="bg"><div class="window">'+content+'</div></div></div>';
+                var dialogHtml='<div class="dialog '+_class+'" data-dialog_type="'+dialogName+'" data-id="'+id+'"><div class="bg"><div class="window">'+content+'</div></div></div>';
             }
 
             $(".dialogarea").append(dialogHtml);
@@ -45,8 +60,12 @@ jsf3.dialog=function(dialogName,settings){
             var dialog=$(".dialog[data-id=\""+id+"\"]");
             
             var callObj={
+                _waited:false,
                 id:id,
                 dialog:dialog,
+                wait:function(){
+                    callObj._waited=true;
+                },
                 close:function(){
                 
                     jsf3.sync([
@@ -66,17 +85,18 @@ jsf3.dialog=function(dialogName,settings){
                         },
                         function(next){
 
-                            if(!jsf3.callback.get("DIALOG_CLOSE_"+dialogName)){
+                            if(!_dialogData.close){
                                 next();
                                 return;
                             }
 
-                            var _callback=jsf3.callback.get("DIALOG_CLOSE_"+dialogName);
+                            var _callback=_dialogData.close;
                             _callback(callObj);
                                     
                             if(!callObj._waited){
                                 next();
                             }
+
                         },
                         function(next){
 
@@ -114,11 +134,7 @@ jsf3.dialog=function(dialogName,settings){
             
             jsf3.sync([
                 function(next){
-
-                    callObj._waited=false;
-                    callObj.wait=function(){
-                        callObj._waited=true;
-                    };
+             
                     callObj.next=function(){
                         callObj._waited=false;
                         next();
@@ -128,12 +144,12 @@ jsf3.dialog=function(dialogName,settings){
                 },
                 function(next){
 
-                    if(!jsf3.callback.get("DIALOG_OPEN_"+dialogName)){
+                    if(!_dialogData.open){
                         next();
                         return;
                     }
                     
-                    var _callback=jsf3.callback.get("DIALOG_OPEN_"+dialogName);
+                    var _callback=_dialogData.open;
                     _callback(callObj);
 
                     if(!callObj._waited){
@@ -160,14 +176,12 @@ jsf3.dialog=function(dialogName,settings){
                     }
         
                 },
-                function(next){
+                function(){
 
                     dialog.addClass("open");
 
                 },
             ]);
-
-
 
             dialog.find(".closed").on("click",function(){
                 callObj.close();
@@ -183,27 +197,72 @@ jsf3.dialog=function(dialogName,settings){
             }
 
             var dialog=$(".dialog[data-id=\""+dialogId+"\"]");
+            var dialogName=dialog.attr("data-dialog_type");
+
+            var _dialogData=jsf3.cache.dialog[dialogName];
+
+            if(!_dialogData){
+                return;
+            }
 
             var callObj={
+                _waited:false,
                 id:dialogId,
                 dialog:dialog,
                 option:option,
+                wait:function(){
+                    callObj._waited=true;
+                },
             };
 
-            if(jsf3.callback.get("DIALOG_CLOSE_"+dialogName)){
-                var _callback=jsf3.callback.get("DIALOG_CLOSE_"+dialogName);
-                _callback(callObj);
-            }
+            jsf3.sync([
+                function(next){
+                    callObj.next=function(){
+                        callObj._waited=false;
+                        next();
+                    };
 
-            if(option.callback){
-                option.callback(callObj);
-            }
+                    next();
+                },
+                function(next){
 
-            dialog.removeClass("open").addClass("closed");
+                    if(!_dialogData.close){
+                        next();
+                        return;
+                    }
 
-            setTimeout(function(){
-                dialog.remove();
-            },500);
+                    var _callback=_dialogData.close;
+                    _callback(callObj);
+                    
+                    if(!callObj._waited){
+                        next();
+                    }
+                },
+                function(){
+
+                    if(!option.callback){
+                        next();
+                        return;
+                    }
+
+
+                    option.callback(callObj);
+                    if(!callObj._waited){
+                        next();
+                    }
+
+                },
+                function(){
+
+                    dialog.removeClass("open").addClass("closed");
+
+                    setTimeout(function(){
+                        dialog.remove();
+                    },500);
+        
+                },
+            ])
+
         };
 
     };

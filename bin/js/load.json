@@ -3,7 +3,7 @@
     "jsf3.sync.js",
     "jsf3.convert.js",
     "jsf3.load.js",
-    "jsf3.callback.js",
+    "jsf3.common.js",
     "jsf3.page.js",
     "jsf3.group.js",
     "jsf3.redirect.js",
@@ -11,5 +11,6 @@
     "jsf3.formbuild.js",
     "jsf3.form.js",
     "jsf3.request.js",
+    "jsf3.validateRule.js",
     "jsf3.validator.js"
 ]

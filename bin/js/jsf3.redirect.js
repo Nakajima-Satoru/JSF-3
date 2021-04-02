@@ -17,23 +17,19 @@ jsf3.redirect={
 
         var now=jsf3.buffer.nowPage;
         
-        if(!jsf3.cache.pages[jsf3.base64.encode(pageName)]){
+        if(jsf3.cache.pages[pageName]==undefined){
             return;
         }
 
-        var _content=jsf3.cache.pages[jsf3.base64.encode(pageName)];
-
-        _content=jsf3.base64.decode(_content);
+        var _content=jsf3.base64.decode(jsf3.cache.pages[pageName]);
 
         var _next={
             id:jsf3.uniqId(),
             pageName:pageName,
             option:option,
-            content:_content,
         };
 
         var callObj={
-            mode:"next",
             _waited:false,
             now:now,
             next:_next,
@@ -43,22 +39,31 @@ jsf3.redirect={
         };
 
         var pageArea=$("pagearea");
-        
-        var nextPage='<page id="'+_next.id+'"><wk>'+_next.content+'</wk></page>';
+
+        var nextPage='<page id="'+_next.id+'"><wk>'+_content+'</wk></page>';
         pageArea.append(nextPage);
 
-        jsf3.buffer.nowPage=_next;
+        var nextPageObj=pageArea.find("#"+_next.id);
 
-        jsf3.buffer.pages.push(_next);
-        jsf3.buffer.pageMoveIndex++;
+        if(now){
+            now.content=pageArea.find("#"+now.id).html();
+            jsf3.buffer.pages.push(now);
+            jsf3.buffer.pageMoveIndex++;    
+        }
+
+        jsf3.buffer.nowPage=_next;
 
         if(now){
             pageArea.find("page#"+now.id).removeClass("open").addClass("closed");
         }
 
         var _pageData={};
-        if(jsf3.cache.data.page[jsf3.base64.encode(pageName)]){
-            _pageData=jsf3.cache.data.page[jsf3.base64.encode(pageName)];
+        if(jsf3.cache.page[pageName]){
+            _pageData=jsf3.cache.page[pageName];
+        }
+
+        if(_pageData.class){
+            nextPageObj.addClass(_pageData.class);
         }
 
         jsf3.sync([
@@ -79,41 +84,48 @@ jsf3.redirect={
                     return;
                 }
 
+                if(typeof _pageData.group=="string"){
+                    _pageData.group=[_pageData.group];
+                }
+
                 var groupCallbackList=[];
 
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
+                    var _g=jsf3.cache.group[groupName];
 
-                    if(jsf3.callback.get("GROUP_BEFORE_"+groupName)){
+                    if(_g){
+                        if(_g.before){
+                            var _callback=_g.before;
 
-                        var _callback=jsf3.callback.get("GROUP_BEFORE_"+groupName);
-
-                        groupCallbackList.push(function(next2){   
-                            _callback(callObj);
-                            if(!callObj._waited){
-                                next2();
-                            }
-                        });
+                            groupCallbackList.push(function(next2){   
+                                _callback(callObj);
+                                if(!callObj._waited){
+                                    next2();
+                                }
+                            });
+                        }
                     }
+                   
                 }
 
-                jsf3.sync(groupCallbackList);
+                if(groupCallbackList.length){
+                    jsf3.sync(groupCallbackList);
+                }
 
             },
 
             function(next){
 
-                var callName="PAGE_BEFORE_"+jsf3.base64.encode(pageName);
-
-                if(jsf3.callback.get(callName)){
-                    var callback=jsf3.callback.get(callName);
-                    callback(callObj);
-                    if(!callObj._waited){
-                        next();
-                    }
+                if(!_pageData.before){
+                    next();
+                    return;
                 }
-                else{
+                
+                var callback=_pageData.before;
+                callback(callObj);
+                if(!callObj._waited){
                     next();
                 }
 
@@ -143,7 +155,9 @@ jsf3.redirect={
                 setTimeout(function(){
 
                     if(now){
-                        pageArea.find("page#"+now.id).remove();
+                        if(!option.leavePage){
+                            pageArea.find("page#"+now.id).remove();
+                        }
                     }
 
                     var nowPageArea=pageArea.find("page#"+_next.id);
@@ -169,38 +183,43 @@ jsf3.redirect={
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
+                    var _g=jsf3.cache.group[groupName];
 
-                    if(jsf3.callback.get("GROUP_AFTER_"+groupName)){
+                    if(_g){
+                        if(_g.after){
 
-                        var _callback=jsf3.callback.get("GROUP_AFTER_"+groupName);
+                            var _callback=_g.after;
 
-                        groupCallbackList.push(function(next2){   
-                            _callback(callObj);
-                            if(!callObj._waited){
-                                next2();
-                            }
-                        });
+                            groupCallbackList.push(function(next2){   
+                                _callback(callObj);
+                                if(!callObj._waited){
+                                    next2();
+                                }
+                            });
+
+                        }
                     }
                 }
 
-                jsf3.sync(groupCallbackList);
+                if(groupCallbackList.length){
+                    jsf3.sync(groupCallbackList);
+                }
 
             },
 
             function(next){
 
-                var callName="PAGE_AFTER_"+jsf3.base64.encode(pageName);
-                if(jsf3.callback.get(callName)){
-                    var callback=jsf3.callback.get(callName);
-                    callback(callObj);
-
-                    if(!callObj._waited){
-                        next();
-                    }
+                if(!_pageData.after){
+                    next();
+                    return;
                 }
-                else{
+
+                var callback=_pageData.after;
+                callback(callObj);
+                if(!callObj._waited){
                     next();
                 }
+
             },
 
             function(next){
@@ -235,15 +254,14 @@ jsf3.redirect={
         
         var now=jsf3.buffer.nowPage;
 
-        if(!jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-2]){
+        if(!jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1]){
             return;
         }
 
-        var _back=jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-2];
+        var _back=jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1];
         jsf3.buffer.pageMoveIndex--;
 
         var callObj={
-            mode:"back",
             _waited:false,
             now:now,
             back:_back,
@@ -256,7 +274,17 @@ jsf3.redirect={
         pageArea.addClass("back");
         
         var backpage='<page id="'+_back.id+'"><wk>'+_back.content+'</wk></page>';
-        pageArea.append(backpage);
+        if(_back.option){
+            if(pageArea.find("#"+_back.id).length){
+                pageArea.find("#"+_back.id).removeClass("closed");
+            }
+            else{
+                pageArea.append(backpage);                
+            }
+        }
+        else{
+            pageArea.append(backpage);
+        }
 
         jsf3.buffer.nowPage=_back;
 
@@ -264,6 +292,10 @@ jsf3.redirect={
             $("pagearea page#"+now.id).removeClass("open").addClass("closed");
         }
 
+        var _backPageData={};
+        if(jsf3.cache.page[_back.pageName]){
+            _backPageData=jsf3.cache.page[_back.pageName];
+        }
 
         jsf3.sync([
 
@@ -274,19 +306,20 @@ jsf3.redirect={
                 next();
             },
 
-            function(){
-
-                var callName="PAGE_BEFORE_"+jsf3.base64.encode(_back.pageName);
-                if(jsf3.callback.get(callName)){
-                    var callback=jsf3.callback.get(callName);
-                    callback(callObj);
-                    if(!callObj._waited){
-                        callObj.next();
-                    }
+            function(next){
+/*
+                if(!_backPageData.before){
+                    next();
+                    return;
                 }
-                else{
+
+                var callback=_backPageData.before;
+                callback(callObj);
+                if(!callObj._waited){
                     callObj.next();
                 }
+*/
+                next();
 
             },
 
@@ -310,12 +343,6 @@ jsf3.redirect={
                 setTimeout(function(){
 
                     pageArea.removeClass("back");
-
-                    var callName="PAGE_AFTER_"+jsf3.base64.encode(_back.pageName);
-                    if(jsf3.callback.get(callName)){
-                        var callback=jsf3.callback.get(callName);
-                        callback(callObj);
-                    }
     
                 },500);
 

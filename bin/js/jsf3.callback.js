@@ -1,3 +1,4 @@
+/*
 jsf3.callback={
 
     set:function(name, callbacks){
@@ -15,3 +16,4 @@ jsf3.callback={
 jsf3.start=function(callbacks){
     jsf3.callback.set("START",callbacks);
 };
+*/
