@@ -2,8 +2,13 @@ jsf3.page("logic",{
 
     before:function(obj){
 
-        console.log(jsf3.logic("test").method());
+
+        $(".logic_test1").off("click").on("click",function(){
+
+            alert(jsf3.logic("test").method());
     
+        });
+
     },
 
 

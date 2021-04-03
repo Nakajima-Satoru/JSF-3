@@ -6,5 +6,4 @@ jsf3.logic("test",{
 
     },
 
-
 });
