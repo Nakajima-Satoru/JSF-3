@@ -1,4 +1,4 @@
-jsf3.validator("validate01",{
+jsf3.validator("validate02",{
 
     rules:{
         like:[
@@ -6,6 +6,94 @@ jsf3.validator("validate01",{
                 rule:["like","だべ"],
                 message:"「だべ」が挿入されていません",
             },
+        ],
+        any:[
+            {
+                rule:["any",[
+                    "みかん",
+                    "いちご",
+                    "のり",
+                ]],
+                message:"適用できません",
+            },
+        ],
+        date:[
+            {
+                rule:"date",
+                message:"日付フォーマットではありません",
+            },
+        ],
+        minDate:[
+            {
+                rule:["minDate","2021/04/01"],
+                message:"選択可能な日付より古いです",
+            },
+        ],
+        maxDate:[
+            {
+                rule:["maxDate","2021/04/01"],
+                message:"選択可能な日付を超えています",
+            },
+        ],
+        betweenDate:[
+            {
+                rule:["betweenDate","2021/01/01","2021/12/31"],
+                message:"選択可能な日付の範囲外です",
+            },
+        ],
+        isInt:[
+            {
+                rule:"isInt",
+                message:"整数値を入力してください",
+            },
+        ],
+        isBool:[
+            {
+                rule:"isBool",
+                message:"ブール値(0or1)を入力してください",
+            },
+        ],
+        isEmail:[
+            {
+                rule:"isEmail",
+                message:"メールアドレス形式を入力してください",
+            },
+        ],
+        isTel:[
+            {
+                rule:"isTel",
+                message:"電話番号形式を入力してください",
+            },
+        ],
+        isIp:[
+            {
+                rule:"isIp",
+                message:"IPアドレス形式を入力してください",
+            },
+        ],
+        isUrl:[
+            {
+                rule:"isUrl",
+                message:"URL形式を入力してください",
+            },
+        ],
+        isZipJP:[
+            {
+                rule:"isZipJP",
+                message:"日本の郵便番号形式を入力してください",
+            }
+        ],
+        isKatakana:[
+            {
+                rule:["isKatakana","　"],
+                message:"全角カタカナで入力してください",
+            }
+        ],
+        isHiragana:[
+            {
+                rule:["isHiragana","　"],
+                message:"全角ひらがなで入力してください",
+            }
         ],
     },
 

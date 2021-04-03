@@ -125,8 +125,10 @@ jsf3.validateRule={
 			return true;
 		}
 
-		for(var n=0;n<arg1.length;n++){
-			value=value.split(arg1[n]).join("");
+		if(arg1){
+			for(var n=0;n<arg1.length;n++){
+				value=value.split(arg1[n]).join("");
+			}	
 		}
 
 		var reg="^[a-zA-Z0-9]+$";
@@ -149,10 +151,12 @@ jsf3.validateRule={
 			return true;
 		}
 
-		for(var n=0;n<arg1.length;n++){
-			value=value.split(arg1[n]).join("");
+		if(arg1){
+			for(var n=0;n<arg1.length;n++){
+				value=value.split(arg1[n]).join("");
+			}
 		}
-
+		
 		var reg="^[0-9]+$";
 
 		if(jsf3.validateRule.regex(value,reg)){
@@ -437,6 +441,10 @@ jsf3.validateRule={
 			return true;
 		}
 
+		if(value[0]==0){
+			return false;
+		}
+
 		if(!isNaN(value)){
 			return true;
 		}
@@ -545,8 +553,10 @@ jsf3.validateRule={
 			return true;
 		}
 
-		for(var n=0;n<arg1.length;n++){
-			value=value.split(arg1[n]).join("");
+		if(arg1){
+			for(var n=0;n<arg1.length;n++){
+				value=value.split(arg1[n]).join("");
+			}	
 		}
 
 		if(value.match(/^[ァ-ヶー]+$/u)){
@@ -561,8 +571,10 @@ jsf3.validateRule={
 			return true;
 		}
 
-		for(var n=0;n<arg1.length;n++){
-			value=value.split(arg1[n]).join("");
+		if(arg1){
+			for(var n=0;n<arg1.length;n++){
+				value=value.split(arg1[n]).join("");
+			}
 		}
 
 		if(value.match(/^[ぁ-ん]+$/u)){
