@@ -221,7 +221,14 @@ jsf3.form=function(formName,settings){
                 }
             }
 
+        };
 
+        this.submit=function(){
+            $("form#"+formName).submit();
+        };
+        
+        this.reset=function(){
+            $("form#"+formName).reset();
         };
 
     };

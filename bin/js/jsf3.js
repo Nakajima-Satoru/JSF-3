@@ -12,6 +12,9 @@ jsf3.cache={
     form:{},
     request:{},
     validator:{},
+    logic:{},
+    element:{},
+    elements:{},
 };
 
 jsf3.buffer={
