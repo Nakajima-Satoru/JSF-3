@@ -17,11 +17,19 @@ jsf3.redirect={
 
         var now=jsf3.buffer.nowPage;
         
-        if(jsf3.cache.pages[pageName]==undefined){
+        if(jsf3.cache.pages[pageName]==undefined && jsf3.cache.page[pageName]==undefined){
             return;
         }
 
-        var _content=jsf3.base64.decode(jsf3.cache.pages[pageName]);
+        var _content="";
+        if(jsf3.base64.decode(jsf3.cache.pages[pageName])){
+            _content=jsf3.base64.decode(jsf3.cache.pages[pageName]);
+        }
+
+        var _pageData={};
+        if(jsf3.cache.page[pageName]){
+            _pageData=jsf3.cache.page[pageName];
+        }
 
         var _next={
             id:jsf3.uniqId(),
@@ -41,11 +49,15 @@ jsf3.redirect={
 
         var pageArea=$("pagearea");
 
-        var nextPage='<page id="'+_next.id+'"><wk>'+_content+'</wk></page>';
-        pageArea.append(nextPage);
-
-        var nextPageObj=pageArea.find("#"+_next.id);
-        callObj.pageObj=nextPageObj;
+        if(_content){
+            var nextPage='<page id="'+_next.id+'"><wk>'+_content+'</wk></page>';
+            pageArea.append(nextPage);
+            var nextPageObj=pageArea.find("#"+_next.id);
+            callObj.pageObj=nextPageObj;
+            if(_pageData.class){
+                nextPageObj.addClass(_pageData.class);
+            }    
+        }
 
         if(now){
             now.content=pageArea.find("#"+now.id).html();
@@ -59,14 +71,6 @@ jsf3.redirect={
             pageArea.find("page#"+now.id).removeClass("open").addClass("closed");
         }
 
-        var _pageData={};
-        if(jsf3.cache.page[pageName]){
-            _pageData=jsf3.cache.page[pageName];
-        }
-
-        if(_pageData.class){
-            nextPageObj.addClass(_pageData.class);
-        }
 
         jsf3.sync([
 
@@ -126,6 +130,9 @@ jsf3.redirect={
 
                 if(groupCallbackList.length){
                     jsf3.sync(groupCallbackList);
+                }
+                else{
+                    next();
                 }
 
             },
@@ -260,6 +267,9 @@ jsf3.redirect={
 
                 if(groupCallbackList.length){
                     jsf3.sync(groupCallbackList);
+                }
+                else{
+                    next();
                 }
 
             },
@@ -439,6 +449,9 @@ jsf3.redirect={
                 if(groupCallbackList.length){
                     jsf3.sync(groupCallbackList);
                 }
+                else{
+                    next();
+                }
 
             },
 
@@ -567,6 +580,9 @@ jsf3.redirect={
                 if(groupCallbackList.length){
                     jsf3.sync(groupCallbackList);
                 }
+                else{
+                    next();
+                }
 
             },
 
@@ -629,10 +645,13 @@ jsf3.redirect={
 
     refresh:function(option){
         
+        if(!option){
+            option={};
+        }
+
         var now=jsf3.buffer.nowPage;
 
         var callObj={
-            mode:"refresh",
             _waited:false,
             now:now,
             wait:function(){
@@ -640,8 +659,13 @@ jsf3.redirect={
             },
         };
 
-        var pageObj=pageArea.find("#"+now.id);
+        var pageObj=$("pagearea").find("#"+now.id);
         callObj.pageObj=pageObj;
+
+        var _pageData={};
+        if(jsf3.cache.page[now.pageName]){
+            _pageData=jsf3.cache.page[now.pageName];
+        }
 
         jsf3.sync([
 
@@ -691,6 +715,9 @@ jsf3.redirect={
 
                 if(groupCallbackList.length){
                     jsf3.sync(groupCallbackList);
+                }
+                else{
+                    next();
                 }
             },
             function(next){

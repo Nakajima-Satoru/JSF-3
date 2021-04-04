@@ -12,6 +12,11 @@ jsf3.page("main",{
             console.log("OPEN Dialog");
             jsf3.dialog("dialog01").open();
         });
+    
+        obj.pageObj.find(".refresh_btn").on("click",function(){
+
+            jsf3.redirect.refresh();
+        });
 
     },
 
@@ -30,5 +35,9 @@ jsf3.page("main",{
         console.log("main page after...");
 
     },
-    
+
+    refresh:function(obj){
+
+        console.log("main refesh.....");
+    },
 });
