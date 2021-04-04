@@ -1,0 +1,112 @@
+*{
+	margin:0;
+	padding:0;
+	font-family:sans-serif, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	letter-spacing:0;
+	box-sizing:border-box;
+}
+body{
+	font-size:13px;
+}
+input,
+select,
+textarea{
+	padding:5px;
+	outline:none;
+}
+pagearea{
+	background:#aaa;
+}
+pagearea page,
+pagearea page wk{
+		background:#eee;
+}
+dl{
+	margin-bottom:20px;
+}
+dl dt{
+	margin-bottom:5px;
+}
+dl dd{
+	margin-bottom:10px;
+}
+h1,h2,h3,h4,h5{
+	font-weight:100;
+}
+h1{
+	margin-bottom:1rem;
+}
+h2{
+	margin-bottom:1rem;
+}
+
+.error{
+	background:#a31;
+	color:#fff;
+	padding:5px;
+	margin:3px 0;
+}
+
+.btn{
+	background:#127;
+	color:#fff;
+	display:inline-block;
+	padding:5px 10px;
+	line-height:1.8rem;
+}
+.btn.btn-success{
+	background:#499;
+	border:none;
+}
+
+.login_form,
+.login_form wk{
+	background:#277;
+	color:#fff;
+}
+.login_form form{
+	position:absolute;
+	border:solid 1px #ddd;
+	padding:30px;
+	left:50%;
+	top:50%;
+	transform:translateX(-50%) translateY(-50%);
+	-webkit-transform:translateX(-50%) translateY(-50%);
+	width:320px;
+}
+.login_form input{
+	width:100%;
+}
+
+.sidemenu{
+	background:#278;
+	color:#fff;
+	position:fixed;
+	z-index:100;
+	left:-250px;
+	top:0;
+	width:250px;
+	height:100%;
+	opacity:0;
+	-webkit-opacity:0;
+	padding:20px;
+	transition-duration:500ms;
+}
+.sidemenu p{
+	margin-bottom:10px;
+}
+.sidemenu a{
+	color:#fff;
+	text-decoration:none;
+}
+.sidemenu.open{
+	left:0;
+	opacity:1;
+	-webkit-opacity:1;	
+}
+.sidemenu+pagearea{
+	transition-duration:500ms;
+}
+.sidemenu.open+pagearea{
+	left:250px;
+}

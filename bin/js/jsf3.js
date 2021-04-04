@@ -19,6 +19,7 @@ jsf3.cache={
     logic:{},
     element:{},
     elements:{},
+    data:{},
 };
 
 jsf3.buffer={
