@@ -279,7 +279,7 @@ jsf3.redirect={
                 }
 
             },
-            
+
             function(next){
 
                 /** afterNext */
@@ -522,8 +522,115 @@ jsf3.redirect={
                 }
 
             },
+        
+            function(next){
+
+                /** group after / afterNext */
+                if(!_backPageData.group){
+                    next();
+                    return;
+                }
+
+                var groupCallbackList=[];
+
+                for(var n=0;n<_backPageData.group.length;n++){
+
+                    var groupName=_backPageData.group[n];
+                    var _g=jsf3.cache.group[groupName];
+
+                    if(_g){
+                        if(_g.after){
+                            var _callback=_g.after;
+
+                            groupCallbackList.push(function(next2){   
+                                _callback(callObj);
+                                if(!callObj._waited){
+                                    next2();
+                                }
+                            });
+
+                        }
+
+                        if(_g.afterNext){
+                            var _callback=_g.afterNext;
+
+                            groupCallbackList.push(function(next2){   
+                                _callback(callObj);
+                                if(!callObj._waited){
+                                    next2();
+                                }
+                            });
+                        }
+                    }
+                }
+
+                if(groupCallbackList.length){
+                    jsf3.sync(groupCallbackList);
+                }
+
+            },
+
+            function(next){
+
+                /** after */
+                if(!_backPageData.after){
+                    next();
+                    return;
+                }
+
+                var callback=_backPageData.after;
+                callback(callObj);
+                if(!callObj._waited){
+                    next();
+                }
+
+            },
+
+            function(next){
+
+                /** afterNext */
+                if(!_backPageData.afterNext){
+                    next();
+                    return;
+                }
+
+                var callback=_backPageData.afterNext;
+                callback(callObj);
+                if(!callObj._waited){
+                    next();
+                }
+
+            },
+
+            function(next){
+
+                /** option after */
+                if(!option.callback){
+                    next();
+                    return;
+                }
+
+                if(!option.callback.after){
+                    next();
+                    return;
+                }
+
+                option.callback.after(callObj);
+
+                if(!callObj._waited){
+                    next();
+                }
+
+            },
+
         ]);
 
     },
 
+    refresh:function(option){
+
+
+
+    },
+    
 };
