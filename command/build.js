@@ -2,9 +2,9 @@
  * Build
  */
 const https=require("https");
-const sync=require("../sync.js");
-const fsa=require("../fsa.js");
-const base64=require("../base64.js");
+const sync=require("./sync.js");
+const fsa=require("./fsa.js");
+const base64=require("./base64.js");
 
 module.exports=function(name){
 

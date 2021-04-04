@@ -1,9 +1,8 @@
 /**
  * Create
  */
-var sync=require("../sync.js");
-var fsa=require("../fsa.js");
-var base64=require("../base64.js");
+var sync=require("./sync.js");
+var fsa=require("./fsa.js");
 
 module.exports=function(name,templateName){
 
@@ -58,6 +57,13 @@ module.exports=function(name,templateName){
                 fsa.copyFileSync(filePath0,name+"/"+filePath);
                 console.log("# filecopy "+filePath0+" "+name+"/"+filePath);
             }
+
+            obj.next();
+        },
+        function(obj){
+
+            fsa.copyFileSync(__dirname+"/template_build.js",name+"/index.js");
+            console.log("# filecopy index.js");
 
             obj.next();
         },

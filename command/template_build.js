@@ -1,0 +1,1 @@
+require("JSF-3/projectBuild.js").build(__dirname);

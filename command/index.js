@@ -2,8 +2,6 @@ var cmd=process.argv;
 cmd.shift();
 cmd.shift();
 
-const path = require("path");
-
 if(cmd[0]=="create"){
 
     var name=cmd[1];
@@ -22,6 +20,11 @@ else if(cmd[0]=="build"){
     build(name);
 
 }
-else if(cmd[0]=="delete"){
+else{
 
+    console.log("------------------------------");
+    console.log("JSF-3 ");
+    console.log("Copylight: Nakajima Satoru");
+    console.log("------------------------------");
+    
 }
