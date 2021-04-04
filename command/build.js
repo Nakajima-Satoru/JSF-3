@@ -86,14 +86,16 @@ module.exports=function(name){
             for(var n=0;n<getJson.length;n++){
                 var content=fsa.readFileSync(__dirname+"/../bin/js/"+getJson[n]).toString();
 
-                if(manifest.option.libCompressionMode){
-                    content=content.split("    ").join("");
-                    content=content.split("\r").join(" ");
-                    content=content.split("\n").join("");    
-                }
-
                 jscoreStr+=content+"\n";
                 console.log("# read "+__dirname+"/../bin/js/"+getJson[n]);
+            }
+
+            if(manifest.option.libCompressionMode){
+                jscoreStr=jscoreStr.split("    ").join("");
+                jscoreStr=jscoreStr.split("\r").join("");
+                jscoreStr=jscoreStr.split("\n").join("");    
+                jscoreStr=jscoreStr.split("\t").join("");
+                console.log("# code Compression....");
             }
     
             fsa.writeFileSync(buildPath+"/bin/core.js",jscoreStr);
@@ -113,14 +115,16 @@ module.exports=function(name){
             for(var n=0;n<getJson.length;n++){
                 var content=fsa.readFileSync(__dirname+"/../bin/css/"+getJson[n]).toString();
 
-                if(manifest.option.libCompressionMode){
-                    content=content.split("    ").join("");
-                    content=content.split("\r").join(" ");
-                    content=content.split("\n").join("");
-                }
-
                 csscoreStr+=content+"\n";
                 console.log("# read "+__dirname+"/../bin/css/"+getJson[n]);
+            }
+
+            if(manifest.option.libCompressionMode){
+                csscoreStr=csscoreStr.split("    ").join("");
+                csscoreStr=csscoreStr.split("\r").join(" ");
+                csscoreStr=csscoreStr.split("\n").join(""); 
+                csscoreStr=csscoreStr.split("\t").join("");
+                console.log("# code Compression....");
             }
     
             fsa.writeFileSync(buildPath+"/bin/jsf3.css",csscoreStr);
@@ -146,7 +150,7 @@ module.exports=function(name){
                 var content=fsa.readFileSync(filepath).toString();
                 var contentB64=base64.encode(content);
 
-                htmlCacheStr+="  \""+fileName+"\":\""+contentB64+"\",\n";
+                htmlCacheStr+="\""+fileName+"\":\""+contentB64+"\",\n";
 
                 console.log("# read "+filepath);
             }
@@ -169,7 +173,7 @@ module.exports=function(name){
     
                     var contentB64=base64.encode(content);
     
-                    htmlCacheStr+="  \""+fileName+"\":\""+contentB64+"\",\n";
+                    htmlCacheStr+="\""+fileName+"\":\""+contentB64+"\",\n";
     
                     console.log("# read "+filepath);
                 }
@@ -192,13 +196,20 @@ module.exports=function(name){
 
                     var contentB64=base64.encode(content);
 
-                    htmlCacheStr+="  \""+fileName+"\":\""+contentB64+"\",\n";
+                    htmlCacheStr+="\""+fileName+"\":\""+contentB64+"\",\n";
 
                     console.log("# read "+filepath);
 
                 }
                 htmlCacheStr+="};\n";
 
+            }
+
+            if(manifest.option.libCompressionMode){
+                htmlCacheStr=htmlCacheStr.split("\r").join("");
+                htmlCacheStr=htmlCacheStr.split("\n").join(""); 
+                htmlCacheStr=htmlCacheStr.split("\t").join("");
+                console.log("# code Compression....");
             }
 
             fsa.writeFileSync(buildPath+"/bin/cache.js",htmlCacheStr);
@@ -227,7 +238,7 @@ module.exports=function(name){
                 console.log("# read "+pageFileList.file[n]);
             }
             
-            pageCacheStr+=" jsf3.load();"
+            pageCacheStr+=" jsf3.load("+JSON.stringify(manifest.option)+");"
 
             fsa.writeFileSync(buildPath+"/bin/app.js",pageCacheStr);
             console.log("# fileset "+buildPath+"/bin/app.js");

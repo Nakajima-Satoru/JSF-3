@@ -53,7 +53,7 @@ jsf3.element=function(elementName,settings){
 				obj.html(content);
 			}
 
-			var _element={}
+			var _element={};
 			if(jsf3.cache.element[elementName]){
 				_element=jsf3.cache.element[elementName];
 			}

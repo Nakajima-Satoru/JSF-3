@@ -28,7 +28,22 @@ pagearea page wk{
     padding:20px;
     overflow:auto;
 }
-
+pagearea page.open{
+    opacity:1;
+    -webkit-opacity:1;
+}
+pagearea page.open wk{
+    opacity:1;
+    -webkit-opacity:1;
+}
+pagearea page.close{
+    opacity:0;
+    -webkit-opacity:0;    
+}
+pagearea page.close wk{
+    opacity:0;
+    -webkit-opacity:0;    
+}
 
 .dialog .bg{
     background:rgba(0,0,0,0.5);

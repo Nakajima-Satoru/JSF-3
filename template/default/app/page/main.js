@@ -5,8 +5,11 @@ jsf3.page("main",{
     before:function(obj){
 
         console.log("main page beforer...");
+        
+        console.log(obj);
 
-        $(".open_dialog").off("click").on("click",function(){
+        obj.pageObj.find(".open_dialog").on("click",function(){
+            console.log("OPEN Dialog");
             jsf3.dialog("dialog01").open();
         });
 

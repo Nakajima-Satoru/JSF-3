@@ -1,6 +1,6 @@
+jsf3.load=function(loadOption){
 
-
-jsf3.load=function(){
+    jsf3.option=loadOption;
 
     $(window).on("load",function(){
 
@@ -46,7 +46,10 @@ jsf3.load=function(){
             },
 
             function(){
-                jsf3.redirect.next("main");
+                if(!jsf3.option.topPage){
+                    jsf3.option.topPage="main";
+                }
+                jsf3.redirect.next(jsf3.option.topPage);
             },
 
         ]);
