@@ -58,6 +58,10 @@ jsf3.load=function(loadOption){
 
             try{
 
+                if(jsf3.locking.link){
+                    return false;
+                }
+
                 var href=$(this).attr("href");
                 var backto=$(this).attr("backto");
 

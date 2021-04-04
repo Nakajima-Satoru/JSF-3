@@ -7,7 +7,7 @@
     "option": {
         "libCompressionMode":false,
         "jquery": "3.6.0",
-        "animation": null,
+        "animation": "slide_left",
         "topPage":"main"
     }
 }

@@ -4,6 +4,10 @@ jsf3.option={
     animation:null,
 };
 
+jsf3.locking={
+    link:false,
+};
+
 jsf3.cache={
     common:{},
     page:{},

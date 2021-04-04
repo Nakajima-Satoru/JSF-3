@@ -4,14 +4,15 @@ pagearea{
     top:0;
     right:0;
     bottom:0;
+    overflow:hidden;
     background:#999;
 }
 pagearea page{
     position:absolute;
     left:0;
     top:0;
-    right:0;
-    bottom:0;
+    width:100%;
+    height:100%;
     background:#ccc;
     opacity:0;
     -webkit-opacity:0;
@@ -36,11 +37,11 @@ pagearea page.open wk{
     opacity:1;
     -webkit-opacity:1;
 }
-pagearea page.close{
+pagearea page.closed{
     opacity:0;
     -webkit-opacity:0;    
 }
-pagearea page.close wk{
+pagearea page.closed wk{
     opacity:0;
     -webkit-opacity:0;    
 }
