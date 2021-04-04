@@ -36,7 +36,11 @@ module.exports=function(name){
         manifest.option.jquery="3.6.0";
     }
 
-    var buildPath=name+"/_build";
+    if(!manifest.option.buildDirectory){
+        manifest.option.buildDirectory="_build";
+    }
+
+    var buildPath=name+"/"+manifest.option.buildDirectory;
     var jqueryCacheDir=__dirname+"/../__jquerycache";
     var jqueryCache=jqueryCacheDir+"/"+manifest.option.jquery+".js";
     var jqueryUrl="https://code.jquery.com/jquery-"+manifest.option.jquery+".min.js";
@@ -67,10 +71,13 @@ module.exports=function(name){
         function(obj){
 
             // copy template index.html
+            if(!manifest.option.buildIndexFile){
+                manifest.option.buildIndexFile="index.html";
+            }
 
-            fsa.copyFileSync(name+"/index.html",buildPath+"/index.html");
+            fsa.copyFileSync(name+"/index.html",buildPath+"/"+manifest.option.buildIndexFile);
 
-            console.log("# fileset "+buildPath+"/index.html");
+            console.log("# fileset "+buildPath+"/"+manifest.option.buildIndexFile);
     
             obj.next();
 

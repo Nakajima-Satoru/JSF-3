@@ -1,5 +1,27 @@
 jsf3.load=function(loadOption){
 
+    if(location.search){
+
+        var search=location.search;
+        if(search[0]=="?"){
+            search=search.substring(1);
+        }
+
+        var buffer=search.split("&");
+
+        var query={};
+        for(var n=0;n<buffer.length;n++){
+            var buffer2=buffer[n].split("=");
+            query[buffer2[0]]=buffer2[1];
+        }
+
+        if(loadOption.queryRouting){
+            if(query.path){
+                loadOption.topPage=query.path;
+            }
+        }
+    }
+
     jsf3.option=loadOption;
 
     $(window).on("load",function(){
