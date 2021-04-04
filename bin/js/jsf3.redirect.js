@@ -18,7 +18,7 @@ jsf3.redirect={
         var now=jsf3.buffer.nowPage;
         
         if(jsf3.cache.pages[pageName]==undefined && jsf3.cache.page[pageName]==undefined){
-            return;
+            throw new Error("The redirected page or method information cannot be found.\""+pageName+"\"");
         }
 
         var _content="";
@@ -344,6 +344,10 @@ jsf3.redirect={
         var now=jsf3.buffer.nowPage;
 
         if(!jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1]){
+            if(jsf3.cache.common.exit){
+                var callback=jsf3.cache.common.exit;
+                callback();
+            }
             return;
         }
 
