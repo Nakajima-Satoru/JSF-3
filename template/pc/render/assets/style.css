@@ -110,3 +110,22 @@ h2{
 .sidemenu.open+pagearea{
 	left:250px;
 }
+
+table tr th,
+table tr td{
+	padding:7px;
+}
+table tr th{
+	vertical-align:top;
+	line-height:2.2rem;
+	width:140px;
+	text-align:right;
+}
+label{
+	display:inline-block;	
+	margin-right:10px;
+}
+input[type=radio]{
+	margin-right:5px;
+	vertical-align:middle;
+}
