@@ -628,9 +628,111 @@ jsf3.redirect={
     },
 
     refresh:function(option){
+        
+        var now=jsf3.buffer.nowPage;
+
+        var callObj={
+            mode:"refresh",
+            _waited:false,
+            now:now,
+            wait:function(){
+                this._waited=true;
+            },
+        };
+
+        var pageObj=pageArea.find("#"+now.id);
+        callObj.pageObj=pageObj;
+
+        jsf3.sync([
+
+            function(next){
+
+                /** set wait function */
+                callObj.next=function(){
+                    callObj._waited=false;
+                    next();
+                };
+                next();
+            },
+
+            function(next){
+
+                /** group refresh */
+                if(!_pageData.group){
+                    next();
+                    return;
+                }
+
+                if(typeof _pageData.group=="string"){
+                    _pageData.group=[_pageData.group];
+                }
+
+                var groupCallbackList=[];
+
+                for(var n=0;n<_pageData.group.length;n++){
+
+                    var groupName=_pageData.group[n];
+                    var _g=jsf3.cache.group[groupName];
+
+                    if(_g){
+                        if(_g.refresh){
+                            var _callback=_g.refresh;
+
+                            groupCallbackList.push(function(next2){   
+                                _callback(callObj);
+                                if(!callObj._waited){
+                                    next2();
+                                }
+                            });
+                        }
+                    }
+                   
+                }
+
+                if(groupCallbackList.length){
+                    jsf3.sync(groupCallbackList);
+                }
+            },
+            function(next){
+                
+                /** refresh */
+                if(!_pageData.refresh){
+                    next();
+                    return;
+                }
+                
+                var callback=_pageData.refresh;
+                callback(callObj);
+                if(!callObj._waited){
+                    next();
+                }
+
+            },
+            function(next){
+                
+                /** option refresh */
+                if(!option.callback){
+                    next();
+                    return;
+                }
+
+                if(!option.callback.refresh){
+                    next();
+                    return;
+                }
+
+                option.callback.refresh(callObj);
+
+                if(!callObj._waited){
+                    next();
+                }
+
+            },
+
+        ]);
 
 
 
     },
-    
+
 };
