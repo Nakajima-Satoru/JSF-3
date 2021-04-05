@@ -9,6 +9,8 @@ jsf3.redirect={
      */
     next:function(pageName,option){
 
+        console.log(jsf3.buffer);
+
         if(!option){
             option={};
         }
@@ -61,17 +63,26 @@ jsf3.redirect={
             if(jsf3.option.animation){
                 pageArea.addClass("open");
             }
+
    
+            if(jsf3.buffer.pageMoveIndex<(jsf3.buffer.pages.length-1)){
+                for(var n=jsf3.buffer.pageMoveIndex;n<jsf3.buffer.pages.length;n++){
+                    delete jsf3.buffer.pages[n];
+                }
+                jsf3.buffer.pages.sort();
+            }
+
             if(now){
-                now.content=pageArea.find("#"+now.id).html();
-                jsf3.buffer.pages.push(now);
-                jsf3.buffer.pageMoveIndex++;               
+                jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1].content=pageArea.find("#"+now.id).html();
                 pageArea.find("page#"+now.id).removeClass("open").addClass("closed"); 
             }
 
             if(option.bufferClear){
                 jsf3.redirect.clear();
             }
+
+            jsf3.buffer.pages[jsf3.buffer.pageMoveIndex]=_next;
+            jsf3.buffer.pageMoveIndex++;
 
             var nextPage='<page id="'+_next.id+'"><wk>'+_content+'</wk></page>';
             pageArea.append(nextPage);
@@ -353,13 +364,15 @@ jsf3.redirect={
      */
     back:function(option){
 
+        console.log(jsf3.buffer);
+
         if(!option){
             option={};
         }
 
         var now=jsf3.buffer.nowPage;
 
-        if(!jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1]){
+        if(!jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-2]){
             if(jsf3.cache.common.exit){
                 var callback=jsf3.cache.common.exit;
                 callback();
@@ -367,7 +380,9 @@ jsf3.redirect={
             return;
         }
 
-        var _back=jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1];
+        var pageArea=$("pagearea");
+
+        var _back=jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-2];
         jsf3.buffer.pageMoveIndex--;
 
         var callObj={
@@ -376,7 +391,7 @@ jsf3.redirect={
             now:now,
             back:_back,
             wait:function(){
-                this._waited=true;
+                callObj._waited=true;
             },
         };
 
@@ -420,6 +435,7 @@ jsf3.redirect={
 
                 /** set wait function */
                 callObj.next=function(){
+                    callObj._waited=false;
                     next();
                 };
                 next();
@@ -439,6 +455,24 @@ jsf3.redirect={
 
                 var groupCallbackList=[];
 
+                var callObj2={
+                    mode:"back",
+                    _waited:false,
+                    now:callObj.now,
+                    back:callObj._back,
+                    wait:function(){
+                        callObj2._waited=true;
+                    },
+                };
+
+                groupCallbackList.push(function(next2){
+                    callObj2.next=function(){
+                        callObj2._waited=false;
+                        next2();
+                    };
+                    next2();
+                });
+
                 for(var n=0;n<_backPageData.group.length;n++){
 
                     var groupName=_backPageData.group[n];
@@ -449,8 +483,9 @@ jsf3.redirect={
                             var _callback=_g.before;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                console.log(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -460,8 +495,8 @@ jsf3.redirect={
                             var _callback=_g.beforeBack;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });   
@@ -469,6 +504,10 @@ jsf3.redirect={
                     }
                    
                 }
+
+                groupCallbackList.push(function(){
+                    next();
+                });
 
                 if(groupCallbackList.length){
                     jsf3.sync(groupCallbackList);
@@ -530,7 +569,7 @@ jsf3.redirect={
             },
 
             function(next){
-            
+
                 /** page tag class move */
                 var pageClose=function(){
                     pageArea.find("page#"+now.id).remove();
@@ -660,6 +699,7 @@ jsf3.redirect={
                 if(!callObj._waited){
                     next();
                 }
+
 
             },
 

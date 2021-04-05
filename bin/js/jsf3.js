@@ -25,5 +25,4 @@ jsf3.cache={
 jsf3.buffer={
     pageMoveIndex:0,
     pages:[],
-    nowPaage:null,
 };

@@ -9,7 +9,7 @@
         "buildIndexFile":"test.html",
         "buildDirectory":"_build",
         "jquery": "3.6.0",
-        "animation": "slide_left",
+        "animation": "slide_left_fede",
         "topPage":"main",
         "queryRouting":true
     }
