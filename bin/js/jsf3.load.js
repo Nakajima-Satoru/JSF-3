@@ -71,7 +71,13 @@ jsf3.load=function(loadOption){
                 if(!jsf3.option.topPage){
                     jsf3.option.topPage="main";
                 }
-                jsf3.redirect.next(jsf3.option.topPage);
+
+                var nextOption={};
+                if(jsf3.option.firstAnimation){
+                    nextOption.animation=jsf3.option.firstAnimation;
+                }
+
+                jsf3.redirect.next(jsf3.option.topPage,nextOption);
             },
 
         ]);

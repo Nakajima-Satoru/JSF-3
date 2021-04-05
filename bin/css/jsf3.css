@@ -73,22 +73,22 @@ pagearea page.closed wk{
 }
 .dialog.open .bg{
     animation-name:dialog_open_bg;
-    animation-duration:500ms;
+    animation-duration:300ms;
     animation-fill-mode: forwards;
 }
 .dialog.open .window{
     animation-name:dialog_open_window;
-    animation-duration:500ms;
+    animation-duration:300ms;
     animation-fill-mode: forwards;
 }
 .dialog.closed .bg{
     animation-name:dialog_close_bg;
-    animation-duration:500ms;
+    animation-duration:300ms;
     animation-fill-mode: forwards;
 }
 .dialog.closed .window{
     animation-name:dialog_close_window;
-    animation-duration:500ms;
+    animation-duration:300ms;
     animation-fill-mode: forwards;
 }
 

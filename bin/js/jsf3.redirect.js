@@ -9,8 +9,6 @@ jsf3.redirect={
      */
     next:function(pageName,option){
 
-        console.log(jsf3.buffer);
-
         if(!option){
             option={};
         }
@@ -62,9 +60,12 @@ jsf3.redirect={
 
             if(jsf3.option.animation){
                 pageArea.addClass("open");
+                if(option.animation!=undefined){
+                    var __beforeAnimation=pageArea.attr("class");
+                    pageArea.removeClass(__beforeAnimation).addClass(option.animation);
+                }
             }
 
-   
             if(jsf3.buffer.pageMoveIndex<(jsf3.buffer.pages.length-1)){
                 for(var n=jsf3.buffer.pageMoveIndex;n<jsf3.buffer.pages.length;n++){
                     delete jsf3.buffer.pages[n];
@@ -122,6 +123,28 @@ jsf3.redirect={
 
                 var groupCallbackList=[];
 
+                var callObj2={
+                    mode:"next",
+                    _waited:false,
+                    now:callObj.now,
+                    next:callObj.next,
+                    wait:function(){
+                        callObj2._waited=true;
+                    },
+                    exit:function(){
+                        callObj2._waited=true;        
+                        jsf3.locking.link=false;
+                    },
+                };
+
+                groupCallbackList.push(function(next2){
+                    callObj2.next=function(){
+                        callObj2._waited=false;
+                        next2();
+                    };
+                    next2();
+                });
+
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
@@ -132,8 +155,8 @@ jsf3.redirect={
                             var _callback=_g.before;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -142,8 +165,8 @@ jsf3.redirect={
                             var _callback=_g.beforeNext;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -152,12 +175,11 @@ jsf3.redirect={
                    
                 }
 
-                if(groupCallbackList.length){
-                    jsf3.sync(groupCallbackList);
-                }
-                else{
+                groupCallbackList.push(function(){
                     next();
-                }
+                });
+
+                jsf3.sync(groupCallbackList);
 
             },
 
@@ -235,7 +257,12 @@ jsf3.redirect={
                     pageOpen();
                     setTimeout(function(){
                         pageClose();                        
-                        setTimeout(function(){            
+                        setTimeout(function(){   
+                            
+                            if(option.animation){
+                                pageArea.addClass(__beforeAnimation).removeClass(option.animation);
+                            }               
+                            
                             pageArea.removeClass("open");
                             next();
                         },500);
@@ -259,6 +286,28 @@ jsf3.redirect={
 
                 var groupCallbackList=[];
 
+                var callObj2={
+                    mode:"next",
+                    _waited:false,
+                    now:callObj.now,
+                    next:callObj.next,
+                    wait:function(){
+                        callObj2._waited=true;
+                    },
+                    exit:function(){
+                        callObj2._waited=true;        
+                        jsf3.locking.link=false;
+                    },
+                };
+
+                groupCallbackList.push(function(next2){
+                    callObj2.next=function(){
+                        callObj2._waited=false;
+                        next2();
+                    };
+                    next2();
+                });
+
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
@@ -269,8 +318,8 @@ jsf3.redirect={
                             var _callback=_g.after;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -281,8 +330,8 @@ jsf3.redirect={
                             var _callback=_g.afterNext;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -290,13 +339,11 @@ jsf3.redirect={
                     }
                 }
 
-                if(groupCallbackList.length){
-                    jsf3.sync(groupCallbackList);
-                }
-                else{
+                groupCallbackList.push(function(){
                     next();
-                }
+                });
 
+                jsf3.sync(groupCallbackList);
             },
 
             function(next){
@@ -459,9 +506,13 @@ jsf3.redirect={
                     mode:"back",
                     _waited:false,
                     now:callObj.now,
-                    back:callObj._back,
+                    back:callObj.back,
                     wait:function(){
                         callObj2._waited=true;
+                    },
+                    exit:function(){
+                        callObj2._waited=true;        
+                        jsf3.locking.link=false;
                     },
                 };
 
@@ -509,13 +560,8 @@ jsf3.redirect={
                     next();
                 });
 
-                if(groupCallbackList.length){
-                    jsf3.sync(groupCallbackList);
-                }
-                else{
-                    next();
-                }
-
+                jsf3.sync(groupCallbackList);
+ 
             },
 
             function(next){
@@ -609,6 +655,28 @@ jsf3.redirect={
 
                 var groupCallbackList=[];
 
+                var callObj2={
+                    mode:"back",
+                    _waited:false,
+                    now:callObj.now,
+                    back:callObj.back,
+                    wait:function(){
+                        callObj2._waited=true;
+                    },
+                    exit:function(){
+                        callObj2._waited=true;        
+                        jsf3.locking.link=false;
+                    },
+                };
+
+                groupCallbackList.push(function(next2){
+                    callObj2.next=function(){
+                        callObj2._waited=false;
+                        next2();
+                    };
+                    next2();
+                });
+
                 for(var n=0;n<_backPageData.group.length;n++){
 
                     var groupName=_backPageData.group[n];
@@ -619,8 +687,8 @@ jsf3.redirect={
                             var _callback=_g.after;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -631,8 +699,8 @@ jsf3.redirect={
                             var _callback=_g.afterNext;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -640,13 +708,11 @@ jsf3.redirect={
                     }
                 }
 
-                if(groupCallbackList.length){
-                    jsf3.sync(groupCallbackList);
-                }
-                else{
+                groupCallbackList.push(function(){
                     next();
-                }
+                });
 
+                jsf3.sync(groupCallbackList);
             },
 
             function(next){
@@ -757,6 +823,26 @@ jsf3.redirect={
 
                 var groupCallbackList=[];
 
+                var callObj2={
+                    _waited:false,
+                    now:now,
+                    wait:function(){
+                        callObj2._waited=true;
+                    },
+                    exit:function(){
+                        callObj2._waited=true;        
+                        jsf3.locking.link=false;
+                    },
+                };
+
+                groupCallbackList.push(function(next2){
+                    callObj2.next=function(){
+                        callObj2._waited=false;
+                        next2();
+                    };
+                    next2();
+                });
+
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
@@ -767,8 +853,8 @@ jsf3.redirect={
                             var _callback=_g.refresh;
 
                             groupCallbackList.push(function(next2){   
-                                _callback(callObj);
-                                if(!callObj._waited){
+                                _callback(callObj2);
+                                if(!callObj2._waited){
                                     next2();
                                 }
                             });
@@ -777,12 +863,11 @@ jsf3.redirect={
                    
                 }
 
-                if(groupCallbackList.length){
-                    jsf3.sync(groupCallbackList);
-                }
-                else{
+                groupCallbackList.push(function(){
                     next();
-                }
+                });
+
+                jsf3.sync(groupCallbackList);
             },
             function(next){
                 

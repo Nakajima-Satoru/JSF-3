@@ -2,5 +2,10 @@
     "jsf3.css",
     "jsf3.pageam.fade.css",
     "jsf3.pageam.slide_left.css",
-    "jsf3.pageam.slide_left_feed.css"
+    "jsf3.pageam.slide_left_fade.css",
+    "jsf3.pageam.slide_left_scroll.css",
+    "jsf3.pageam.slide_left_half.css",
+    "jsf3.pageam.slide_top.css",
+    "jsf3.pageam.slide_top_fade.css",
+    "jsf3.pageam.slide_top_scroll.css"
 ]

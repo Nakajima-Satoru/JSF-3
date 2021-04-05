@@ -14,9 +14,7 @@ textarea{
 	padding:5px;
 	outline:none;
 }
-pagearea{
-	background:#aaa;
-}
+pagearea,
 pagearea page,
 pagearea page wk{
 		background:#eee;
@@ -64,9 +62,14 @@ h2{
 	background:#277;
 	color:#fff;
 }
+.login_form h2{
+	text-align:center;
+	font-size:32px;
+	font-weight:100;
+}
 .login_form form{
 	position:absolute;
-	border:solid 1px #ddd;
+	box-shadow:0 0 6px 0 #fff;
 	padding:30px;
 	left:50%;
 	top:50%;
