@@ -117,6 +117,10 @@ jsf3.load=function(loadOption){
 
         window.onpopstate=function(event){
 
+            if(jsf3.locking.back){
+                return false;
+            }
+
             try{
                 jsf3.redirect.back();
             }catch(err){
@@ -168,8 +172,24 @@ jsf3.load=function(loadOption){
 
                 var getData=jsf3.form(formId).getData();
 
+                var callobj={
+                    id:formId,
+                    form:$(this),
+                    data:getData,
+                };
 
+                var _form=jsf3.cache.form[formId];
 
+                if(!_form){
+                    return false;
+                }
+
+                if(!_form.reset){
+                    return false;
+                }
+
+                var _callback=_form.reset;
+                _callback(callobj);
 
             }catch(err){
                 console.log(err);

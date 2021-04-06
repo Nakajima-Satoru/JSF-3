@@ -6,6 +6,7 @@ jsf3.option={
 
 jsf3.locking={
     link:false,
+    back:false,
 };
 
 jsf3.cache={

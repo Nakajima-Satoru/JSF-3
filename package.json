@@ -1,0 +1,24 @@
+{
+  "name": "jsf3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://nakajima-Satoru:fZa0eg72s@github.com/Nakajima-Satoru/JSF-3.git"
+  },
+  "keywords": [
+    "javascript",
+    "framework",
+    "jsf-3"
+  ],
+  "author": "Nakajima-Satoru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nakajima-Satoru/JSF-3/issues"
+  },
+  "homepage": "https://github.com/Nakajima-Satoru/JSF-3#readme"
+}

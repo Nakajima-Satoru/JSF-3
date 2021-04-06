@@ -123,7 +123,7 @@ jsf3.dialog=function(dialogName,settings){
 
                             setTimeout(function(){
                                 dialog.remove();
-                            },500);
+                            },300);
 
                         },
                     ]);  
@@ -258,7 +258,7 @@ jsf3.dialog=function(dialogName,settings){
 
                     setTimeout(function(){
                         dialog.remove();
-                    },500);
+                    },300);
         
                 },
             ])

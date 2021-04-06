@@ -15,6 +15,7 @@ jsf3.page=function(pageName,settings){
             jsf3.cache.page[pageName][field]=values;
         }
 
+        return;
     }
-    
+
 };
