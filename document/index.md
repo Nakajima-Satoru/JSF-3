@@ -1,4 +1,4 @@
-# JavaScript Framework (JDF-3)
+# JavaScript Framework (JSF-3)
 
 リファレンスメモ...(仮)
 
