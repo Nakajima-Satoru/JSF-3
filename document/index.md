@@ -4,6 +4,7 @@
 
 - [インストール方法](install.md)
 - [プロジェクトの作成](project.md)
+    - [プリセット済みのテンプレート一覧](template.md)
 - 各ディレクトリ構成
     - [プロジェクト生成時](directory_project.md)
     - [ビルド実行後](directory_build.md)
