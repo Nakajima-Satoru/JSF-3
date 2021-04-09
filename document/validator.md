@@ -688,6 +688,26 @@ jsf3.form("test1",{
 }
 ```
 
+### - 今日以前の日付を許可 (allowedBeforeToday)
+
+当日以前の日付のみを許可します。
+
+```json
+{
+    rule:"allowedBeforeToday",
+}
+```
+
+### - 今日以降の日付を許可 (allowedAfterToday)
+
+当日以降の日付のみを許可します。
+
+```json
+{
+    rule:"allowedAfterToday",
+}
+```
+
 ---
 
 <a id="custom_validation"></a>

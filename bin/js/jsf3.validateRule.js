@@ -583,4 +583,38 @@ jsf3.validateRule={
 
 		return false;
 	},
+	allowedBeforeToday:function(value){
+
+		if(!value){
+			return true;
+		}
+
+		var toDay=new Date();
+		var jugeToday=parseInt(toDay.getTime());
+		var tims=new Date(value);
+		var juges=parseInt(tims.getTime());
+
+		if(juges <= jugeToday){
+			return true;
+		}
+
+		return false;
+	},
+	allowedAfterToday:function(value){
+
+		if(!value){
+			return true;
+		}
+
+		var toDay=new Date();
+		var jugeToday=parseInt(toDay.getTime());
+		var tims=new Date(value);
+		var juges=parseInt(tims.getTime());
+
+		if(juges >= jugeToday){
+			return true;
+		}
+
+		return false;
+	},
 };
