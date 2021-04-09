@@ -8,11 +8,15 @@ jsf3.page("main",{
 
         console.log(obj);
 
-        obj.pageObj.find(".open_dialog").on("click",function(){
-            console.log("OPEN Dialog");
+        obj.pageObj.find(".open_dialog1").on("click",function(){
             jsf3.dialog("dialog01").open();
         });
     
+        obj.pageObj.find(".open_dialog12").on("click",function(){
+            jsf3.dialog("dialog02").open();
+        });
+    
+
         obj.pageObj.find(".refresh_btn").on("click",function(){
 
             jsf3.redirect.refresh();

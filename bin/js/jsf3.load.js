@@ -138,12 +138,6 @@ jsf3.load=function(loadOption){
 
                 var getData=jsf3.form(formId).getData();
 
-                var callobj={
-                    id:formId,
-                    form:$(this),
-                    data:getData,
-                };
-
                 var _form=jsf3.cache.form[formId];
 
                 if(!_form){
@@ -154,8 +148,16 @@ jsf3.load=function(loadOption){
                     return false;
                 }
 
+                var callObj=new formCallbackObject({
+                    id:formId,
+                    form:$(this),
+                    data:getData,
+                });
+
                 var _callback=_form.submit;
-                _callback(callobj);
+                if(_callback){
+                    _callback(callObj);
+                }
     
             }catch(err){
                 console.log(err);
@@ -172,12 +174,6 @@ jsf3.load=function(loadOption){
 
                 var getData=jsf3.form(formId).getData();
 
-                var callobj={
-                    id:formId,
-                    form:$(this),
-                    data:getData,
-                };
-
                 var _form=jsf3.cache.form[formId];
 
                 if(!_form){
@@ -188,8 +184,16 @@ jsf3.load=function(loadOption){
                     return false;
                 }
 
+                var callObj=new formCallbackObject({
+                    id:formId,
+                    form:$(this),
+                    data:getData,
+                });
+
                 var _callback=_form.reset;
-                _callback(callobj);
+                if(_callback){
+                    _callback(callObj);
+                }
 
             }catch(err){
                 console.log(err);
@@ -227,5 +231,16 @@ jsf3.load=function(loadOption){
         });
 
     });
+
+};
+
+var formCallbackObject=function(params){
+
+    var paramsColum=Object.keys(params);
+    for(var n=0;n<paramsColum.length;n++){
+        var field=paramsColum[n];
+        var value=params[field];
+        this[field]=value;
+    }
 
 };

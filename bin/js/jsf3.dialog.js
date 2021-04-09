@@ -23,9 +23,7 @@ jsf3.dialog=function(dialogName,settings){
         this.open=function(option){
 
             if(!option){
-                option={
-                    callback:{},
-                };
+                option={};
             }
 
             if(!jsf3.cache.dialog[dialogName]){
@@ -45,7 +43,14 @@ jsf3.dialog=function(dialogName,settings){
 
             var _class="";
             if(option.class){
-                _class=option.class;
+                _class+=option.class;
+            }
+
+            if(_dialogData.class){
+                if(_class){
+                    _class+=" ";
+                }
+                _class+=_dialogData.class;
             }
 
             if(option.noWindow){
@@ -59,87 +64,16 @@ jsf3.dialog=function(dialogName,settings){
 
             var dialog=$(".dialog[data-id=\""+id+"\"]");
             
-            var callObj={
-                _waited:false,
+            var callObj=new dialogCallbackObject({
+                name:dialogName,
                 id:id,
                 dialog:dialog,
-                wait:function(){
-                    callObj._waited=true;
-                },
-                close:function(){
-                
-                    jsf3.sync([
-                        function(next){
-                            
-                            callObj._waited=false;
-                            callObj.wait=function(){
-                                callObj._waited=true;
-                            };
-                            callObj.next=function(){
-                                callObj._waited=false;
-                                next();
-                            };
-        
-                            next();
-
-                        },
-                        function(next){
-
-                            if(!_dialogData.close){
-                                next();
-                                return;
-                            }
-
-                            var _callback=_dialogData.close;
-                            _callback(callObj);
-                                    
-                            if(!callObj._waited){
-                                next();
-                            }
-
-                        },
-                        function(next){
-
-                            if(!option.callback){
-                                next();
-                                return;
-                            }
-                            
-                            if(!option.callback.close){
-                                next();
-                                return;
-                            }
-        
-                            option.callback.close(callObj);
-                            
-                            if(!callObj._waited){
-                                next();
-                            }
-
-                        },
-                        function(){
-
-                            dialog.removeClass("open").addClass("closed");
-
-                            setTimeout(function(){
-                                dialog.remove();
-                            },300);
-
-                        },
-                    ]);  
-
-                },
                 option:option,
-            };
+            });
             
             jsf3.sync([
                 function(next){
-             
-                    callObj.next=function(){
-                        callObj._waited=false;
-                        next();
-                    };
-
+                    callObj._next=next;
                     next();
                 },
                 function(next){
@@ -177,9 +111,7 @@ jsf3.dialog=function(dialogName,settings){
         
                 },
                 function(){
-
                     dialog.addClass("open");
-
                 },
             ]);
 
@@ -205,23 +137,17 @@ jsf3.dialog=function(dialogName,settings){
                 return;
             }
 
-            var callObj={
-                _waited:false,
+            var callObj=new dialogCallbackObject({
+                name:dialogName,
                 id:dialogId,
                 dialog:dialog,
                 option:option,
-                wait:function(){
-                    callObj._waited=true;
-                },
-            };
+                _hideClosed:true,
+            });
 
             jsf3.sync([
                 function(next){
-                    callObj.next=function(){
-                        callObj._waited=false;
-                        next();
-                    };
-
+                    callObj._next=next;
                     next();
                 },
                 function(next){
@@ -238,15 +164,19 @@ jsf3.dialog=function(dialogName,settings){
                         next();
                     }
                 },
-                function(){
+                function(next){
 
                     if(!option.callback){
                         next();
                         return;
                     }
 
+                    if(!option.callback.close){
+                        next();
+                        return;
+                    }
 
-                    option.callback(callObj);
+                    option.callback.close(callObj);
                     if(!callObj._waited){
                         next();
                     }
@@ -268,5 +198,34 @@ jsf3.dialog=function(dialogName,settings){
     };
 
     return new _this(dialogName);
+
+};
+
+
+var dialogCallbackObject=function(params){
+
+    this._waited=false;
+
+    var paramsColum=Object.keys(params);
+    for(var n=0;n<paramsColum.length;n++){
+        var field=paramsColum[n];
+        var value=params[field];
+        this[field]=value;
+    }
+
+    this.wait=function(){
+        this._waited=true;
+    };
+
+    this.next=function(){
+        this._waited=false;
+        this._next();
+    };
+
+    if(!params._hideClosed){
+        this.close=function(){
+            jsf3.dialog(this.dialogName).close(this.id,this.option);
+        };    
+    }
 
 };

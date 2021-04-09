@@ -18,9 +18,6 @@ jsf3.element=function(elementName,settings){
 		return;
 	}
 
-
-	var _context=this;
-
 	var _this=function(elementName){
 
 		this.load=function(){
@@ -45,8 +42,9 @@ jsf3.element=function(elementName,settings){
 
 			var content=this.load();
 			
+			var id=null;
 			if(option.append){
-				var id=jsf3.uniqId();
+				id=jsf3.uniqId();
 				obj.append("<div data-element_id=\""+id+"\">"+content+"</div>");
 			}
 			else{
@@ -58,26 +56,14 @@ jsf3.element=function(elementName,settings){
 				_element=jsf3.cache.element[elementName];
 			}
 
-			var callObj={
-				_waited:false,
+			var callObj=new elementCallbackObject({
 				obj:obj,
-				wait:function(){
-					callobj._waited=true;
-				},
-			};
-
-			if(option.append){
-				callObj.id=id;
-			}
+				id:id,
+			});
 
 			jsf3.sync([
 				function(next){
-
-					callObj.next=function(){
-						callObj._waited=false;
-						next();
-					};
-
+					callObj._next=next;
 					next();
 				},
 				function(next){
@@ -88,8 +74,7 @@ jsf3.element=function(elementName,settings){
 					}
 
 					_element.before(callObj);
-
-					if(callObj._waited){
+					if(!callObj._waited){
 						next();
 					}
 				},
@@ -101,8 +86,7 @@ jsf3.element=function(elementName,settings){
 					}
 
 					option.before(callObj);
-
-					if(callObj._waited){
+					if(!callObj._waited){
 						next();
 					}
 
@@ -113,6 +97,7 @@ jsf3.element=function(elementName,settings){
 		};
 
 		this.append=function(tagName,option){
+
 			if(!option){
 				option={};
 			}
@@ -133,4 +118,26 @@ jsf3.element=function(elementName,settings){
 
 	return new _this(elementName);
 
-}
+};
+
+var elementCallbackObject=function(params){
+
+    var paramsColum=Object.keys(params);
+    for(var n=0;n<paramsColum.length;n++){
+        var field=paramsColum[n];
+        var value=params[field];
+        this[field]=value;
+    }
+
+	this._waited=false;
+
+	this.wait=function(){
+		this._waited=true;
+	};
+
+	this.next=function(){
+		this._waited=false;
+		this._next();
+	};
+
+};
