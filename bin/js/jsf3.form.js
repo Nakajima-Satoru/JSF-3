@@ -20,7 +20,7 @@ jsf3.form=function(formName,settings){
         return;
     }
 
-    var _this=function(formName){
+    var jsf3FormObject=function(formName){
 
         this.tagOpen=function(option){
 
@@ -233,6 +233,6 @@ jsf3.form=function(formName,settings){
 
     };
 
-    return  new _this(formName);
+    return  new jsf3FormObject(formName);
 
 };

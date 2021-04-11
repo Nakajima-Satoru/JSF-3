@@ -18,7 +18,7 @@ jsf3.dialog=function(dialogName,settings){
         return;
     }
 
-    var _this=function(dialogName){
+    var jsf3DialogObject=function(dialogName){
 
         this.open=function(option){
 
@@ -197,7 +197,7 @@ jsf3.dialog=function(dialogName,settings){
 
     };
 
-    return new _this(dialogName);
+    return new jsf3DialogObject(dialogName);
 
 };
 
