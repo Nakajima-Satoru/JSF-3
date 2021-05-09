@@ -1,13 +1,13 @@
 *{
 	margin:0;
 	padding:0;
-	font-family:sans-serif, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 	letter-spacing:0;
 	box-sizing:border-box;
 }
 body{
 	font-size:13px;
 }
+
 input,
 select,
 textarea{
@@ -59,7 +59,7 @@ h2{
 
 .login_form,
 .login_form wk{
-	background:#277;
+	background:#177;
 	color:#fff;
 }
 .login_form h2{
@@ -69,7 +69,7 @@ h2{
 }
 .login_form form{
 	position:absolute;
-	box-shadow:0 0 6px 0 #fff;
+	border:solid 1px #ccc;
 	padding:30px;
 	left:50%;
 	top:50%;
@@ -81,6 +81,37 @@ h2{
 	width:100%;
 }
 
+
+
+header{
+	padding:0 20px;
+	background:#298;
+	color:#fff;
+	position:fixed;
+	left:0;
+	top:-50px;
+	width:100%;
+	z-index:1000;
+	transition-duration:500ms;
+	-webkit-transition-duration:500ms;
+	opacity:0;
+	-webkit-opacity:0;
+}
+header.open{
+	top:0;
+	opacity:1;
+	-webkit-opacity:1;
+}
+header a{
+	color:#fff;
+	line-height:50px;
+	display:inline-block;
+	text-decoration:none;
+	font-weight:100;
+}
+header a.title{
+	font-size:24px;
+}
 .sidemenu{
 	background:#278;
 	color:#fff;
@@ -93,6 +124,7 @@ h2{
 	opacity:0;
 	-webkit-opacity:0;
 	padding:20px;
+	padding-top:70px;
 	transition-duration:500ms;
 }
 .sidemenu p{
@@ -109,6 +141,9 @@ h2{
 }
 .sidemenu+pagearea{
 	transition-duration:500ms;
+}
+header.open~pagearea{
+	top:50px;
 }
 .sidemenu.open+pagearea{
 	left:250px;
