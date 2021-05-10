@@ -21,6 +21,12 @@ pagearea page,
 pagearea page wk{
 	background:#eee;
 }
+pagearea page wk.closed{
+	transition-duration:300ms;
+	-webkit-transition-duration:300ms;
+	opacity:0;
+	-webkit-opacity:0;
+}
 dl{
 	margin-bottom:20px;
 }
