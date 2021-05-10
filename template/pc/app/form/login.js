@@ -35,15 +35,27 @@ jsf3.form("login",{
 			name:"山田　太郎",
 		});
 
-		jsf3.element("sidemenu").put(".sidemenu",{
-			before:function(obj){
-				obj.obj.addClass("open");
-			},
-		});
+		obj.form.addClass("closed");
 
-		jsf3.redirect.next("top",{
-			bufferClear:true,
-		});
+		setTimeout(function(){
+
+			jsf3.element("sidemenu").put(".sidemenu",{
+				before:function(obj){
+					obj.obj.addClass("open");
+				},
+			});
+	
+			jsf3.element("header").put("header",{
+				before:function(obj){
+					obj.obj.addClass("open");
+				},
+			});
+	
+			jsf3.redirect.next("top",{
+				bufferClear:true,
+			});
+
+		},200);
 
 	},
 

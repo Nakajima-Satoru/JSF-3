@@ -43,7 +43,7 @@ jsf3.redirect={
             _pageData=jsf3.cache.page[pageName];
         }
 
-        var _next={
+        var _nextdata={
             id:jsf3.uniqId(),
             pageNameFull:pageNameFull,
             pageName:pageName,
@@ -56,20 +56,20 @@ jsf3.redirect={
 
         if(_content){
 
-            var nextPage='<page id="'+_next.id+'"><wk>'+_content+'</wk></page>';
+            var nextPage='<page id="'+_nextdata.id+'"><wk>'+_content+'</wk></page>';
             pageArea.append(nextPage);
-            var nextPageObj=pageArea.find("#"+_next.id);
+            var nextPageObj=pageArea.find("#"+_nextdata.id);
             if(_pageData.class){
                 nextPageObj.addClass(_pageData.class);
             }
             
-            jsf3.buffer.nowPage=_next;
+            jsf3.buffer.nowPage=_nextdata;
         }
 
         var callObj=new redirectCallbackObject({
             mode:"next",
             nowPage:now,
-            nextPage:_next,
+            nextPage:_nextdata,
             aregment:aregment,
             pageObj:nextPageObj,
         });
@@ -111,8 +111,8 @@ jsf3.redirect={
 
                 var callObj2=new redirectCallbackObject({
                     mode:"next",
-                    nowPage:callObj.now,
-                    nextPage:callObj.next,
+                    nowPage:callObj.nowPage,
+                    nextPage:callObj.nextPage,
                     aregment:aregment,            
                     pageObj:nextPageObj,
                 });
@@ -237,7 +237,7 @@ jsf3.redirect={
                             jsf3.redirect.clear();
                         }
             
-                        jsf3.buffer.pages[jsf3.buffer.pageMoveIndex]=_next;
+                        jsf3.buffer.pages[jsf3.buffer.pageMoveIndex]=_nextdata;
                         jsf3.buffer.pageMoveIndex++;  
 
                         if(jsf3.option.animation){
@@ -252,7 +252,7 @@ jsf3.redirect={
                             pageArea.find("page#"+now.id).removeClass("open").addClass("closed"); 
                         }
             
-                        var nowPageArea=pageArea.find("page#"+_next.id);
+                        var nowPageArea=pageArea.find("page#"+_nextdata.id);
                         nowPageArea.addClass("open");    
                     }
                 };
@@ -640,8 +640,8 @@ jsf3.redirect={
 
                 var callObj2=new redirectCallbackObject({
                     mode:"back",
-                    nowPage:callObj.now,
-                    backPage:callObj.back,
+                    nowPage:callObj.nowPage,
+                    backPage:callObj.backPage,
                     pageObj:backPageObj,
                 });
 

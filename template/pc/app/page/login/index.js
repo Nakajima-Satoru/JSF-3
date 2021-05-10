@@ -1,6 +1,6 @@
 jsf3.page("login/index",{
 
-	group:"login",
+	group:"app",
 
 	class:"login_form",
 	
