@@ -18,43 +18,57 @@ jsf3.form("login",{
 
 	submit:function(obj){
 
-		var data=obj.data;
+		var vres=jsf3.validator("login").verify(obj.data);
 
-		$(".login_error").removeClass("error").text("");
-
-		if(!(
-			data.username=="user" && 
-			data.password=="12345"
-		)){
-			$(".login_error").addClass("error").text("入力いただいたユーザーは存在しないか、ログイン検眼がありません");
+		if(vres){
 			return;
 		}
 
-		jsf3.data("auth").set({
-			username:"user",
-			name:"山田　太郎",
-		});
-
-		obj.form.addClass("closed");
-
 		setTimeout(function(){
 
-			jsf3.element("sidemenu").put(".sidemenu",{
-				before:function(obj){
-					obj.obj.addClass("open");
-				},
-			});
-	
-			jsf3.element("header").put("header",{
-				before:function(obj){
-					obj.obj.addClass("open");
-				},
-			});
-	
-			jsf3.redirect.next("top",{
-				bufferClear:true,
+			var logined={};
+
+			if(obj.data.username=="user" && obj.data.password=="12345"){
+				logined={
+					logined:true,
+				};
+			}
+			
+			var vres2=jsf3.validator("login").verify(logined,{
+				rule:"ruleLogined",
 			});
 
+			if(vres2){
+				return;
+			}
+
+			jsf3.data("auth").set({
+				username:"user",
+				name:"山田　太郎",
+			});
+	
+			obj.form.addClass("closed");
+	
+			setTimeout(function(){
+	
+				jsf3.element("sidemenu").put(".sidemenu",{
+					before:function(obj){
+						obj.obj.addClass("open");
+					},
+				});
+		
+				jsf3.element("header").put("header",{
+					before:function(obj){
+						obj.obj.addClass("open");
+					},
+				});
+		
+				jsf3.redirect.next("top",{
+					bufferClear:true,
+				});
+	
+			},200);
+			
 		},200);
 
 	},

@@ -1,0 +1,60 @@
+<h2>Form Test (on Validate)</h2>
+
+<form id="test2">
+	<table>
+		<tr>
+			<th class="top">required</th>
+			<td>
+				<div field="required"></div>
+				<div error="required"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>alphaNumeric</th>
+			<td>
+                <div class="mb-1">: Half-width alphanumeric characters and "-", "_" are allowed</div>
+				<div field="alphaNumeric"></div>
+				<div error="alphaNumeric"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>numeric</th>
+			<td>
+                <div class="mb-1">: Half-width numeric characters and "-", "_" are allowed</div>
+				<div field="numeric"></div>
+				<div error="numeric"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>minLength</th>
+			<td>
+                <div class="mb-1">: Enter 6 or more characters</div>
+				<div field="minLength"></div>
+				<div error="minLength"></div>
+			</td>
+		</tr>
+        <tr>
+			<th>maxLength</th>
+			<td>
+                <div class="mb-1">: Enter within 20 characters</div>
+				<div field="maxLength"></div>
+				<div error="maxLength"></div>
+			</td>
+		</tr>
+        <tr>
+			<th>betweenLength</th>
+			<td>
+                <div class="mb-1">: Enter within the range of 6 to 20 characters</div>
+				<div field="betweenLength"></div>
+				<div error="betweenLength"></div>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>
+				<div field="submit"></div>
+			</td>
+		</tr>
+	</table>
+
+</form>
