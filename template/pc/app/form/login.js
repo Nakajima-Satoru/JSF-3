@@ -24,10 +24,11 @@ jsf3.form("login",{
 			return;
 		}
 
+		loading.open();
+
 		setTimeout(function(){
 
 			var logined={};
-
 			if(obj.data.username=="user" && obj.data.password=="12345"){
 				logined={
 					logined:true,
@@ -39,6 +40,7 @@ jsf3.form("login",{
 			});
 
 			if(vres2){
+				loading.close();
 				return;
 			}
 
@@ -63,13 +65,15 @@ jsf3.form("login",{
 					},
 				});
 		
+				loading.close();
+				
 				jsf3.redirect.next("top",{
 					bufferClear:true,
 				});
 	
 			},200);
 			
-		},200);
+		},1200);
 
 	},
 

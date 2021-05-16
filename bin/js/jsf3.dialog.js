@@ -26,11 +26,10 @@ jsf3.dialog=function(dialogName,settings){
                 option={};
             }
 
-            if(!jsf3.cache.dialog[dialogName]){
-                return;
+            var _dialogData={};
+            if(jsf3.cache.dialog[dialogName]){
+                _dialogData=jsf3.cache.dialog[dialogName];
             }
-
-            var _dialogData=jsf3.cache.dialog[dialogName];
 
             var content=jsf3.cache.dialogs[dialogName];
             content=jsf3.base64.decode(content);
@@ -131,10 +130,9 @@ jsf3.dialog=function(dialogName,settings){
             var dialog=$(".dialog[data-id=\""+dialogId+"\"]");
             var dialogName=dialog.attr("data-dialog_type");
 
-            var _dialogData=jsf3.cache.dialog[dialogName];
-
-            if(!_dialogData){
-                return;
+            var _dialogData={};
+            if(jsf3.cache.dialog[dialogName]){
+                _dialogData=jsf3.cache.dialog[dialogName];
             }
 
             var callObj=new dialogCallbackObject({
