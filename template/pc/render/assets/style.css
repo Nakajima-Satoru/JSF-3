@@ -90,9 +90,8 @@ h2{
 	font-weight:100;
 }
 .login_form form{
-	background:#343434;
+	background:#353535;
 	position:absolute;
-	border:solid 1px #999;
 	padding:35px;
 	left:50%;
 	top:50%;
