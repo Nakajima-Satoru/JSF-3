@@ -214,6 +214,10 @@ jsf3.redirect={
 
             function(next){
 
+                if(jsf3.option.queryreplase){
+                    history.replaceState("","","index.html?path="+pageName);
+                }
+
                 /** page tag class move */
 
                 var pageOpen=function(){
@@ -869,7 +873,6 @@ jsf3.redirect={
         jsf3.buffer.pages=[];
         jsf3.buffer.pageMoveIndex=0;
     },
-
 
     _getAregment:function(pageName){
 
