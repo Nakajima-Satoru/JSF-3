@@ -10,6 +10,7 @@
         "animation": "slide_left_fede",
         "firstAnimation":null,
         "topPage":"main",
-        "queryRouting":true
+        "queryRouting":true,
+        "queryreplase":true
     }
 }
