@@ -13,6 +13,10 @@ jsf3.redirect={
             option={};
         }
 
+        if(!pageNameFull){
+            return;
+        }
+
         var _pbuff=this._getAregment(pageNameFull);
 
         var pageName=_pbuff.pageName;
@@ -875,6 +879,7 @@ jsf3.redirect={
     },
 
     _getAregment:function(pageName){
+
 
         var pageNames=pageName.split("?");
         
