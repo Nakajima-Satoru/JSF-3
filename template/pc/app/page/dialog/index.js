@@ -30,7 +30,9 @@ jsf3.page("dialog/index",{
                 callback:{
                     open:(d)=>{
                         d.dialog.find(".dialog_3a").on("click",()=>{
-                            jsf3.dialog("dialog_3a").open();
+                            jsf3.dialog("dialog_3a").open({
+                                class:"my_dialog",
+                            });
                         });
                     },
                 },

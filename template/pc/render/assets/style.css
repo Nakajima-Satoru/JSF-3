@@ -213,6 +213,9 @@ input[type=radio]{
 	color:#fff;
 	box-shadow:0px 0px 2px 0px #fff;
 }
+.dialog.my_dialog .window{
+	width:auto;
+}
 .dialog.loading .window{
 	width:auto;
 }
