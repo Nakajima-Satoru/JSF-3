@@ -4,7 +4,7 @@ jsf3.page("login/logout",{
 	
 	before:function(obj){
 
-		jsf3.data("auth").delete();
+		jsf3.localStorage.delete("auth");
 
 		$("wk").addClass("closed");
 

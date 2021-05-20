@@ -6,16 +6,28 @@ jsf3.group("app",{
 			return;
 		}
 
-		var pageName=obj.nextPage.pageNameFull;
+		if(jsf3.localStorage.get("auth")){
 
-		if(jsf3.data("auth").get()){
-			$("header").addClass("open");
+			jsf3.element("sidemenu").put(".sidemenu",{
+				before:function(obj){
+					obj.obj.addClass("open");
+				},
+			});
+	
+			jsf3.element("header").put("header",{
+				before:function(obj){
+					obj.obj.addClass("open");
+				},
+			});
+
 			obj.next();
 		}
 		else{
+
+			var pageName=obj.nextPage.pageNameFull;
+
 			if(pageName!="login/index"){
 				jsf3.redirect.next("login/index");
-				$("header").removeClass("open");
 				obj.exit();
 				return;
 			}

@@ -2,6 +2,8 @@
     "jsf3.js",
     "jsf3.sync.js",
     "jsf3.data.js",
+    "jsf3.localStorage.js",
+    "jsf3.sessionStorage.js",
     "jsf3.convert.js",
     "jsf3.load.js",
     "jsf3.common.js",

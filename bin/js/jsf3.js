@@ -1,4 +1,8 @@
-const jsf3={};
+const JSF3=function(){
+
+};
+
+const jsf3=new JSF3();
 
 jsf3.option={
     animation:null,

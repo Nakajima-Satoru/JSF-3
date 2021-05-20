@@ -244,7 +244,7 @@ module.exports=function(name){
                 pageCacheStr+=" "+content+"\n";
                 console.log("# read "+pageFileList.file[n]);
             }
-            
+
             pageCacheStr+=" jsf3.load("+JSON.stringify(manifest.option)+");"
 
             fsa.writeFileSync(buildPath+"/bin/app.js",pageCacheStr);

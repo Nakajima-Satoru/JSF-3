@@ -11,6 +11,7 @@
         "firstAnimation":null,
         "topPage":"main",
         "queryRouting":true,
-        "queryreplase":true
+        "queryreplase":true,
+        "webStoragePrefix":"spa_"
     }
 }
