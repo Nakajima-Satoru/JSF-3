@@ -1,0 +1,17 @@
+{
+    "name": "smp",
+    "description": "JavaScript Framwwork (JSF-3) Default Template (SmartPhone and Table-Web-Page).",
+    "author": "Nakajima Satoru.",
+    "email": "test@jsf-3.com",
+    "hp": "https://www.jsf-3.com/",
+    "option": {
+        "libCompressionMode":false,
+        "jquery": "3.6.0",
+        "animation": "slide_left_fede",
+        "firstAnimation":null,
+        "topPage":"main",
+        "queryRouting":true,
+        "queryreplase":true,
+        "webStoragePrefix":"spas_"
+    }
+}
