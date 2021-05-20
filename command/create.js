@@ -10,7 +10,7 @@ module.exports=function(name,templateName){
     console.log("#");
 
     if(!templateName){
-        templateName="default";
+        templateName="hello_world";
     }
 
     var templatePath=__dirname+"/../template/"+templateName;
