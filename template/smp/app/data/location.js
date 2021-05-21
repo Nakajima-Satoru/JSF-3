@@ -1,4 +1,4 @@
-jsf3.data("location").set({
+javelin.data("location").set({
 	0:"北海道",
 	1:"青森県",
 	2:"秋田県",

@@ -1,19 +1,17 @@
-const JSF3=function(){
+const Javelin=function(){};
 
-};
+const javelin=new Javelin();
 
-const jsf3=new JSF3();
-
-jsf3.option={
+javelin.option={
     animation:null,
 };
 
-jsf3.locking={
+javelin.locking={
     link:false,
     back:false,
 };
 
-jsf3.cache={
+javelin.cache={
     common:{},
     page:{},
     group:{},
@@ -27,7 +25,7 @@ jsf3.cache={
     data:{},
 };
 
-jsf3.buffer={
+javelin.buffer={
     pageMoveIndex:0,
     pages:[],
 };

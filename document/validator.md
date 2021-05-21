@@ -1,10 +1,10 @@
-JSF-3(仮)
+Javelin
 
 # バリデーション (validator)
 
 バリデーション(validator)は入力データの検証チェックを行うための機能です。
 
-バリデーション機能は``jsf3.validator``メソッドを使用します。
+バリデーション機能は``javelin.validator``メソッドを使用します。
 
 ---
 
@@ -14,7 +14,7 @@ JSF-3(仮)
 バリデーションのスクリプトは``app/validator``ディレクトリにJSファイルとして設置します。
 
 ```javascript | app/form/test1.js
-jsf3.validator("vtest1",{
+javelin.validator("vtest1",{
 
     rules:{
         name:[
@@ -59,17 +59,17 @@ jsf3.validator("vtest1",{
 
 ## # バリデーションを実行する
 
-バリデーションの実行は``jsf3.validator.verify``メソッドを使用します。  
+バリデーションの実行は``javelin.validator.verify``メソッドを使用します。  
 引数にチェック対象のデータ(入力データ等)をセットし、入力内容がルールと異なる場合のみエラー内容が返されます。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     submit:function(obj){
 
         var postData=obj.data;
 
-        var vres=jsf3.validator("vtest1").verify(postData);
+        var vres=javelin.validator("vtest1").verify(postData);
 
         if(vres){
             console.log(vres);
@@ -114,11 +114,11 @@ jsf3.form("test1",{
 ```
 
 そのあとでバリデーション名をフォームのIDと同じ(フォーム名)にした状態で
-``jsf3.validator.verify``メソッドぉ実行すると、  
+``javelin.validator.verify``メソッドぉ実行すると、  
 error属性の箇所にエラーメッセージが自動で入ります。
 
 ```javascript | app/form/test1.js
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         name:{
@@ -138,7 +138,7 @@ jsf3.form("test1",{
 
     submit:function(obj){
 
-        var vres=jsf3.validator("vtest").verify(obj.data);
+        var vres=javelin.validator("vtest").verify(obj.data);
 
         if(vres){
             return;
@@ -164,7 +164,7 @@ jsf3.form("test1",{
 例えば、バリデーションスクリプトを下記のように設置します。
 
 ```javascript | app/form/test1.js
-jsf3.validator("vtest1",{
+javelin.validator("vtest1",{
 
     rules:{
         name:[
@@ -203,13 +203,13 @@ jsf3.validator("vtest1",{
 ruleをrule2で指定することで、rule2のバリデーションで検証されます。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     submit:function(obj){
 
         var postData=obj.data;
 
-        var vres=jsf3.validator("vtest1").verify(postData,{
+        var vres=javelin.validator("vtest1").verify(postData,{
             rule:"rule2",
         });
 
@@ -230,13 +230,13 @@ jsf3.form("test1",{
 
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     submit:function(obj){
 
         var postData=obj.data;
 
-        var vres=jsf3.validator("vtest1").verify(postData,{
+        var vres=javelin.validator("vtest1").verify(postData,{
             noOrrorOutputed:true,
         });
 
@@ -722,7 +722,7 @@ jsf3.form("test1",{
 
 
 ```javascript | 
-jsf3.validator("test1",{
+javelin.validator("test1",{
 
     rules:{
         name:[
@@ -749,7 +749,7 @@ jsf3.validator("test1",{
 引数ではvalueに入力値が、そのあとにそれぞれルール指定時の値が入ります。
 
 ```javascript | 
-jsf3.validator("test1",{
+javelin.validator("test1",{
 
     rules:{
         name:[
@@ -789,7 +789,7 @@ jsf3.validator("test1",{
 
 
 ```javascript | 
-jsf3.validator("test1",{
+javelin.validator("test1",{
 
     rules:{
         name:[

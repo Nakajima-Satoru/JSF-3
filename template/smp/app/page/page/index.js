@@ -1,4 +1,4 @@
-jsf3.page("page/index",{
+javelin.page("page/index",{
 
 	group:"app",
 

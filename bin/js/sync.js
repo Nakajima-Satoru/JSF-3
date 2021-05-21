@@ -1,5 +1,5 @@
 
-jsf3.sync=function(callbackList){
+javelin.sync=function(callbackList){
 
     var _this=function(){
 
@@ -38,9 +38,9 @@ jsf3.sync=function(callbackList){
 
 };
 
-jsf3.syncFor=function(startIndex,endIndex,callbacks){
+javelin.syncFor=function(startIndex,endIndex,callbacks){
 
-    var _o=jsf3.sync();
+    var _o=javelin.sync();
     for(let n=startIndex;n<endIndex;n++){
         _o.then(function(next){
             callbacks(next,n); 
@@ -50,9 +50,9 @@ jsf3.syncFor=function(startIndex,endIndex,callbacks){
 
 };
 
-jsf3.syncEach=function(arrays,callbacks){
+javelin.syncEach=function(arrays,callbacks){
 
-    var _o=jsf3.sync();
+    var _o=javelin.sync();
     for(let n=0;n<arrays.length;n++){
 
         let a_=arrays[n];

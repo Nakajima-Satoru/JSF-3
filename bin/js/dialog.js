@@ -1,24 +1,24 @@
-jsf3.dialog=function(dialogName,settings){
+javelin.dialog=function(dialogName,settings){
 
     if(settings){
 
         var colum=Object.keys(settings);
 
-        if(!jsf3.cache.dialog[dialogName]){
-            jsf3.cache.dialog[dialogName]={};
+        if(!javelin.cache.dialog[dialogName]){
+            javelin.cache.dialog[dialogName]={};
         }
 
         for(var n=0;n<colum.length;n++){
             var field=colum[n];
             var values=settings[field];
 
-            jsf3.cache.dialog[dialogName][field]=values;
+            javelin.cache.dialog[dialogName][field]=values;
         }
 
         return;
     }
 
-    var jsf3DialogObject=function(dialogName){
+    var javelinDialogObject=function(dialogName){
 
         this.open=function(option){
 
@@ -27,18 +27,18 @@ jsf3.dialog=function(dialogName,settings){
             }
 
             var _dialogData={};
-            if(jsf3.cache.dialog[dialogName]){
-                _dialogData=jsf3.cache.dialog[dialogName];
+            if(javelin.cache.dialog[dialogName]){
+                _dialogData=javelin.cache.dialog[dialogName];
             }
 
-            var content=jsf3.cache.dialogs[dialogName];
-            content=jsf3.base64.decode(content);
+            var content=javelin.cache.dialogs[dialogName];
+            content=javelin.base64.decode(content);
 
             if(content==undefined){
                 return;
             }
 
-            var id=jsf3.uniqId();
+            var id=javelin.uniqId();
 
             var _class="";
             if(option.class){
@@ -70,7 +70,7 @@ jsf3.dialog=function(dialogName,settings){
                 option:option,
             });
             
-            jsf3.sync([
+            javelin.sync([
                 function(next){
                     callObj._next=next;
                     next();
@@ -131,8 +131,8 @@ jsf3.dialog=function(dialogName,settings){
             var dialogName=dialog.attr("data-dialog_type");
 
             var _dialogData={};
-            if(jsf3.cache.dialog[dialogName]){
-                _dialogData=jsf3.cache.dialog[dialogName];
+            if(javelin.cache.dialog[dialogName]){
+                _dialogData=javelin.cache.dialog[dialogName];
             }
 
             var callObj=new dialogCallbackObject({
@@ -143,7 +143,7 @@ jsf3.dialog=function(dialogName,settings){
                 _hideClosed:true,
             });
 
-            jsf3.sync([
+            javelin.sync([
                 function(next){
                     callObj._next=next;
                     next();
@@ -195,7 +195,7 @@ jsf3.dialog=function(dialogName,settings){
 
     };
 
-    return new jsf3DialogObject(dialogName);
+    return new javelinDialogObject(dialogName);
 
 };
 
@@ -222,7 +222,7 @@ var dialogCallbackObject=function(params){
 
     if(!params._hideClosed){
         this.close=function(){
-            jsf3.dialog(this.dialogName).close(this.id,this.option);
+            javelin.dialog(this.dialogName).close(this.id,this.option);
         };    
     }
 

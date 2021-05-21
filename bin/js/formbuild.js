@@ -1,4 +1,4 @@
-jsf3.formbuild={
+javelin.formbuild={
 
     input:function(name,option){
 

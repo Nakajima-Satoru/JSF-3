@@ -1,4 +1,4 @@
-jsf3.group("app",{
+javelin.group("app",{
 
 	before:function(obj){
 		
@@ -6,11 +6,11 @@ jsf3.group("app",{
 			return;
 		}
 
-		if(jsf3.localStorage.get("auth")){
+		if(javelin.localStorage.get("auth")){
 
-			jsf3.element("sidemenu").put(".sidemenu");
+			javelin.element("sidemenu").put(".sidemenu");
 	
-			jsf3.element("header").put("header",{
+			javelin.element("header").put("header",{
 				before:function(obj){
 					obj.obj.addClass("open");
 				},
@@ -23,7 +23,7 @@ jsf3.group("app",{
 			var pageName=obj.nextPage.pageNameFull;
 
 			if(pageName!="login/index"){
-				jsf3.redirect.next("login/index");
+				javelin.redirect.next("login/index");
 				obj.exit();
 				return;
 			}

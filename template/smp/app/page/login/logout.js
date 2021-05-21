@@ -1,10 +1,10 @@
-jsf3.page("login/logout",{
+javelin.page("login/logout",{
 
 	group:"app",
 	
 	before:function(obj){
 
-		jsf3.localStorage.delete("auth");
+		javelin.localStorage.delete("auth");
 
 		$("wk").addClass("closed");
 
@@ -20,7 +20,7 @@ jsf3.page("login/logout",{
 				$("header").html("");
 			},500);
 	
-			jsf3.redirect.next("login/index",{
+			javelin.redirect.next("login/index",{
 				bufferClear:true,
 			});
 	

@@ -1,24 +1,24 @@
 {
-  "name": "jsf3",
+  "name": "javelin",
   "version": "1.0.0",
-  "description": "",
+  "description": "JavaScript Simple UI Framework.",
   "main": "index.js",
   "scripts": {
-    "jsf3":"jsf3"
+    "javelin":"javelin"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nakajima-Satoru/JSF-3.git"
+    "url": "git+https://github.com/Nakajima-Satoru/Javelin.git"
   },
   "keywords": [
     "javascript",
     "framework",
-    "jsf-3"
+    "Javelin"
   ],
   "author": "Nakajima-Satoru",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Nakajima-Satoru/JSF-3/issues"
+    "url": "https://github.com/Nakajima-Satoru/Javelin/issues"
   },
-  "homepage": "https://github.com/Nakajima-Satoru/JSF-3#readme"
+  "homepage": "https://github.com/Nakajima-Satoru/Javelin#readme"
 }

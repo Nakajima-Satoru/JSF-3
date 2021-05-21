@@ -1,4 +1,4 @@
-jsf3.base64={
+javelin.base64={
     encode:function(str){
         return btoa(encodeURIComponent(str));
     },
@@ -8,7 +8,7 @@ jsf3.base64={
     },
 };
 
-jsf3.uniqId=function(length){
+javelin.uniqId=function(length){
 
     if(!length){
         length=40;
@@ -28,7 +28,7 @@ jsf3.uniqId=function(length){
 
 };
 
-jsf3.date=function(formatStr,dateTimeStr){
+javelin.date=function(formatStr,dateTimeStr){
 
     if(!formatStr){
         formatStr="Y-m-d";

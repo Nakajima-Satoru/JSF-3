@@ -1,4 +1,4 @@
-jsf3.localStorage={
+javelin.localStorage={
 
     /**
      * get
@@ -46,8 +46,8 @@ jsf3.localStorage={
      * @returns 
      */
     getName:function(name){
-        if(jsf3.option.webStoragePrefix){
-            name = jsf3.option.webStoragePrefix+name;
+        if(javelin.option.webStoragePrefix){
+            name = javelin.option.webStoragePrefix+name;
         }
         return name;
     },

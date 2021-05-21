@@ -1,5 +1,5 @@
 
-jsf3.redirect={
+javelin.redirect={
 
     /**
      * next
@@ -22,33 +22,33 @@ jsf3.redirect={
         var pageName=_pbuff.pageName;
         var aregment=_pbuff.aregment;
 
-        var now=jsf3.buffer.nowPage;
+        var now=javelin.buffer.nowPage;
 
         if(now && now.pageNameFull == pageNameFull){
              return;
         }
 
-        jsf3.locking.link=true;
+        javelin.locking.link=true;
 
         history.pushState(pageName, null, null);
 
-        if(jsf3.cache.pages[pageName]==undefined && jsf3.cache.page[pageName]==undefined){        
-            jsf3.locking.link=false;
+        if(javelin.cache.pages[pageName]==undefined && javelin.cache.page[pageName]==undefined){        
+            javelin.locking.link=false;
             throw new Error("The redirected page or method information cannot be found.\""+pageName+"\"");
         }
 
         var _content="";
-        if(jsf3.cache.pages[pageName]){
-            _content=jsf3.base64.decode(jsf3.cache.pages[pageName]);
+        if(javelin.cache.pages[pageName]){
+            _content=javelin.base64.decode(javelin.cache.pages[pageName]);
         }
 
         var _pageData={};
-        if(jsf3.cache.page[pageName]){
-            _pageData=jsf3.cache.page[pageName];
+        if(javelin.cache.page[pageName]){
+            _pageData=javelin.cache.page[pageName];
         }
 
         var _nextdata={
-            id:jsf3.uniqId(),
+            id:javelin.uniqId(),
             pageNameFull:pageNameFull,
             pageName:pageName,
             option:option,
@@ -67,7 +67,7 @@ jsf3.redirect={
                 nextPageObj.addClass(_pageData.class);
             }
             
-            jsf3.buffer.nowPage=_nextdata;
+            javelin.buffer.nowPage=_nextdata;
         }
 
         var callObj=new redirectCallbackObject({
@@ -78,7 +78,7 @@ jsf3.redirect={
             pageObj:nextPageObj,
         });
 
-        jsf3.sync([
+        javelin.sync([
 
             function(next){
                 callObj._next=next;
@@ -109,7 +109,7 @@ jsf3.redirect={
                             nextPageObj.remove();
                         }
                         callObj2._waited=true;        
-                        jsf3.locking.link=false;
+                        javelin.locking.link=false;
                     },
                 };
 
@@ -129,7 +129,7 @@ jsf3.redirect={
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
-                    var _g=jsf3.cache.group[groupName];
+                    var _g=javelin.cache.group[groupName];
 
                     if(_g){
                         if(_g.before){
@@ -160,7 +160,7 @@ jsf3.redirect={
                     next();
                 });
 
-                jsf3.sync(groupCallbackList);
+                javelin.sync(groupCallbackList);
 
             },
 
@@ -218,7 +218,7 @@ jsf3.redirect={
 
             function(next){
 
-                if(jsf3.option.queryreplase){
+                if(javelin.option.queryreplase){
                     history.replaceState("","","index.html?path="+pageName);
                 }
 
@@ -228,27 +228,27 @@ jsf3.redirect={
 
                     if(_content){
 
-                        if(jsf3.buffer.pageMoveIndex<(jsf3.buffer.pages.length-1)){
-                            for(var n=jsf3.buffer.pageMoveIndex;n<jsf3.buffer.pages.length;n++){
-                                delete jsf3.buffer.pages[n];
+                        if(javelin.buffer.pageMoveIndex<(javelin.buffer.pages.length-1)){
+                            for(var n=javelin.buffer.pageMoveIndex;n<javelin.buffer.pages.length;n++){
+                                delete javelin.buffer.pages[n];
                             }
-                            jsf3.buffer.pages.sort();
+                            javelin.buffer.pages.sort();
                         }
             
                         if(now){
-                            if(jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1]){
-                                jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-1].content=pageArea.find("#"+now.id).html();
+                            if(javelin.buffer.pages[javelin.buffer.pageMoveIndex-1]){
+                                javelin.buffer.pages[javelin.buffer.pageMoveIndex-1].content=pageArea.find("#"+now.id).html();
                             }
                         }
             
                         if(option.bufferClear){
-                            jsf3.redirect.clear();
+                            javelin.redirect.clear();
                         }
             
-                        jsf3.buffer.pages[jsf3.buffer.pageMoveIndex]=_nextdata;
-                        jsf3.buffer.pageMoveIndex++;  
+                        javelin.buffer.pages[javelin.buffer.pageMoveIndex]=_nextdata;
+                        javelin.buffer.pageMoveIndex++;  
 
-                        if(jsf3.option.animation){
+                        if(javelin.option.animation){
                             pageArea.addClass("open");
                             if(option.animation!=undefined){
                                 var __beforeAnimation=pageArea.attr("class");
@@ -272,7 +272,7 @@ jsf3.redirect={
                 };
                
 
-                if(jsf3.option.animation){
+                if(javelin.option.animation){
                     pageOpen();
                     setTimeout(function(){
                         pageClose();                        
@@ -321,7 +321,7 @@ jsf3.redirect={
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
-                    var _g=jsf3.cache.group[groupName];
+                    var _g=javelin.cache.group[groupName];
 
                     if(_g){
                         if(_g.after){
@@ -353,7 +353,7 @@ jsf3.redirect={
                     next();
                 });
 
-                jsf3.sync(groupCallbackList);
+                javelin.sync(groupCallbackList);
             },
 
             function(next){
@@ -409,7 +409,7 @@ jsf3.redirect={
 
             },
             function(next){
-                jsf3.locking.link=false;
+                javelin.locking.link=false;
             },
         ]);
         
@@ -425,11 +425,11 @@ jsf3.redirect={
             option={};
         }
 
-        var now=jsf3.buffer.nowPage;
+        var now=javelin.buffer.nowPage;
 
-        if(!jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-2]){
-            if(jsf3.cache.common.exit){
-                var callback=jsf3.cache.common.exit;
+        if(!javelin.buffer.pages[javelin.buffer.pageMoveIndex-2]){
+            if(javelin.cache.common.exit){
+                var callback=javelin.cache.common.exit;
                 callback();
             }
             return;
@@ -437,8 +437,8 @@ jsf3.redirect={
 
         var pageArea=$("pagearea");
 
-        var _back=jsf3.buffer.pages[jsf3.buffer.pageMoveIndex-2];
-        jsf3.buffer.pageMoveIndex--;
+        var _back=javelin.buffer.pages[javelin.buffer.pageMoveIndex-2];
+        javelin.buffer.pageMoveIndex--;
 
         var pageArea=$("pagearea");
         pageArea.addClass("back");
@@ -466,22 +466,22 @@ jsf3.redirect={
             pageObj:backPageObj,
         });
 
-        jsf3.buffer.nowPage=_back;
+        javelin.buffer.nowPage=_back;
 
         if(now){
             $("pagearea page#"+now.id).removeClass("open").addClass("closed");
         }
 
         var _backPageData={};
-        if(jsf3.cache.page[_back.pageName]){
-            _backPageData=jsf3.cache.page[_back.pageName];
+        if(javelin.cache.page[_back.pageName]){
+            _backPageData=javelin.cache.page[_back.pageName];
         }
 
         if(_backPageData.class){
             backPageObj.addClass(_backPageData.class);
         }
 
-        jsf3.sync([
+        javelin.sync([
 
             function(next){
 
@@ -519,7 +519,7 @@ jsf3.redirect={
                 for(var n=0;n<_backPageData.group.length;n++){
 
                     var groupName=_backPageData.group[n];
-                    var _g=jsf3.cache.group[groupName];
+                    var _g=javelin.cache.group[groupName];
 
                     if(_g){
                         if(_g.before){
@@ -551,7 +551,7 @@ jsf3.redirect={
                     next();
                 });
 
-                jsf3.sync(groupCallbackList);
+                javelin.sync(groupCallbackList);
  
             },
 
@@ -617,7 +617,7 @@ jsf3.redirect={
                     nowPageArea.addClass("open");
                 };
                 
-                if(jsf3.option.animation){
+                if(javelin.option.animation){
                     pageOpen();
                     setTimeout(function(){
                         pageClose();
@@ -661,7 +661,7 @@ jsf3.redirect={
                 for(var n=0;n<_backPageData.group.length;n++){
 
                     var groupName=_backPageData.group[n];
-                    var _g=jsf3.cache.group[groupName];
+                    var _g=javelin.cache.group[groupName];
 
                     if(_g){
                         if(_g.after){
@@ -693,7 +693,7 @@ jsf3.redirect={
                     next();
                 });
 
-                jsf3.sync(groupCallbackList);
+                javelin.sync(groupCallbackList);
             },
 
             function(next){
@@ -760,7 +760,7 @@ jsf3.redirect={
             option={};
         }
 
-        var now=jsf3.buffer.nowPage;
+        var now=javelin.buffer.nowPage;
 
         var pageObj=$("pagearea").find("#"+now.id);
         
@@ -770,11 +770,11 @@ jsf3.redirect={
         });
 
         var _pageData={};
-        if(jsf3.cache.page[now.pageName]){
-            _pageData=jsf3.cache.page[now.pageName];
+        if(javelin.cache.page[now.pageName]){
+            _pageData=javelin.cache.page[now.pageName];
         }
 
-        jsf3.sync([
+        javelin.sync([
 
             function(next){
 
@@ -810,7 +810,7 @@ jsf3.redirect={
                 for(var n=0;n<_pageData.group.length;n++){
 
                     var groupName=_pageData.group[n];
-                    var _g=jsf3.cache.group[groupName];
+                    var _g=javelin.cache.group[groupName];
 
                     if(_g){
                         if(_g.refresh){
@@ -831,7 +831,7 @@ jsf3.redirect={
                     next();
                 });
 
-                jsf3.sync(groupCallbackList);
+                javelin.sync(groupCallbackList);
             },
             function(next){
                 
@@ -874,8 +874,8 @@ jsf3.redirect={
     },
 
     clear:function(){
-        jsf3.buffer.pages=[];
-        jsf3.buffer.pageMoveIndex=0;
+        javelin.buffer.pages=[];
+        javelin.buffer.pageMoveIndex=0;
     },
 
     _getAregment:function(pageName){
@@ -929,7 +929,7 @@ var redirectCallbackObject=function(params){
             this.nextPageObj.remove();
         }
         this._waited=true;        
-        jsf3.locking.link=false;
+        javelin.locking.link=false;
 
     };
 

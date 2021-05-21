@@ -1,9 +1,9 @@
-jsf3.validator=function(validateName,settings){
+javelin.validator=function(validateName,settings){
 
     if(settings){
 
-        if(!jsf3.cache.validator[validateName]){
-            jsf3.cache.validator[validateName]={};
+        if(!javelin.cache.validator[validateName]){
+            javelin.cache.validator[validateName]={};
         }
 
         var colum=Object.keys(settings);
@@ -12,7 +12,7 @@ jsf3.validator=function(validateName,settings){
             var field=colum[n];
             var values=settings[field];
 
-            jsf3.cache.validator[validateName][field]=values;
+            javelin.cache.validator[validateName][field]=values;
         }
     
         return;
@@ -35,13 +35,13 @@ jsf3.validator=function(validateName,settings){
             }
 
 			this._value=post;
-			jsf3.validateRule._value=post;
+			javelin.validateRule._value=post;
 
             if(!option.rule){
                 option.rule="rules";
             }
 
-			var _validator=jsf3.cache.validator[validateName];
+			var _validator=javelin.cache.validator[validateName];
 			if(!_validator){
 				return;
 			}
@@ -96,11 +96,11 @@ jsf3.validator=function(validateName,settings){
 					}
 
 					var jugement=true;
-					if(jsf3.validateRule[sendRule[0]]){
-						jugement=jsf3.validateRule[rule[0]](post[name],sendRule[1],sendRule[2],sendRule[3]);
+					if(javelin.validateRule[sendRule[0]]){
+						jugement=javelin.validateRule[rule[0]](post[name],sendRule[1],sendRule[2],sendRule[3]);
 					}
-					else if(jsf3.cache.data.validator[validateName][sendRule[0]]){
-						jugement=jsf3.cache.data.validator[validateName][sendRule[0]](post[name],sendRule[1],sendRule[2],sendRule[3]);
+					else if(javelin.cache.data.validator[validateName][sendRule[0]]){
+						jugement=javelin.cache.data.validator[validateName][sendRule[0]](post[name],sendRule[1],sendRule[2],sendRule[3]);
 					}
 
 					if(vrule.message){

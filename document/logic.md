@@ -1,4 +1,4 @@
-JSF-3(仮)
+Javelin
 
 # ロジック (Logic)
 
@@ -7,14 +7,14 @@ JSF-3(仮)
 JavaScriptの通常のオブジェクトメソッドを記述してそれを使用する形でも構いませんが、  
 ロジックの機能を使用するメリットとしては、どのロジックでかつどのメソッドを使用しているかを明確に判断できるようになっています。  
 
-``jsf3.logic``メソッドを使用します。
+``javelin.logic``メソッドを使用します。
 
 ## # ロジックの設置
 
 ロジックの設置は``app/logic``ディレクトリ内に下記のようなファイルを設置してください。
 
 ```javascript | app/group/test.js
-jsf3.logic("test",{
+javelin.logic("test",{
 
     run:function(){
 
@@ -32,11 +32,11 @@ jsf3.logic("test",{
 ロジックを使用する場合は、下記のようにロジック内に設置したメソッドを呼び出すだけです。
 
 ```javascript | app/group/test.js
-jsf3.page("logictest",{
+javelin.page("logictest",{
 
     before:function(){
 
-        var text=jsf3.logic("text").run();
+        var text=javelin.logic("text").run();
 
         console.log(text);
 

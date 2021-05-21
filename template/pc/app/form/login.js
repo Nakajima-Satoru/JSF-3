@@ -1,4 +1,4 @@
-jsf3.form("login",{
+javelin.form("login",{
 
 	tags:{
 		username:{
@@ -18,7 +18,7 @@ jsf3.form("login",{
 
 	submit:function(obj){
 
-		var vres=jsf3.validator("login").verify(obj.data);
+		var vres=javelin.validator("login").verify(obj.data);
 
 		if(vres){
 			return;
@@ -35,7 +35,7 @@ jsf3.form("login",{
 				};
 			}
 			
-			var vres2=jsf3.validator("login").verify(logined,{
+			var vres2=javelin.validator("login").verify(logined,{
 				rule:"ruleLogined",
 			});
 
@@ -44,7 +44,7 @@ jsf3.form("login",{
 				return;
 			}
 
-			jsf3.localStorage.set("auth",{
+			javelin.localStorage.set("auth",{
 				userName:"user",
 				name:"山田　太郎",
 				token:"**************************************************",
@@ -56,7 +56,7 @@ jsf3.form("login",{
 		
 				loading.close();
 				
-				jsf3.redirect.next("top",{
+				javelin.redirect.next("top",{
 					bufferClear:true,
 				});
 	

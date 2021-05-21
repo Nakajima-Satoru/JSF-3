@@ -1,1 +1,1 @@
-require("JSF-3/projectBuild.js").build(__dirname);
+require("./projectBuild.js").build(__dirname);

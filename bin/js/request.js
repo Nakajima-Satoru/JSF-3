@@ -1,27 +1,27 @@
-jsf3.request=function(requestName,settings){
+javelin.request=function(requestName,settings){
 
     if(settings){
 
         var colum=Object.keys(settings);
         
-        if(!jsf3.cache.request[requestName]){
-            jsf3.cache.request[requestName]={};
+        if(!javelin.cache.request[requestName]){
+            javelin.cache.request[requestName]={};
         }
 
         for(var n=0;n<colum.length;n++){
             var field=colum[n];
             var values=settings[field];
 
-            jsf3.cache.request[requestName][field]=values;
+            javelin.cache.request[requestName][field]=values;
         }
 
         return;
     }
 
 
-    var jsf3RequestObject=function(requestName){
+    var javelinRequestObject=function(requestName){
 
-        var _cache=jsf3.cache.request[requestName];
+        var _cache=javelin.cache.request[requestName];
 
         if(!_cache){
             _cache={};
@@ -75,13 +75,13 @@ jsf3.request=function(requestName,settings){
 
             ajax.done(function(data, textStatus, jqXHR){
                 
-                var callObj=new jsf3RequestResponseObject({
+                var callObj=new javelinRequestResponseObject({
                     data:data,
                     textStatus:textStatus,
                     jqXHR:jqXHR,
                 });
 
-                jsf3.sync([
+                javelin.sync([
                     function(next){
                         callObj.next=function(){
                             this._waited=false;
@@ -130,13 +130,13 @@ jsf3.request=function(requestName,settings){
 
             ajax.fail(function(jqXHR, textStatus, errorThrown){
                 
-                var callObj=new jsf3RequestResponseObject({
+                var callObj=new javelinRequestResponseObject({
                     jqXHR:jqXHR,
                     textStatus:textStatus,
                     errorThrown:errorThrown,
                 });
 
-                jsf3.sync([
+                javelin.sync([
                     function(next){
                         callObj.next=function(){
                             this._waited=false;
@@ -199,9 +199,9 @@ jsf3.request=function(requestName,settings){
                     };
                 }
 
-                var callObj=new jsf3RequestResponseObject(_o);
+                var callObj=new javelinRequestResponseObject(_o);
                 
-                jsf3.sync([
+                javelin.sync([
                     function(next){
                         callObj.next=function(){
                             this._waited=false;
@@ -253,11 +253,11 @@ jsf3.request=function(requestName,settings){
 
     };
 
-    return new jsf3RequestObject(requestName);
+    return new javelinRequestObject(requestName);
 
 };
 
-var jsf3RequestResponseObject=function(params){
+var javelinRequestResponseObject=function(params){
 
     this._waited=false;
 

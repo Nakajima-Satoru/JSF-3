@@ -1,10 +1,10 @@
-JSF-3(仮)
+Javelin
 
 # エレメント (Element)
 
 エレメント(Element)はHTMLタグを部品のように後から動的に追加できる機能です。
 
-``jsf3.element``メソッドから利用します
+``javelin.element``メソッドから利用します
 
 ## # エレメントの実装
 
@@ -23,7 +23,7 @@ HTMLは``render/element``ディレクトリ内に「.html」の拡張子でフ�
 スクリプトは``app/element``ディレクトリにJSファイルを設置してください。
 
 ```javascript | app/element/test.js
-jsf3.element("test",{
+javelin.element("test",{
 
     open:function(obj){
 
@@ -34,7 +34,7 @@ jsf3.element("test",{
 });
 ```
 
-jsf3.elementメソッドの引数にそれぞれエレメント名、各種設定オブジェクトを設置します。
+javelin.elementメソッドの引数にそれぞれエレメント名、各種設定オブジェクトを設置します。
 
 各種オプション設定については下記にて解説しています。
 
@@ -43,7 +43,7 @@ jsf3.elementメソッドの引数にそれぞれエレメント名、各種設�
 エレメントに専用にクラス属性を追加できます。
 
 ```javascript | app/element/test.js
-jsf3.element("test",{
+javelin.element("test",{
 
     class:"elementclass",
 
@@ -61,7 +61,7 @@ jsf3.element("test",{
 例としてエレメントが開いたときのコールバックは下記のように実装します。
 
 ```javascript | app/element/test.js
-jsf3.element("test",{
+javelin.element("test",{
 
     before:function(obj){
 
@@ -79,13 +79,13 @@ jsf3.element("test",{
 
 ## # エレメントのHTMLを取得
 
-エレメントのHTMLタグをを取得する場合は``jsf3.element.load``メソッドを使用します。  
+エレメントのHTMLタグをを取得する場合は``javelin.element.load``メソッドを使用します。  
 必ずエレメント名を指定して下さい。
 
 ```javascript | app/page/element.js
 $(".open_element").on("click",function(){
 
-    var html=jsf3.element("test").load();
+    var html=javelin.element("test").load();
 
     console.log(html);
 });
@@ -97,13 +97,13 @@ $(".open_element").on("click",function(){
 
 ## # エレメントを任意のタグに追加
 
-エレメントのHTMLタグを任意のタグ内に追加する場合は``jsf3.element.put``メソッドを使用します。  
+エレメントのHTMLタグを任意のタグ内に追加する場合は``javelin.element.put``メソッドを使用します。  
 必ずエレメント名と追加先のタグ要素を指定して下さい。
 
 ```javascript | app/page/element.js
 $(".open_element").on("click",function(){
 
-    jsf3.element("test").put("element_area");
+    javelin.element("test").put("element_area");
 
 });
 ```
@@ -118,7 +118,7 @@ $(".open_element").on("click",function(){
 ```javascript
 $(".open_element").on("click",function(){
 
-    jsf3.element("test").put("element_area",{
+    javelin.element("test").put("element_area",{
         class:"element_class",
     });
 
@@ -133,7 +133,7 @@ $(".open_element").on("click",function(){
 ```javascript
 $(".open_element").on("click",function(){
 
-    jsf3.element("test").put("element_area",{
+    javelin.element("test").put("element_area",{
         callback:{
             before:function(obj){
                 
@@ -163,7 +163,7 @@ JQueryのエレメントのDM要素オブジェクトを取得できます。
 下記のように``obj.element``から取得できます。
 
 ```javascript | app/element/test.js
-jsf3.element("test",{
+javelin.element("test",{
 
     before:function(obj){
 
@@ -180,7 +180,7 @@ jsf3.element("test",{
 このエレメントIDは一意のコードです。
 
 ```javascript | app/element/test.js
-jsf3.element("test",{
+javelin.element("test",{
 
     before:function(obj){
 
@@ -198,7 +198,7 @@ jsf3.element("test",{
 **wait**メソッドで次以降のコールバック実行を中断し、**next**メソッドで再開させます。
 
 ```javascript | app/element/test.js
-jsf3.element("test",{
+javelin.element("test",{
 
     before:function(obj){
 

@@ -6,7 +6,7 @@ const loading={
     open: function(){
         var cont = this;
         this.loadingTiming = setTimeout(function(){
-            cont.loadingCode = jsf3.dialog("loading").open();
+            cont.loadingCode = javelin.dialog("loading").open();
         },300);
     },
 
@@ -15,7 +15,7 @@ const loading={
             clearTimeout(this.loadingTiming);
         }
         else{
-            jsf3.dialog("loading").close(this.loadingCode);
+            javelin.dialog("loading").close(this.loadingCode);
         }
     },
 };

@@ -1,4 +1,4 @@
-jsf3.page("page/index3",{
+javelin.page("page/index3",{
 
     group:"app",
 
@@ -12,7 +12,7 @@ jsf3.page("page/index3",{
 
             loading.close();
             
-            jsf3.redirect.next("page/index2");
+            javelin.redirect.next("page/index2");
             
         },3000);
 

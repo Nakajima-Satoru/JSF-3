@@ -1,4 +1,4 @@
-jsf3.form("test1",{
+javelin.form("test1",{
 
 	tags:{
 		name:{
@@ -17,7 +17,7 @@ jsf3.form("test1",{
 		},
 		location:{
 			type:"select",
-			selected:jsf3.data("location").get(),
+			selected:javelin.data("location").get(),
 		},
 		message:{
 			type:"textarea",

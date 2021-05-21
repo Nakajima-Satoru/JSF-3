@@ -1,4 +1,4 @@
-jsf3.validator("test2",{
+javelin.validator("test2",{
 
     rules:{
         required:[

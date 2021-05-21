@@ -1,11 +1,11 @@
-JSF-3(仮)
+Javelin
 
 # フォーム(Form)
 
 フォーム(Form)は入力フォームの各種入力欄の動的な設置や、Submitイベント時のコールバック実装等、  
 フォーム全般の機能を実装するためのものです。
 
-フォーム機能は``jsf3.form``メソッドを使用します。
+フォーム機能は``javelin.form``メソッドを使用します。
 
 ---
 
@@ -14,7 +14,7 @@ JSF-3(仮)
 フォームのスクリプトは``app/form``ディレクトリにJSファイルとして設置します。
 
 ```javascript | app/form/test1.js
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         name:{
@@ -52,7 +52,7 @@ tagsは[各入力タグおよび送信ボタンの決定](#tags)、submitは[Sub
 下記のようにsubmitを指定することでフォーム送信処理(Submit)が行われたときのコールバックを実装することができます。
 
 ```javascript | app/form/test1.js
-jsf3.form("test1",{
+javelin.form("test1",{
 
     submit:function(obj){
 
@@ -63,7 +63,7 @@ jsf3.form("test1",{
 });
 ```
 
-JSF-3では実際にSubmitが行われたとしても、リクエスト送信はされずにこのコールバックが実行されます。  
+Javelinでは実際にSubmitが行われたとしても、リクエスト送信はされずにこのコールバックが実行されます。  
 リクエスト送信を行う場合はAjax通信を行ってください。
 
 引数には専用のオブジェクトが入ります。  
@@ -71,7 +71,7 @@ JSF-3では実際にSubmitが行われたとしても、リクエスト送信は
 
 
 ```javascript | app/form/test1.js
-jsf3.form("test1",{
+javelin.form("test1",{
 
     submit:function(obj){
 
@@ -91,7 +91,7 @@ jsf3.form("test1",{
 下記のようにresetを指定することでフォームの入力データリセット処理処理(reset)が行われたときのコールバックを実装することができます。
 
 ```javascript | app/form/test1.js
-jsf3.form("test1",{
+javelin.form("test1",{
 
     reset:function(obj){
 
@@ -107,7 +107,7 @@ jsf3.form("test1",{
 
 
 ```javascript | app/form/test1.js
-jsf3.form("test1",{
+javelin.form("test1",{
 
     reset:function(obj){
 
@@ -152,7 +152,7 @@ formタグのID属性値はこれから設置するフォームスクリプト�
 今回の場合は``app/form/test1.js``でファイルを追加します。
 
 ```javascript | app/form/test1.js
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         name:{
@@ -174,14 +174,14 @@ jsf3.form("test1",{
 ```
 
 tagsにHTMLで設置したield属性ごとでの入力形式等をセットします。  
-最後にページスクリプトを設置したら、そこに入力フォームを展開するためのメソッド``jsf3.form.tagOpen``メソッドを設置します。
+最後にページスクリプトを設置したら、そこに入力フォームを展開するためのメソッド``javelin.form.tagOpen``メソッドを設置します。
 
 ```javascript | app/form/test1.js
-jsf3.page("form",{
+javelin.page("form",{
 
     before:function(obj){
 
-        jsf3.form("test1").tagOpen();
+        javelin.form("test1").tagOpen();
 
     }.
 
@@ -212,7 +212,7 @@ tagsでは型の指定(type)が必要となります。
 テキストボックスを出力します。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         name:{
@@ -228,7 +228,7 @@ jsf3.form("test1",{
 
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         name:{
@@ -247,7 +247,7 @@ jsf3.form("test1",{
 テキストエリアを出力します。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         message:{
@@ -263,7 +263,7 @@ jsf3.form("test1",{
 
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         message:{
@@ -282,7 +282,7 @@ jsf3.form("test1",{
 必ずselectedにて選択肢を指定してください。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         selected:{
@@ -303,7 +303,7 @@ jsf3.form("test1",{
 あらかじめ選択肢を初期段階で指定する場合はvalueを指定します。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         selected:{
@@ -326,7 +326,7 @@ jsf3.form("test1",{
 下記はclass属性を指定しています。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         selected:{
@@ -352,7 +352,7 @@ jsf3.form("test1",{
 必ずselectedにて選択肢を指定してください。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         radiobutton:{
@@ -373,7 +373,7 @@ jsf3.form("test1",{
 あらかじめ選択肢を初期段階で指定する場合はvalueを指定します。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         radiobutton:{
@@ -396,7 +396,7 @@ jsf3.form("test1",{
 下記はclass属性を指定しています。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         radiobutton:{
@@ -422,7 +422,7 @@ jsf3.form("test1",{
 必ずselectedにて選択肢を指定してください。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         checkboxs:{
@@ -444,7 +444,7 @@ jsf3.form("test1",{
 配列値で複数選択がっ可能です。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         checkboxs:{
@@ -467,7 +467,7 @@ jsf3.form("test1",{
 下記はclass属性を指定しています。
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         checkboxs:{
@@ -493,7 +493,7 @@ jsf3.form("test1",{
 valueにボタン表示テキストを指定します
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         submit:{
@@ -512,7 +512,7 @@ jsf3.form("test1",{
 valueにボタン表示テキストを指定します
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         submit:{
@@ -530,7 +530,7 @@ jsf3.form("test1",{
 valueにボタン表示テキストを指定します
 
 ```javascript
-jsf3.form("test1",{
+javelin.form("test1",{
 
     tags:{
         submit:{
@@ -545,15 +545,15 @@ jsf3.form("test1",{
 
 ## # 入力データのセット
 
-``jsf3.form.setData``っメソッドを使用することで入力データをフォームにセットできます。  
+``javelin.form.setData``っメソッドを使用することで入力データをフォームにセットできます。  
 引数に各フィールドごとの値を指定するだけです。
 
 ```javascript
-jsf3.page("form",{
+javelin.page("form",{
 
     before:function(){
 
-        jsf3.form("test1").setData({
+        javelin.form("test1").setData({
             name:"test name",
             email:"aaaaa@email.jp",
             message:"text sample sample.....",
@@ -568,14 +568,14 @@ jsf3.page("form",{
 
 ## # Submitの実行
 
-``jsf3.form.submit``っメソッドを使用することでフォームの送信(Submit)を実行できます。  
+``javelin.form.submit``っメソッドを使用することでフォームの送信(Submit)を実行できます。  
 
 ```javascript
-jsf3.page("form",{
+javelin.page("form",{
 
     before:function(){
 
-        jsf3.form("test1").submit();
+        javelin.form("test1").submit();
 
     },
 
@@ -586,14 +586,14 @@ jsf3.page("form",{
 
 ## # resetの実行
 
-``jsf3.form.reset``っメソッドを使用することで入力データのクリア(Reset)を実行できます。  
+``javelin.form.reset``っメソッドを使用することで入力データのクリア(Reset)を実行できます。  
 
 ```javascript
-jsf3.page("form",{
+javelin.page("form",{
 
     before:function(){
 
-        jsf3.form("test1").reset();
+        javelin.form("test1").reset();
         
     },
 

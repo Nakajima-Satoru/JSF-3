@@ -1,4 +1,4 @@
-jsf3.page("login/index",{
+javelin.page("login/index",{
 
 	group:"app",
 
@@ -6,7 +6,7 @@ jsf3.page("login/index",{
 	
 	before:function(obj){
 
-		jsf3.form("login").tagOpen();
+		javelin.form("login").tagOpen();
 
 	},
 

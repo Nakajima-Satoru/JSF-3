@@ -9,7 +9,7 @@ if(cmd[0]=="create"){
     var templateName=cmd[2];
 
     if(!templateName){
-        templateName="default";
+        templateName="hello_world";
     }
 
     var create=require("./create.js");
@@ -29,7 +29,7 @@ else if(cmd[0]=="build"){
 else{
 
     console.log("------------------------------");
-    console.log("JSF-3 ");
+    console.log("Javelin");
     console.log("Copylight: Nakajima Satoru");
     console.log("------------------------------");
     

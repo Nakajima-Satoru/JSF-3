@@ -1,10 +1,10 @@
-JSF-3(仮)
+Javelin
 
 # ダイアログ (Dialog)
 
 ダイアログ(Dialog)は画面上にダイアログ画面を表示するための機能です。  
 
-``jsf3.dialog``メソッドを使用します。
+``javelin.dialog``メソッドを使用します。
 
 ## # ダイアログの設置
 
@@ -25,7 +25,7 @@ HTMLは``render/dialog``ディレクトリ内に「.html」の拡張子でファ
 
 
 ```javascript | app/dialog/test.js
-jsf3.dialog("test",{
+javelin.dialog("test",{
 
     open:function(obj){
 
@@ -36,7 +36,7 @@ jsf3.dialog("test",{
 });
 ```
 
-jsf3.dialogメソッドの引数にそれぞれダイアログ名、各種設定オブジェクトを設置します。
+javelin.dialogメソッドの引数にそれぞれダイアログ名、各種設定オブジェクトを設置します。
 
 各種オプション設定については下記にて解説しています。
 
@@ -45,7 +45,7 @@ jsf3.dialogメソッドの引数にそれぞれダイアログ名、各種設定
 ダイアログに専用にクラス属性を追加できます。
 
 ```javascript | app/dialog/test.js
-jsf3.dialog("test",{
+javelin.dialog("test",{
 
     class:"dialog_class",
 
@@ -64,7 +64,7 @@ jsf3.dialog("test",{
 例としてダイアログが開いたときのコールバックは下記のように実装します。
 
 ```javascript | app/dialog/test.js
-jsf3.dialog("test",{
+javelin.dialog("test",{
 
     open:function(obj){
 
@@ -81,14 +81,14 @@ jsf3.dialog("test",{
 
 ## # ダイアログを開く
 
-ダイアログを開く場合は``jsf3.dialog.open``メソッドを使用します。  
+ダイアログを開く場合は``javelin.dialog.open``メソッドを使用します。  
 必ずダイアログ名を指定して下さい。
 
 
 ```javascript | app/page/dialog.js
 $(".open_dialog").on("click",function(){
 
-    jsf3.dialog("test").open();
+    javelin.dialog("test").open();
 
 });
 ```
@@ -103,7 +103,7 @@ $(".open_dialog").on("click",function(){
 ```javascript
 $(".open_dialog").on("click",function(){
 
-    jsf3.dialog("text").open({
+    javelin.dialog("text").open({
         class:"dialog_class",
     });
 
@@ -118,7 +118,7 @@ $(".open_dialog").on("click",function(){
 ```javascript
 $(".open_dialog").on("click",function(){
 
-    jsf3.dialog("text").open({
+    javelin.dialog("text").open({
         callback:{
             before:function(obj){
                 
@@ -150,7 +150,7 @@ JQueryのダイアログのDM要素オブジェクトを取得できます。
 下記のように``obj.dialog``から取得できます。
 
 ```javascript | app/dialog/test.js
-jsf3.dialog("test",{
+javelin.dialog("test",{
 
     open:function(obj){
 
@@ -167,7 +167,7 @@ jsf3.dialog("test",{
 このダイアログIDは一意のコードです。
 
 ```javascript | app/dialog/test.js
-jsf3.dialog("test",{
+javelin.dialog("test",{
 
     open:function(obj){
 
@@ -185,7 +185,7 @@ jsf3.dialog("test",{
 **wait**メソッドで次以降のコールバック実行を中断し、**next**メソッドで再開させます。
 
 ```javascript | app/dialog/test.js
-jsf3.dialog("test",{
+javelin.dialog("test",{
 
     open:function(obj){
 
@@ -208,7 +208,7 @@ jsf3.dialog("test",{
 
 
 ```javascript | app/dialog/test.js
-jsf3.dialog("test",{
+javelin.dialog("test",{
 
     open:function(obj){
 

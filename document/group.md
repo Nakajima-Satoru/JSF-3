@@ -1,11 +1,11 @@
-JSF-3(仮)
+Javelin
 
 # グループ (Group)
 
 グループは各ページごとのコールバックを共通化するための機能です。
 グループを使用することでページ遷移前後等で各ページごとでロジックを共通で実行させることができます。
 
-グループ機能は``jsf3.group``メソッドを使用します。
+グループ機能は``javelin.group``メソッドを使用します。
 
 ---
 
@@ -14,7 +14,7 @@ JSF-3(仮)
 グループの設置は``app/group``ディレクトリ内に下記のようなファイルを設置してください。
 
 ```javascript | app/group/app.js
-jsf3.group("app",{
+javelin.group("app",{
 
     before:function(Obj){
 
@@ -40,7 +40,7 @@ jsf3.group("app",{
 各ページでのグループの設定は非常に簡単で、下記のようにgroupに適用したグループ名を指定するだけです。
 
 ```javascript | app/page/main.js
-jsf3.page("main",{
+javelin.page("main",{
 
     group:"app",
 
@@ -55,7 +55,7 @@ jsf3.page("main",{
 その場合、グループ内のコールバックの実行順序は配列値に準拠します。
 
 ```javascript | app/page/main.js
-jsf3.page("main",{
+javelin.page("main",{
 
     group:["app","auth"],
 

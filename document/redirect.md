@@ -1,17 +1,17 @@
-JSF-3(仮)
+Javelin
 
 # リダイレクト(Redirect)
 
 リダイレクト(Redirect)は各ページへの遷移または前のページへ戻る、あるいは現ページでの更新を行うなどの  
 ページ操作を行うための機能です。
 
-``jsf3.redirect``オブジェクトを使用します。
+``javelin.redirect``オブジェクトを使用します。
 
 ---
 
 ## # 別のページへ遷移
 
-別のページに遷移する場合は``jsf3.redirect.next``メソッドを使用してください。  
+別のページに遷移する場合は``javelin.redirect.next``メソッドを使用してください。  
 遷移先のページ名(またはパス)を必ず引数に指定します。
 
 例えばボタンクリックのイベントで別ページに移動する場合は。下記のように記述します。
@@ -19,7 +19,7 @@ JSF-3(仮)
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.next("page1");
+    javelin.redirect.next("page1");
 
 });
 ```
@@ -30,7 +30,7 @@ $(".btn_page1").on("click",function(){
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.next("page1/index");
+    javelin.redirect.next("page1/index");
 
 });
 ```
@@ -41,14 +41,14 @@ $(".btn_page1").on("click",function(){
 
 ## # 前のページへ戻る
 
-前のページに戻る場合は``jsf3.redirect.back``メソッドを使用してください。  
+前のページに戻る場合は``javelin.redirect.back``メソッドを使用してください。  
 
 例えばボタンクリックのイベントで前のページに戻るする場合は。下記のように記述します。
 
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.back();
+    javelin.redirect.back();
 
 });
 ```
@@ -61,14 +61,14 @@ $(".btn_page1").on("click",function(){
 ## # 現在のページを更新
 
 
-前のページを更新する場合は``jsf3.redirect.refresh``メソッドを使用してください。  
+前のページを更新する場合は``javelin.redirect.refresh``メソッドを使用してください。  
 
 例えばボタンクリックのイベントでページを更新する場合は。下記のように記述します。
 
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.refresh();
+    javelin.redirect.refresh();
 
 });
 ```
@@ -96,7 +96,7 @@ callbackにそれぞれのコールバックを指定します
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.next("page1",{
+    javelin.redirect.next("page1",{
         callback:{
             before:function(obj){
 
@@ -121,7 +121,7 @@ $(".btn_page1").on("click",function(){
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.next("page1",{
+    javelin.redirect.next("page1",{
         bufferClear:true,
     });
 
@@ -136,7 +136,7 @@ $(".btn_page1").on("click",function(){
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.next("page1",{
+    javelin.redirect.next("page1",{
         animation:"fade",
     });
 
@@ -149,7 +149,7 @@ $(".btn_page1").on("click",function(){
 ```javascript
 $(".btn_page1").on("click",function(){
 
-    jsf3.redirect.next("page1",{
+    javelin.redirect.next("page1",{
         animation:null,
     });
 

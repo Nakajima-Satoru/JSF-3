@@ -1,36 +1,36 @@
-jsf3.formFileBuffer={};
+javelin.formFileBuffer={};
 
-jsf3.form=function(formName,settings){
+javelin.form=function(formName,settings){
 
     if(settings){
 
         var colum=Object.keys(settings);
         
-        if(!jsf3.cache.form[formName]){
-            jsf3.cache.form[formName]={};
+        if(!javelin.cache.form[formName]){
+            javelin.cache.form[formName]={};
         }
 
         for(var n=0;n<colum.length;n++){
             var field=colum[n];
             var values=settings[field];
 
-            jsf3.cache.form[formName][field]=values;
+            javelin.cache.form[formName][field]=values;
         }
 
         return;
     }
 
-    var jsf3FormObject=function(formName){
+    var javelinFormObject=function(formName){
 
         this.tagOpen=function(option){
 
-            jsf3.formFileBuffer={};
+            javelin.formFileBuffer={};
 
-            if(!jsf3.cache.form[formName]){
+            if(!javelin.cache.form[formName]){
                 return;
             }
 
-            var _form=jsf3.cache.form[formName];
+            var _form=javelin.cache.form[formName];
 
             if(!_form.tags){
                 return;
@@ -48,19 +48,19 @@ jsf3.form=function(formName,settings){
                 var values=_form.tags[field];
 
                 if(values.type=="select"){
-                    var tagStr=jsf3.formbuild.select(field,values);
+                    var tagStr=javelin.formbuild.select(field,values);
                 }
                 else if(values.type=="radio"){
-                    var tagStr=jsf3.formbuild.radio(field,values);
+                    var tagStr=javelin.formbuild.radio(field,values);
                 }
                 else if(values.type=="checkbox"){
-                    var tagStr=jsf3.formbuild.checkbox(field,values);
+                    var tagStr=javelin.formbuild.checkbox(field,values);
                 }
                 else if(values.type=="textarea"){
-                    var tagStr=jsf3.formbuild.textarea(field,values);
+                    var tagStr=javelin.formbuild.textarea(field,values);
                 }
                 else{
-                    var tagStr=jsf3.formbuild.input(field,values);
+                    var tagStr=javelin.formbuild.input(field,values);
                 }
                 
                 formObj.find("[field="+field+"]").html(tagStr);
@@ -149,8 +149,8 @@ jsf3.form=function(formName,settings){
                         field=field.replace("[]","",field);
                     }
                     else if(type=="file"){
-                        if(jsf3.formFileBuffer[field]){
-                            value=jsf3.formFileBuffer[field];
+                        if(javelin.formFileBuffer[field]){
+                            value=javelin.formFileBuffer[field];
                         }
                     }
                     else{
@@ -233,6 +233,6 @@ jsf3.form=function(formName,settings){
 
     };
 
-    return  new jsf3FormObject(formName);
+    return  new javelinFormObject(formName);
 
 };

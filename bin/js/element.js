@@ -1,18 +1,18 @@
-jsf3.element=function(elementName,settings){
+javelin.element=function(elementName,settings){
 
 	if(settings){
 
         var colum=Object.keys(settings);
         
-        if(!jsf3.cache.element[elementName]){
-            jsf3.cache.element[elementName]={};
+        if(!javelin.cache.element[elementName]){
+            javelin.cache.element[elementName]={};
         }
 
         for(var n=0;n<colum.length;n++){
             var field=colum[n];
             var values=settings[field];
 
-            jsf3.cache.element[elementName][field]=values;
+            javelin.cache.element[elementName][field]=values;
         }
 
 		return;
@@ -22,11 +22,11 @@ jsf3.element=function(elementName,settings){
 
 		this.load=function(){
 
-			if(!jsf3.cache.elements[elementName]){
+			if(!javelin.cache.elements[elementName]){
 				return;
 			}
 
-			var content=jsf3.base64.decode(jsf3.cache.elements[elementName]);
+			var content=javelin.base64.decode(javelin.cache.elements[elementName]);
 
 			return content;
 
@@ -44,7 +44,7 @@ jsf3.element=function(elementName,settings){
 			
 			var id=null;
 			if(option.append){
-				id=jsf3.uniqId();
+				id=javelin.uniqId();
 				obj.append("<div data-element_id=\""+id+"\">"+content+"</div>");
 			}
 			else{
@@ -52,8 +52,8 @@ jsf3.element=function(elementName,settings){
 			}
 
 			var _element={};
-			if(jsf3.cache.element[elementName]){
-				_element=jsf3.cache.element[elementName];
+			if(javelin.cache.element[elementName]){
+				_element=javelin.cache.element[elementName];
 			}
 
 			var callObj=new elementCallbackObject({
@@ -61,7 +61,7 @@ jsf3.element=function(elementName,settings){
 				id:id,
 			});
 
-			jsf3.sync([
+			javelin.sync([
 				function(next){
 					callObj._next=next;
 					next();

@@ -1,4 +1,4 @@
-JSF-3(仮)
+Javelin
 
 # マニフェスト(manifest.json)ファイルについて
 
@@ -14,10 +14,10 @@ JSF-3(仮)
 ```json
 {
     "name": "pc",
-    "description": "JavaScript Framwwork (JSF-3) Default Template (PCSite-Web-Page).",
+    "description": "JavaScript Framwwork (Javelin) Default Template (PCSite-Web-Page).",
     "author": "Nakajima Satoru.",
-    "email": "test@jsf-3.com",
-    "hp": "https://www.jsf-3.com/",
+    "email": "test@Javelin.com",
+    "hp": "https://www.Javelin.com/",
     "option": {
         "libCompressionMode":false,
         "jquery": "3.6.0",

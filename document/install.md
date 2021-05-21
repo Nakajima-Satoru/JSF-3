@@ -1,4 +1,4 @@
-JSF-3(仮)
+Javelin
 
 # インストール方法
 
@@ -8,7 +8,7 @@ JSF-3(仮)
 package.jsonを新たに作成して下記コードを記述
 
 ```
-npm install git+https://github.com/Nakajima-Satoru/JSF-3
+npm install git+https://github.com/Nakajima-Satoru/Javelin
 ```
 
 インストールが終わったら、プロジェクトを作成してください。

@@ -1,4 +1,4 @@
-jsf3.form("test2",{
+javelin.form("test2",{
 
 	tags:{
 		required:{
@@ -28,7 +28,7 @@ jsf3.form("test2",{
 
 	submit:function(obj){
 
-        var vres = jsf3.validator("test2").verify(obj.data);
+        var vres = javelin.validator("test2").verify(obj.data);
 
         if(vres){
             return;

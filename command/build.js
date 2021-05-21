@@ -134,8 +134,8 @@ module.exports=function(name){
                 console.log("# code Compression....");
             }
     
-            fsa.writeFileSync(buildPath+"/bin/jsf3.css",csscoreStr);
-            console.log("# fileset "+buildPath+"/bin/jsf3.css");
+            fsa.writeFileSync(buildPath+"/bin/javelin.css",csscoreStr);
+            console.log("# fileset "+buildPath+"/bin/javelin.css");
 
             obj.next();
         },
@@ -147,7 +147,7 @@ module.exports=function(name){
             // page cache...
             var htmlPageLIst = fsa.deepSearch(name+"/render/page");    
 
-            htmlCacheStr+="jsf3.cache.pages = { \n";
+            htmlCacheStr+="javelin.cache.pages = { \n";
             for(var n=0;n<htmlPageLIst.file.length;n++){
                 var filepath=htmlPageLIst.file[n];
 
@@ -169,7 +169,7 @@ module.exports=function(name){
 
                 var HtmlDialogList = fsa.deepSearch(name+"/render/dialog");    
 
-                htmlCacheStr+="jsf3.cache.dialogs = { \n";
+                htmlCacheStr+="javelin.cache.dialogs = { \n";
                 for(var n=0;n<HtmlDialogList.file.length;n++){
                     var filepath=HtmlDialogList.file[n];
     
@@ -192,7 +192,7 @@ module.exports=function(name){
             if(fsa.existsSync(name+"/render/element")){
                 var HtmlElementList = fsa.deepSearch(name+"/render/element");    
 
-                htmlCacheStr+="jsf3.cache.elements = {\n";
+                htmlCacheStr+="javelin.cache.elements = {\n";
                 for(var n=0;n<HtmlElementList.file.length;n++){
                     var filepath=HtmlElementList.file[n];
 
@@ -245,7 +245,7 @@ module.exports=function(name){
                 console.log("# read "+pageFileList.file[n]);
             }
 
-            pageCacheStr+=" jsf3.load("+JSON.stringify(manifest.option)+");"
+            pageCacheStr+=" javelin.load("+JSON.stringify(manifest.option)+");"
 
             fsa.writeFileSync(buildPath+"/bin/app.js",pageCacheStr);
             console.log("# fileset "+buildPath+"/bin/app.js");

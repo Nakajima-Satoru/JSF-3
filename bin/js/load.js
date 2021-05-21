@@ -1,4 +1,4 @@
-jsf3.load=function(loadOption){
+javelin.load=function(loadOption){
 
     if(location.search){
 
@@ -22,18 +22,18 @@ jsf3.load=function(loadOption){
         }
     }
 
-    jsf3.option=loadOption;
+    javelin.option=loadOption;
 
     $(window).on("load",function(){
 
-        jsf3.sync([
+        javelin.sync([
 
             function(next){
 
                 var pagearea=$("pagearea");
 
-                if(jsf3.option.animation){
-                    pagearea.addClass(jsf3.option.animation);
+                if(javelin.option.animation){
+                    pagearea.addClass(javelin.option.animation);
                 }
 
                 next();
@@ -41,9 +41,9 @@ jsf3.load=function(loadOption){
 
             function(next){
 
-                if(jsf3.cache.common.start){
+                if(javelin.cache.common.start){
 
-                    var callback=jsf3.cache.common.start;
+                    var callback=javelin.cache.common.start;
 
                     var callObj={
                         _waited:false,
@@ -68,16 +68,16 @@ jsf3.load=function(loadOption){
             },
 
             function(){
-                if(!jsf3.option.topPage){
-                    jsf3.option.topPage="main";
+                if(!javelin.option.topPage){
+                    javelin.option.topPage="main";
                 }
 
                 var nextOption={};
-                if(jsf3.option.firstAnimation){
-                    nextOption.animation=jsf3.option.firstAnimation;
+                if(javelin.option.firstAnimation){
+                    nextOption.animation=javelin.option.firstAnimation;
                 }
 
-                jsf3.redirect.next(jsf3.option.topPage,nextOption);
+                javelin.redirect.next(javelin.option.topPage,nextOption);
             },
 
         ]);
@@ -86,7 +86,7 @@ jsf3.load=function(loadOption){
 
             try{
 
-                if(jsf3.locking.link){
+                if(javelin.locking.link){
                     return false;
                 }
 
@@ -100,11 +100,11 @@ jsf3.load=function(loadOption){
                 };
 
                 if(backto !== undefined){
-                    jsf3.redirect.back();
+                    javelin.redirect.back();
                 }
     
                 if(href!="#"){
-                    jsf3.redirect.next(href,opt);
+                    javelin.redirect.next(href,opt);
                 }
 
                 
@@ -117,12 +117,12 @@ jsf3.load=function(loadOption){
 
         window.onpopstate=function(event){
 
-            if(jsf3.locking.back){
+            if(javelin.locking.back){
                 return false;
             }
 
             try{
-                jsf3.redirect.back();
+                javelin.redirect.back();
             }catch(err){
                 console.log(err);
             }
@@ -136,9 +136,9 @@ jsf3.load=function(loadOption){
 
                 var formId=$(this).attr("id");
 
-                var getData=jsf3.form(formId).getData();
+                var getData=javelin.form(formId).getData();
 
-                var _form=jsf3.cache.form[formId];
+                var _form=javelin.cache.form[formId];
 
                 if(!_form){
                     return false;
@@ -172,9 +172,9 @@ jsf3.load=function(loadOption){
 
                 var formId=$(this).attr("id");
 
-                var getData=jsf3.form(formId).getData();
+                var getData=javelin.form(formId).getData();
 
-                var _form=jsf3.cache.form[formId];
+                var _form=javelin.cache.form[formId];
 
                 if(!_form){
                     return false;
@@ -227,7 +227,7 @@ jsf3.load=function(loadOption){
                 fr.readAsDataURL(file);    
             }
 
-            jsf3.formFileBuffer[field]=fileBuffers;
+            javelin.formFileBuffer[field]=fileBuffers;
         });
 
     });

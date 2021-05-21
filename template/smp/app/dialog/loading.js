@@ -1,4 +1,4 @@
-jsf3.dialog("loading",{
+javelin.dialog("loading",{
 
     class:"loading",
 

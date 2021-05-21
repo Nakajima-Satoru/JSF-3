@@ -1,4 +1,4 @@
-jsf3.validator("login",{
+javelin.validator("login",{
 
     rules:{
         username:[

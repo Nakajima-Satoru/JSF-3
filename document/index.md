@@ -1,4 +1,4 @@
-# JavaScript Framework (JSF-3)
+# JavaScript Framework (Javelin)
 
 リファレンスメモ...(仮)
 

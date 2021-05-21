@@ -1,4 +1,4 @@
-jsf3.validateRule={
+javelin.validateRule={
 
 	_value:null,
 
@@ -133,7 +133,7 @@ jsf3.validateRule={
 
 		var reg="^[a-zA-Z0-9]+$";
 
-		if(jsf3.validateRule.regex(value,reg)){
+		if(javelin.validateRule.regex(value,reg)){
 			return true;
 		}
 
@@ -159,7 +159,7 @@ jsf3.validateRule={
 		
 		var reg="^[0-9]+$";
 
-		if(jsf3.validateRule.regex(value,reg)){
+		if(javelin.validateRule.regex(value,reg)){
 			return true;
 		}
 

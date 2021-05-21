@@ -1,4 +1,4 @@
-jsf3.page("main",{
+javelin.page("main",{
 
 	before:function(obj){
 
