@@ -21,7 +21,10 @@ javelin.request=function(requestName,settings){
 
     var javelinRequestObject=function(requestName){
 
-        var _cache=javelin.cache.request[requestName];
+        var _cache={};
+        if(requestName){
+            var _cache=javelin.cache.request[requestName];
+        }
 
         if(!_cache){
             _cache={};
