@@ -1,8 +1,13 @@
 javelin.load=function(loadOption){
 
-    if(location.search){
+    const getQuery = function(){
 
         var search=location.search;
+
+        if(!search[0]){
+            return {};
+        }
+
         if(search[0]=="?"){
             search=search.substring(1);
         }
@@ -15,11 +20,36 @@ javelin.load=function(loadOption){
             query[buffer2[0]]=buffer2[1];
         }
 
-        if(loadOption.queryRouting){
-            if(query.path){
-                loadOption.topPage=query.path;
-            }
+        return query;
+    };
+
+    var query = getQuery();
+    
+    if(loadOption.queryRouting){
+
+        if(query._path){
+            loadOption.topPage=query._path;
         }
+
+        if(query != {}){
+
+            loadOption.topPage+="?";
+
+            var colum=Object.keys(query);
+            for(var n=0;n<colum.length;n++){
+                var field = colum[n];
+                if(field != "_path"){
+                    if(n>0){
+                        loadOption.topPage+="&";
+                    }
+                    var value = query[field];
+                    loadOption.topPage+=field+"="+value;
+                }
+            }
+
+        }
+
+        loadOption.aregment=query;
     }
 
     javelin.option=loadOption;

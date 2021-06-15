@@ -219,7 +219,21 @@ javelin.redirect={
             function(next){
 
                 if(javelin.option.queryreplase){
-                    history.replaceState("","","index.html?path="+pageName);
+                    
+                    var setUrl="index.html?_path="+pageName;
+
+                    if(callObj.aregment){
+                        var colum=Object.keys(callObj.aregment);
+                        for(var n=0;n<colum.length;n++){
+                            var field=colum[n];
+                            if(field){
+                                var value=callObj.aregment[field];
+                                setUrl+="&"+field+"="+value;    
+                            }
+                        }
+                    }
+
+                    history.replaceState("","",setUrl);
                 }
 
                 /** page tag class move */

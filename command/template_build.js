@@ -1,1 +1,1 @@
-require("./projectBuild.js").build(__dirname);
+require("javelin/projectBuild.js").build(__dirname);
