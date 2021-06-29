@@ -1,39 +1,37 @@
 
 /* slide_left_fede_feed ----- */
 
-pagearea.slide_left_fede.open page.open{
+.pagearea.slide_left_fede.open .page.open{
     animation-name:page_slide_left_fede_open;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.slide_left_fede.open page.open wk{
-	animation-name:page_slide_left_fede_open_wk;
+.pagearea.slide_left_fede.open .page.open .wk{
+    animation-name:page_slide_left_fede_open_wk;
     animation-duration:1s;
 	animation-fill-mode: forwards;
 }
-pagearea.slide_left_fede.open page.closed{
+.pagearea.slide_left_fede.open .page.closed{
     animation-name:page_slide_left_fede_close;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.slide_left_fede page.closed wk{
-	animation-name:page_slide_left_fede_close_wk;
+.pagearea.slide_left_fede .page.closed .wk{
+    animation-name:page_slide_left_fede_close_wk;
     animation-duration:1s;
 	animation-fill-mode: forwards;
 }
-
-
-pagearea.slide_left_fede.back page.open{
+.pagearea.slide_left_fede.back .page.open{
     animation-name:page_slide_left_fede_open_back;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.slide_left_fede.back page.open wk{
-	animation-name:page_slide_left_fede_open_back_wk;
+.pagearea.slide_left_fede.back .page.open .wk{
+    animation-name:page_slide_left_fede_open_back_wk;
     animation-duration:1s;
 	animation-fill-mode: forwards;
 }
-pagearea.slide_left_fede.back page.closed{
+.pagearea.slide_left_fede.back .page.closed{
     animation-name:page_slide_left_fede_close_back;
     animation-duration:500ms;
     animation-fill-mode: forwards;

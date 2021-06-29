@@ -1,39 +1,37 @@
 
 /* slide_top ----- */
 
-pagearea.slide_top.open page.open{
+.pagearea.slide_top.open .page.open{
     animation-name:page_slide_top_open;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.slide_top.open page.open wk{
-	animation-name:page_slide_top_open_wk;
+.pagearea.slide_top.open .page.open .wk{
+    animation-name:page_slide_top_open_wk;
     animation-duration:1s;
 	animation-fill-mode: forwards;
 }
-pagearea.slide_top.open page.closed{
+.pagearea.slide_top.open .page.closed{
     animation-name:page_slide_top_close;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.slide_top page.closed wk{
-	animation-name:page_slide_top_close_wk;
+.pagearea.slide_top .page.closed .wk{
+    animation-name:page_slide_top_close_wk;
     animation-duration:1s;
 	animation-fill-mode: forwards;
 }
-
-
-pagearea.slide_top.back page.open{
+.pagearea.slide_top.back .page.open{
     animation-name:page_slide_top_open_back;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.slide_top.back page.open wk{
-	animation-name:page_slide_top_open_back_wk;
+.pagearea.slide_top.back .page.open .wk{
+    animation-name:page_slide_top_open_back_wk;
     animation-duration:1s;
 	animation-fill-mode: forwards;
 }
-pagearea.slide_top.back page.closed{
+.pagearea.slide_top.back .page.closed{
     animation-name:page_slide_top_close_back;
     animation-duration:500ms;
     animation-fill-mode: forwards;

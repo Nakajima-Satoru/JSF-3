@@ -7,10 +7,10 @@
     "option": {
         "libCompressionMode":false,
         "jquery": "3.6.0",
-        "animation": "slide_left_fede",
+        "animation": "fade",
         "firstAnimation":null,
         "topPage":"main",
         "queryRouting":true,
-        "queryreplase":true
+        "queryReplase":true
     }
 }

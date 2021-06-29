@@ -55,12 +55,12 @@ javelin.redirect={
             aregment:aregment,
         };
 
-        var pageArea=$("pagearea");
+        var pageArea=$(".pagearea");
         var nextPageObj=null;
 
         if(_content){
 
-            var nextPage='<page id="'+_nextdata.id+'"><wk>'+_content+'</wk></page>';
+            var nextPage='<div class="page" id="'+_nextdata.id+'"><div class="wk">'+_content+'</div></div>';
             pageArea.append(nextPage);
             var nextPageObj=pageArea.find("#"+_nextdata.id);
             if(_pageData.class){
@@ -218,7 +218,7 @@ javelin.redirect={
 
             function(next){
 
-                if(javelin.option.queryreplase){
+                if(javelin.option.queryReplase){
                     
                     var setUrl="index.html?_path="+pageName;
 
@@ -271,17 +271,17 @@ javelin.redirect={
                         }
 
                         if(now){
-                            pageArea.find("page#"+now.id).removeClass("open").addClass("closed"); 
+                            pageArea.find(".page#"+now.id).removeClass("open").addClass("closed"); 
                         }
             
-                        var nowPageArea=pageArea.find("page#"+_nextdata.id);
+                        var nowPageArea=pageArea.find(".page#"+_nextdata.id);
                         nowPageArea.addClass("open");    
                     }
                 };
 
                 var pageClose=function(){
                     if(now && _content && !option.leavePage){
-                        pageArea.find("page#"+now.id).remove();
+                        pageArea.find(".page#"+now.id).remove();
                     }
                 };
                
@@ -449,15 +449,14 @@ javelin.redirect={
             return;
         }
 
-        var pageArea=$("pagearea");
+        var pageArea=$(".pagearea");
 
         var _back=javelin.buffer.pages[javelin.buffer.pageMoveIndex-2];
         javelin.buffer.pageMoveIndex--;
 
-        var pageArea=$("pagearea");
         pageArea.addClass("back");
        
-        var backpage='<page id="'+_back.id+'"><wk>'+_back.content+'</wk></page>';
+        var backpage='<div class="page" id="'+_back.id+'"><div class="wk">'+_back.content+'</div></div>';
         if(_back.option){
             if(pageArea.find("#"+_back.id).length){
                 pageArea.find("#"+_back.id).removeClass("closed");
@@ -483,7 +482,7 @@ javelin.redirect={
         javelin.buffer.nowPage=_back;
 
         if(now){
-            $("pagearea page#"+now.id).removeClass("open").addClass("closed");
+            $(".pagearea .page#"+now.id).removeClass("open").addClass("closed");
         }
 
         var _backPageData={};
@@ -623,11 +622,11 @@ javelin.redirect={
 
                 /** page tag class move */
                 var pageClose=function(){
-                    pageArea.find("page#"+now.id).remove();
+                    pageArea.find(".page#"+now.id).remove();
                 };
 
                 var pageOpen=function(){
-                    var nowPageArea=pageArea.find("page#"+_back.id);
+                    var nowPageArea=pageArea.find(".page#"+_back.id);
                     nowPageArea.addClass("open");
                 };
                 
@@ -776,7 +775,7 @@ javelin.redirect={
 
         var now=javelin.buffer.nowPage;
 
-        var pageObj=$("pagearea").find("#"+now.id);
+        var pageObj=$(".pagearea").find("#"+now.id);
         
         var callObj=new redirectCallbackObject({
             nowPage:now,

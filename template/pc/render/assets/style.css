@@ -28,14 +28,14 @@ textarea{
 	color:#eee;
 	border:solid 1px #999;
 }
-pagearea,
-pagearea page,
-pagearea page wk{
+.pagearea,
+.pagearea .page,
+.pagearea .page .wk{
 	background:#444;
 	color:#fff;
 	box-shadow:0px 0px 3px 0px #aaa;
 }
-pagearea page wk.closed{
+.pagearea .page .wk.closed{
 	transition-duration:300ms;
 	-webkit-transition-duration:300ms;
 	opacity:0;
@@ -120,13 +120,10 @@ h2{
 }
 .login_form table tr td{
 	padding:10px 0;
-
 }
-
-
 header{
 	padding:0 20px;
-	background:#242424;
+	background:#192958;
 	color:#fff;
 	position:fixed;
 	left:0;
@@ -180,13 +177,13 @@ header a.title{
 	opacity:1;
 	-webkit-opacity:1;	
 }
-.sidemenu+pagearea{
+.sidemenu+.pagearea{
 	transition-duration:500ms;
 }
-header.open~pagearea{
+header.open~.pagearea{
 	top:50px;
 }
-.sidemenu.open+pagearea{
+.sidemenu.open+.pagearea{
 	left:250px;
 }
 

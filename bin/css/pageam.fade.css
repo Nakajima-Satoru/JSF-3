@@ -1,21 +1,25 @@
 /* fade ----- */
 
-pagearea.fade page.open{
+.pagearea.fade{
+    opacity:1;
+    -webkit-opacity:1;
+}
+.pagearea.fade .page.open{
     animation-name:page_fade_open;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.fade page.open wk{
+.pagearea.fade .page.open .wk{
     animation-name:page_fade_open;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.fade page.closed{
+.pagearea.fade .page.closed{
     animation-name:page_fade_close;
     animation-duration:500ms;
     animation-fill-mode: forwards;
 }
-pagearea.fade page.closed wk{
+.pagearea.fade .page.closed .wk{
     animation-name:page_fade_close;
     animation-duration:500ms;
     animation-fill-mode: forwards;

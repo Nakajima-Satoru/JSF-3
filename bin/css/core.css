@@ -1,4 +1,4 @@
-pagearea{
+.pagearea{
     position:absolute;
     left:0;
     top:0;
@@ -7,7 +7,7 @@ pagearea{
     overflow:hidden;
     background:#999;
 }
-pagearea page{
+.pagearea .page{
     position:absolute;
     left:0;
     top:0;
@@ -17,7 +17,7 @@ pagearea page{
     opacity:0;
     -webkit-opacity:0;
 }
-pagearea page wk{
+.pagearea .page .wk{
     position:absolute;
     left:0;
     top:0;
@@ -29,20 +29,20 @@ pagearea page wk{
     padding:20px;
     overflow:auto;
 }
-pagearea page.open{
+.pagearea .page.open{
     opacity:1;
     -webkit-opacity:1;
 }
-pagearea page.open wk{
+.pagearea .page.open .wk{
     opacity:1;
     -webkit-opacity:1;
 }
-pagearea page.closed{
+.pagearea .page.closed{
     opacity:0;
     -webkit-opacity:0;    
 }
-pagearea page.closed wk{
-    opacity:0;
+.pagearea .page.closed .wk{
+        opacity:0;
     -webkit-opacity:0;    
 }
 

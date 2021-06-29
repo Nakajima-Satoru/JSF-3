@@ -60,7 +60,7 @@ javelin.load=function(loadOption){
 
             function(next){
 
-                var pagearea=$("pagearea");
+                var pagearea=$(".pagearea");
 
                 if(javelin.option.animation){
                     pagearea.addClass(javelin.option.animation);
