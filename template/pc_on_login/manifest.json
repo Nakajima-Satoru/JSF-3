@@ -9,7 +9,7 @@
         "jquery": "3.6.0",
         "animation": "slide_left_fede",
         "firstAnimation":null,
-        "topPage":"top",
+        "topPage":"main",
         "queryRouting":true,
         "queryReplase":true,
         "webStoragePrefix":"spa_",
