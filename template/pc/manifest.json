@@ -12,6 +12,7 @@
         "topPage":"main",
         "queryRouting":true,
         "queryReplase":true,
-        "webStoragePrefix":"spa_"
+        "webStoragePrefix":"spa_",
+        "error":"error"
     }
 }

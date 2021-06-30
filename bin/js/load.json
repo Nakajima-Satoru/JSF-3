@@ -2,6 +2,7 @@
     "core.js",
     "sync.js",
     "data.js",
+    "throw.js",
     "localStorage.js",
     "sessionStorage.js",
     "convert.js",

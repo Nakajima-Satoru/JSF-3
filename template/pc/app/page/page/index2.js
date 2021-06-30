@@ -4,6 +4,8 @@ javelin.page("page/index2",{
 
     before:function(obj){
 
+		setTitle("Page2");
+
         if(obj.aregment){
             var id=obj.aregment.id;   
 

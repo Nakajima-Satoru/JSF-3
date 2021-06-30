@@ -4,6 +4,7 @@ javelin.page("form/test2",{
 
 	before:function(obj){
 
+		setTitle("Form Sample (On Validate)");
 		javelin.form("test2").tagOpen();
 
 	},

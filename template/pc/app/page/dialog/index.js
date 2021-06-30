@@ -4,6 +4,8 @@ javelin.page("dialog/index",{
 
     before:(obj)=>{
 
+		setTitle("Dialog Sample");
+
         obj.pageObj.find(".dialog_1").on("click",()=>{
             javelin.dialog("dialog_1").open();
         });

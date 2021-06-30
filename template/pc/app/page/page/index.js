@@ -4,6 +4,7 @@ javelin.page("page/index",{
 
 	before:function(){
 		
+		setTitle("Page");
 
 	},
 

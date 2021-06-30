@@ -1,7 +1,9 @@
 javelin.group("app",{
 
 	before:function(obj){
-		
+
+		setTitle();
+
 		if(obj.mode!="next"){
 			return;
 		}
@@ -27,9 +29,9 @@ javelin.group("app",{
 			var pageName=obj.nextPage.pageNameFull;
 
 			if(pageName!="login/index"){
+				obj.pageObj.css("display","none");
 				javelin.redirect.next("login/index");
 				obj.exit();
-				return;
 			}
 		}
 

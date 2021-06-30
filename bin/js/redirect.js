@@ -24,17 +24,27 @@ javelin.redirect={
 
         var now=javelin.buffer.nowPage;
 
-        if(now && now.pageNameFull == pageNameFull){
-             return;
+        if(
+            now && 
+            now.pageNameFull == pageNameFull && 
+            now.option.error == option.error
+        ){
+            return;
         }
 
         javelin.locking.link=true;
 
         history.pushState(pageName, null, null);
-
-        if(javelin.cache.pages[pageName]==undefined && javelin.cache.page[pageName]==undefined){        
+        
+        if(javelin.cache.pages[pageName]==undefined && javelin.cache.page[pageName]==undefined){
             javelin.locking.link=false;
-            throw new Error("The redirected page or method information cannot be found.\""+pageName+"\"");
+            if(javelin.option.error){
+                javelin.throw("Page Not Found.\""+pageName+"\"");
+                return;
+            }
+            else{
+                throw new Error("The redirected page or method information cannot be found.\""+pageName+"\"");
+            }
         }
 
         var _content="";
@@ -78,6 +88,10 @@ javelin.redirect={
             pageObj:nextPageObj,
         });
 
+        if(option.error){
+            callObj.error=option.error;
+        }
+
         javelin.sync([
 
             function(next){
@@ -114,11 +128,15 @@ javelin.redirect={
                 };
 
                 var callObj2=new redirectCallbackObject({
+                    _exit:false,
                     mode:"next",
                     nowPage:callObj.nowPage,
                     nextPage:callObj.nextPage,
                     aregment:aregment,            
                     pageObj:nextPageObj,
+                    exit:function(){
+                        this._exit=true;
+                    },
                 });
 
                 groupCallbackList.push(function(next2){
@@ -920,6 +938,19 @@ javelin.redirect={
         };
 
     },
+
+    exists:function(pageName){
+
+        if(
+            javelin.cache.pages[pageName] ||
+            javelin.cache.page[pageName]
+        ){
+            return true;
+        }
+
+        return false;
+    },
+
 };
 
 var redirectCallbackObject=function(params){

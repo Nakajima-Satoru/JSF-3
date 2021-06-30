@@ -4,6 +4,8 @@ javelin.page("page/index3",{
 
     before:function(obj){
 
+		setTitle("Wait...");
+
         loading.open();
 
         obj.wait();

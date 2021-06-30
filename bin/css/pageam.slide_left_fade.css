@@ -62,8 +62,7 @@
 	}
 	50%{
 		opacity:0;
-        -webkit-opacity:0;
-		
+        -webkit-opacity:0l
 	}
 	100%{
         opacity:1;

@@ -11,6 +11,7 @@
         "firstAnimation":null,
         "topPage":"main",
         "queryRouting":true,
-        "queryReplase":true
+        "queryReplase":true,
+        "error":"error"
     }
 }

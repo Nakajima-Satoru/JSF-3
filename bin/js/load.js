@@ -33,12 +33,15 @@ javelin.load=function(loadOption){
 
         if(query != {}){
 
-            loadOption.topPage+="?";
 
             var colum=Object.keys(query);
+            
             for(var n=0;n<colum.length;n++){
                 var field = colum[n];
                 if(field != "_path"){
+                    if(n==0){
+                        loadOption.topPage+="?";
+                    }
                     if(n>0){
                         loadOption.topPage+="&";
                     }
@@ -48,7 +51,7 @@ javelin.load=function(loadOption){
             }
 
         }
-
+        
         loadOption.aregment=query;
     }
 
@@ -98,6 +101,12 @@ javelin.load=function(loadOption){
             },
 
             function(){
+
+                if(!javelin.redirect.exists(javelin.option.topPage)){
+                    javelin.throw("Page Not Found. \""+javelin.option.topPage+"\"");
+                    return;
+                }
+
                 if(!javelin.option.topPage){
                     javelin.option.topPage="main";
                 }
