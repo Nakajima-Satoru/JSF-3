@@ -27,8 +27,8 @@ javelin.load=function(loadOption){
     
     if(loadOption.queryRouting){
 
-        if(query._path){
-            loadOption.topPage=query._path;
+        if(query.p){
+            loadOption.topPage=query.p;
         }
 
         if(query != {}){
@@ -38,7 +38,7 @@ javelin.load=function(loadOption){
             
             for(var n=0;n<colum.length;n++){
                 var field = colum[n];
-                if(field != "_path"){
+                if(field != "p"){
                     if(n==0){
                         loadOption.topPage+="?";
                     }

@@ -238,7 +238,7 @@ javelin.redirect={
 
                 if(javelin.option.queryReplase){
                     
-                    var setUrl="index.html?_path="+pageName;
+                    var setUrl="index.html?p="+pageName;
 
                     if(callObj.aregment){
                         var colum=Object.keys(callObj.aregment);
