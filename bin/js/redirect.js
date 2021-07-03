@@ -39,7 +39,9 @@ javelin.redirect={
         if(javelin.cache.pages[pageName]==undefined && javelin.cache.page[pageName]==undefined){
             javelin.locking.link=false;
             if(javelin.option.error){
-                javelin.throw("Page Not Found.\""+pageName+"\"");
+                javelin.throw("Page Not Found.\""+pageName+"\"",{
+                    redirectToPage:pageNameFull,
+                });
                 return;
             }
             else{
@@ -237,21 +239,29 @@ javelin.redirect={
             function(next){
 
                 if(javelin.option.queryReplase){
-                    
-                    var setUrl="index.html?p="+pageName;
+                    if(!option.renderingOnly){
+                        
+                        if(!option.redirectToPage){
 
-                    if(callObj.aregment){
-                        var colum=Object.keys(callObj.aregment);
-                        for(var n=0;n<colum.length;n++){
-                            var field=colum[n];
-                            if(field){
-                                var value=callObj.aregment[field];
-                                setUrl+="&"+field+"="+value;    
+                            var setUrl="index.html?p="+pageName;
+
+                            if(callObj.aregment){
+                                var colum=Object.keys(callObj.aregment);
+                                for(var n=0;n<colum.length;n++){
+                                    var field=colum[n];
+                                    if(field){
+                                        var value=callObj.aregment[field];
+                                        setUrl+="&"+field+"="+value;    
+                                    }
+                                }
                             }
                         }
-                    }
+                        else{
+                            var setUrl="index.html?p="+option.redirectToPage;
+                        }
 
-                    history.replaceState("","",setUrl);
+                        history.replaceState("","",setUrl);
+                    }
                 }
 
                 /** page tag class move */
@@ -939,11 +949,13 @@ javelin.redirect={
 
     },
 
-    exists:function(pageName){
+    exists:function(pageNameFull){
+
+        var _pbuff = this._getAregment(pageNameFull);
 
         if(
-            javelin.cache.pages[pageName] ||
-            javelin.cache.page[pageName]
+            javelin.cache.pages[_pbuff.pageName] ||
+            javelin.cache.page[_pbuff.pageName]
         ){
             return true;
         }

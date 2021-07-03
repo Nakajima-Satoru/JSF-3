@@ -29,30 +29,26 @@ javelin.load=function(loadOption){
 
         if(query.p){
             loadOption.topPage=query.p;
+            delete query.p;
         }
 
         if(query != {}){
 
-
             var colum=Object.keys(query);
-            
-            for(var n=0;n<colum.length;n++){
-                var field = colum[n];
-                if(field != "p"){
-                    if(n==0){
-                        loadOption.topPage+="?";
-                    }
+
+            if(colum.length){
+                var queryStr="?";
+                for(var n=0;n<colum.length;n++){
+                    var field = colum[n];
                     if(n>0){
                         loadOption.topPage+="&";
                     }
                     var value = query[field];
-                    loadOption.topPage+=field+"="+value;
-                }
+                    queryStr+=field+"="+value;
+                }    
+                loadOption.topPage+=queryStr;
             }
-
         }
-        
-        loadOption.aregment=query;
     }
 
     javelin.option=loadOption;
@@ -101,7 +97,7 @@ javelin.load=function(loadOption){
             },
 
             function(){
-
+                
                 if(!javelin.redirect.exists(javelin.option.topPage)){
                     javelin.throw("Page Not Found. \""+javelin.option.topPage+"\"");
                     return;
