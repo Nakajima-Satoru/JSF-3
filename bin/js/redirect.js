@@ -35,7 +35,7 @@ javelin.redirect={
         javelin.locking.link=true;
 
         history.pushState(pageName, null, null);
-        
+
         if(javelin.cache.pages[pageName]==undefined && javelin.cache.page[pageName]==undefined){
             javelin.locking.link=false;
             if(javelin.option.error){
@@ -481,7 +481,7 @@ javelin.redirect={
 
         var _back=javelin.buffer.pages[javelin.buffer.pageMoveIndex-2];
         javelin.buffer.pageMoveIndex--;
-
+        
         pageArea.addClass("back");
        
         var backpage='<div class="page" id="'+_back.id+'"><div class="wk">'+_back.content+'</div></div>';
@@ -548,7 +548,7 @@ javelin.redirect={
                 var callObj2=new redirectCallbackObject({
                     mode:"back",
                     nowPage:callObj.now,
-                    backPage:callObj.back,
+                    backPage:callObj.backPage,
                     pageObj:backPageObj,
                 });
 
